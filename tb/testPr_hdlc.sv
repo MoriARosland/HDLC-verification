@@ -24,6 +24,10 @@ program testPr_hdlc(
   
   int TbErrorCnt;
 
+  // HDLC register addresses:
+  const logic [2:0] RX_BUFFER_ADDR = 3'b011;
+  const logic [2:0] RXSC = 3'b010;
+
   /****************************************************************************
    *                                                                          *
    *                               Student code                               *
@@ -36,6 +40,35 @@ program testPr_hdlc(
     logic [7:0] ReadData;
 
     // INSERT CODE HERE
+    assert (uin_hdlc.Rx_Ready)
+      $display("ABORT_RECEIVE: ERROR: Rx_ready should not be high");
+    else
+      $display("ABORT_RECEIVE:: SUCCESS: Rx_ready is low");
+
+    assert (uin_hdlc.Rx_FrameError)
+      $display("ABORT_RECEIVE: ERROR: Rx_FrameError should not be high");
+    else
+      $display("ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low");
+
+    assert (uin_hdlc.Rx_Overflow)
+      $display("ABORT_RECEIVE: ERROR: Rx_Overflow should not be high");
+    else
+      $display("ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low");
+
+    assert (uin_hdlc.Rx_AbortSignal)
+      $display("ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low");
+    else
+      $display("ABORT_RECEIVE: ERROR: Rx_AbortSignal should not be low");
+
+
+    // Verify all bytes from the Rx_Buff are zero
+    for (int i = 0; i < Size; i++) begin
+        ReadAddress(RX_BUFFER_ADDR, ReadData);
+        assert (ReadData == 0)
+            $display("SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
+        else
+            $display("ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
+    end
 
   endtask
 
@@ -46,6 +79,35 @@ program testPr_hdlc(
     wait(uin_hdlc.Rx_Ready);
 
     // INSERT CODE HERE
+    assert (uin_hdlc.Rx_Overflow)
+      $display("NORMAL RECEIVE:: ERROR: x OVERFLOW DETECTED!\n");
+    else
+      $display("NORMAL RECEIVE: SUCCESS: No Rx overflow detected\n");
+
+    assert (uin_hdlc.Rx_AbortSignal)
+      $display("NORMAL RECEIVE:: ERROR: Rx ABORT DETECTED!\n");
+    else
+      $display("NORMAL RECEIVE:: SUCCESS: No Rx abort detected\n");
+
+    assert (uin_hdlc.Rx_FrameError)
+      $display("NORMAL RECEIVE:: ERROR: INVALID Rx FRAME DETECTED!\n");
+    else
+      $display("NORMAL RECEIVE:: SUCCESS: FRAME IS VALID\n");
+
+    assert (uin_hdlc.Rx_Ready)
+    else
+      $display("NORMAL RECEIVE:: ERROR: Rx BUFFER NOT READY\n");
+    
+    // Verify all bytes from the Rx_Buff
+    for (int i = 0; i < Size; i++) begin
+        ReadAddress(RX_BUFFER_ADDR, ReadData);
+        assert (data[i] == ReadData)
+            $display("Rx_Buff has correct data at index %0d: data[%0d] = %0h, ReadData = %0h", 
+                      i, i, data[i], ReadData);
+        else
+            $display("DATA ERROR: Mismatch at index %0d: data[%0d] = %0h, ReadData = %0h", 
+                    i, i, data[i], ReadData);
+    end
   
   endtask
 
@@ -56,6 +118,25 @@ program testPr_hdlc(
     wait(uin_hdlc.Rx_Ready);
 
     // INSERT CODE HERE
+    assert (uin_hdlc.Rx_Ready)
+      $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high");
+    else
+      $display("OVERFLOW_RECEIVE:: ERROR: Rx_ready should not be low");
+
+    assert (uin_hdlc.Rx_FrameError)
+      $display("OVERFLOW_RECEIVE: ERROR: Rx_FrameError should not be high");
+    else
+      $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_FrameError is low");
+
+    assert (uin_hdlc.Rx_Overflow)
+      $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high");
+    else
+      $display("OVERFLOW_RECEIVE:: ERROR: Rx_Overflow is low");
+
+    assert (uin_hdlc.Rx_AbortSignal)
+      $display("OVERFLOW_RECEIVE:: ERROR: Rx_FrameError should not be low");
+    else
+      $display("OVERFLOW_RECEIVE: SUCCESS: Rx_AbortSignal is low");
   
   endtask
 
