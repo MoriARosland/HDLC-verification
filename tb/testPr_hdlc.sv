@@ -79,7 +79,7 @@ program testPr_hdlc(
   // register, and that the Rx data buffer contains correct data.
   task VerifyNormalReceive(logic [127:0][7:0] data, int Size);
     logic [7:0] ReadData;
-
+    wait(uin_hdlc.Rx_Ready);
     //Verify status register bits
     ReadAddress(Rx_SC, ReadData);
 
