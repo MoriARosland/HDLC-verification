@@ -31,6 +31,14 @@ module assertions_hdlc (
     ErrCntAssertions  =  0;
   end
 
+  /// Sequence utilities:
+  
+  // TODO: REMEMBER TO LINK THIS UP TO TX ALSO!
+  sequence AbortFlag_sequence(serial_line); 
+    // Note that least significant bit is received first
+    !serial_line ##1 serial_line[*7]; // Pattern: 1111 1110
+  endsequence
+
   /*******************************************
    *  Verify correct Rx_FlagDetect behavior  *
    *******************************************/
@@ -69,4 +77,14 @@ module assertions_hdlc (
     ErrCntAssertions++; 
   end
 
+  // Verify correct behaviour when receiving an abort pattern (Spec8, Rx)
+  property RX_AbortDetect;
+    @(posedge Clk) disable iff (!Rx_ValidFrame) (AbortFlag_sequence(Rx)) |=> ##1 Rx_AbortDetect;
+  endproperty
+
+  Rx_AbortDetect_Assert : assert property (RX_AbortDetect) begin
+    $display("PASS: Abort flag successfully generated abort signal (RX)");
+  end else begin
+    $error("FAIL: Abort flag did not generate abort signal (RX)");
+  end
 endmodule
