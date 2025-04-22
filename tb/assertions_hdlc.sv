@@ -86,6 +86,6 @@ module assertions_hdlc (
   Rx_AbortDetect_Assert : assert property (RX_AbortDetect) begin
     $display("PASS: Abort flag successfully generated abort signal (RX)");
   end else begin
-    $error("FAIL: Abort flag did not generate abort signal (RX)")
+    $error("FAIL: Abort flag did not generate abort signal (RX)");
   end
 endmodule
