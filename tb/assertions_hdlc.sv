@@ -34,10 +34,9 @@ module assertions_hdlc (
   /// Sequence utilities:
   
   // TODO: REMEMBER TO LINK THIS UP TO TX ALSO!
-  sequence abort_flag_sequence(serial_line); 
-    // Pattern: 1111 1110
+  sequence AbortFlag_sequence(serial_line); 
     // Note that least significant bit is received first
-    !serial_line ##1 serial_line[*7];
+    !serial_line ##1 serial_line[*7]; // Pattern: 1111 1110
   endsequence
 
   /*******************************************
@@ -80,7 +79,7 @@ module assertions_hdlc (
 
   // Verify correct behaviour when receiving an abort pattern (Spec8, Rx)
   property RX_AbortDetect;
-    @(posedge Clk) disable iff (!Rx_ValidFrame) (abort_flag_sequence(Rx)) |-> Rx_AbortDetect;
+    @(posedge Clk) disable iff (!Rx_ValidFrame) (AbortFlag_sequence(Rx)) |=> ##1 Rx_AbortDetect;
   endproperty
 
   Rx_AbortDetect_Assert : assert property (RX_AbortDetect) begin
