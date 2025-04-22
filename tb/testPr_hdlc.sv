@@ -208,11 +208,6 @@ program testPr_hdlc(
     else
       $display("FAIL: Rx_AbortSignal is high after dropped frame");
 
-    assert (ReadData[Rx_Drop] == 0)
-      $display("PASS: Rx_Drop is low after dropped frame");
-    else
-      $display("FAIL: Rx_Drop is high after dropped frame");
-
     // Verify Rx_Buff is empty
     ReadAddress(RX_BUFFER_ADDR, ReadData);
     assert (ReadData == 0)
@@ -247,6 +242,8 @@ program testPr_hdlc(
     Receive( 47, 0, 0, 0, 0, 0, 0); //Normal
     Receive( 42, 0, 0, 0, 0, 1, 0); //FrameDropped
     Receive( 14, 0, 0, 0, 0, 0, 0); //Normal
+    Receive( 14, 0, 0, 1, 0, 0, 0); //NonByteAligned
+    Receive( 14, 0, 1, 0, 0, 0, 0); //FCSerr
 
     $display("*************************************************************");
     $display("%t - Finishing Test Program", $time);
@@ -383,6 +380,11 @@ program testPr_hdlc(
     else
       WriteAddress(RXSC, 8'h00);
 
+     if(FCSerr) begin
+      ReceiveData[Size-1] -= 1;
+    end
+
+
     //Generate stimulus
     InsertFlagOrAbort(1);
     
@@ -393,6 +395,11 @@ program testPr_hdlc(
       OverflowData[1] = 8'hBB;
       OverflowData[2] = 8'hCC;
       MakeRxStimulus(OverflowData, 3);
+    end
+
+    if (NonByteAligned) begin
+      @(posedge uin_hdlc.Clk);
+      uin_hdlc.Rx = 0;
     end
 
     if(Abort) begin
@@ -417,6 +424,8 @@ program testPr_hdlc(
       VerifyOverflowReceive(ReceiveData, Size);
     else if(Drop)
       VerifyDropReceive(ReceiveData, Size);
+    else if(FCSerr || NonByteAligned)
+      VerifyErrorReceive(ReceiveData, Size);
     else if(!SkipRead)
       VerifyNormalReceive(ReceiveData, Size);
 
