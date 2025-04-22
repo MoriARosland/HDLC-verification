@@ -34,41 +34,43 @@ program testPr_hdlc(
    *                                                                          *
    ****************************************************************************/
 
+  `include "hdlc_shared.sv"
+
   // VerifyAbortReceive should verify correct value in the Rx status/control
   // register, and that the Rx data buffer is zero after abort.
   task VerifyAbortReceive(logic [127:0][7:0] data, int Size);
     logic [7:0] ReadData;
 
+    //Verify status register bits
+    ReadAddress(Rx_SC, ReadData);
     // INSERT CODE HERE
-    assert (uin_hdlc.Rx_Ready)
+    assert (ReadData[Rx_Ready] == 1)
       $display("ABORT_RECEIVE: ERROR: Rx_ready should not be high");
     else
       $display("ABORT_RECEIVE:: SUCCESS: Rx_ready is low");
 
-    assert (uin_hdlc.Rx_FrameError)
+    assert (ReadData[Rx_FrameError] == 1)
       $display("ABORT_RECEIVE: ERROR: Rx_FrameError should not be high");
     else
       $display("ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low");
 
-    assert (uin_hdlc.Rx_Overflow)
+    assert (ReadData[Rx_Overflow] == 1)
       $display("ABORT_RECEIVE: ERROR: Rx_Overflow should not be high");
     else
       $display("ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low");
 
-    assert (uin_hdlc.Rx_AbortSignal)
+    assert (ReadData[Rx_AbortSignal] == 1)
       $display("ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low");
     else
       $display("ABORT_RECEIVE: ERROR: Rx_AbortSignal should not be low");
 
 
     // Verify all bytes from the Rx_Buff are zero
-    for (int i = 0; i < Size; i++) begin
-        ReadAddress(RX_BUFFER_ADDR, ReadData);
-        assert (ReadData == 0)
-            $display("SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
-        else
-            $display("ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
-    end
+    ReadAddress(RX_BUFFER_ADDR, ReadData);
+    assert (ReadData == 0)
+      $display("SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
+    else
+      $display("ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
 
   endtask
 
@@ -76,38 +78,38 @@ program testPr_hdlc(
   // register, and that the Rx data buffer contains correct data.
   task VerifyNormalReceive(logic [127:0][7:0] data, int Size);
     logic [7:0] ReadData;
-    wait(uin_hdlc.Rx_Ready);
+
+    //Verify status register bits
+    ReadAddress(Rx_SC, ReadData);
 
     // INSERT CODE HERE
-    assert (uin_hdlc.Rx_Overflow)
+    assert (ReadData[Rx_Overflow] == 1)
       $display("NORMAL RECEIVE:: ERROR: x OVERFLOW DETECTED!\n");
     else
       $display("NORMAL RECEIVE: SUCCESS: No Rx overflow detected\n");
 
-    assert (uin_hdlc.Rx_AbortSignal)
+    assert (ReadData[Rx_AbortSignal] == 1)
       $display("NORMAL RECEIVE:: ERROR: Rx ABORT DETECTED!\n");
     else
       $display("NORMAL RECEIVE:: SUCCESS: No Rx abort detected\n");
 
-    assert (uin_hdlc.Rx_FrameError)
+    assert (ReadData[Rx_FrameError] == 1)
       $display("NORMAL RECEIVE:: ERROR: INVALID Rx FRAME DETECTED!\n");
     else
       $display("NORMAL RECEIVE:: SUCCESS: FRAME IS VALID\n");
 
-    assert (uin_hdlc.Rx_Ready)
+    assert (ReadData[Rx_Ready] == 1)
+      $display("NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY\n");
     else
       $display("NORMAL RECEIVE:: ERROR: Rx BUFFER NOT READY\n");
+
     
     // Verify all bytes from the Rx_Buff
-    for (int i = 0; i < Size; i++) begin
-        ReadAddress(RX_BUFFER_ADDR, ReadData);
-        assert (data[i] == ReadData)
-            $display("Rx_Buff has correct data at index %0d: data[%0d] = %0h, ReadData = %0h", 
-                      i, i, data[i], ReadData);
-        else
-            $display("DATA ERROR: Mismatch at index %0d: data[%0d] = %0h, ReadData = %0h", 
-                    i, i, data[i], ReadData);
-    end
+    ReadAddress(RX_BUFFER_ADDR, ReadData);
+    assert (ReadData == data)
+      $display("SUCCESS: Rx_Buff contains correct data");
+    else
+      $display("ERROR: Rx_Buff contains incorrect data");
   
   endtask
 
@@ -140,6 +142,84 @@ program testPr_hdlc(
   
   endtask
 
+  //Verify error receive checks all flags correct and Rx_Buff is empty
+  task VerifyErrorReceive(logic [127:0][7:0] data, int Size);
+    logic [7:0] ReadData;
+
+    // Verify status register bits
+    ReadAddress(Rx_SC, ReadData);
+
+    //Might be overkill to check all of these 
+    assert (ReadData[Rx_Ready] == 0)
+      $display("PASS: Rx_Ready is low after error");  
+    else
+      $display("FAIL: Rx_Ready is high after error");
+
+    assert (ReadData[Rx_FrameError] == 1)
+      $display("PASS: Rx_FrameError is high after error");
+    else
+      $display("FAIL: Rx_FrameError is low after error");
+
+    assert (ReadData[Rx_Overflow] == 0)
+      $display("PASS: Rx_Overflow is low after error");
+    else
+      $display("FAIL: Rx_Overflow is high after error");
+
+    assert (ReadData[Rx_AbortSignal] == 0)
+      $display("PASS: Rx_AbortSignal is low after error");
+    else
+      $display("FAIL: Rx_AbortSignal is high after error");
+
+    assert (ReadData[Rx_Drop] == 0)
+      $display("PASS: Rx_Drop is low after error");
+    else
+      $display("FAIL: Rx_Drop is high after error");
+    
+    // Verify Rx_Buff is empty
+    ReadAddress(RX_BUFFER_ADDR, ReadData);
+    assert (ReadData == 0)
+      $display("PASS: Rx_Buff is empty after error");
+    else
+      $display("FAIL: Rx_Buff is not empty after error");
+  endtask
+
+  task VerifyAbortedFrame(logic [127:0][7:0] data, int Size);
+    logic [7:0] ReadData;
+
+    // Verify status register bits
+    ReadAddress(Rx_SC, ReadData);
+    //Check all flags
+    assert (ReadData[Rx_Ready] == 0)
+      $display("PASS: Rx_Ready is low after aborted frame");
+    else
+      $display("FAIL: Rx_Ready is high after aborted frame");
+
+    assert (ReadData[Rx_FrameError] == 1)
+      $display("PASS: Rx_FrameError is high after aborted frame");
+    else
+      $display("FAIL: Rx_FrameError is low after aborted frame");
+
+    assert (ReadData[Rx_Overflow] == 0)
+      $display("PASS: Rx_Overflow is low after aborted frame");
+    else
+      $display("FAIL: Rx_Overflow is high after aborted frame");
+
+    assert (ReadData[Rx_AbortSignal] == 1)
+      $display("PASS: Rx_AbortSignal is high after aborted frame");
+    else
+      $display("FAIL: Rx_AbortSignal is low after aborted frame");
+
+    assert (ReadData[Rx_Drop] == 0)
+
+    // Verify Rx_Buff is empty
+    ReadAddress(RX_BUFFER_ADDR, ReadData);
+    assert (ReadData == 0)
+      $display("PASS: Rx_Buff is empty after aborted frame");
+    else
+      $display("FAIL: Rx_Buff is not empty after aborted frame");
+
+  endtask
+  
   /****************************************************************************
    *                                                                          *
    *                             Simulation code                              *
