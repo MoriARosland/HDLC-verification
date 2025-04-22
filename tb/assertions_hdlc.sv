@@ -24,33 +24,39 @@ module assertions_hdlc (
   input  logic Rx_AbortDetect,
   input  logic Rx_AbortSignal,
   input  logic Rx_Overflow,
-  input  logic Rx_WrBuff
+  input  logic Rx_WrBuff,
+  input  logic Rx_EoF
 );
 
   initial begin
     ErrCntAssertions  =  0;
   end
 
-  /// Sequence utilities:
+  /// Sequence utilities (Rx and Tx use some of the same sequences):
   
-  // TODO: REMEMBER TO LINK THIS UP TO TX ALSO!
   sequence AbortFlag_sequence(serial_line); 
     // Note that least significant bit is received first
     !serial_line ##1 serial_line[*7]; // Pattern: 1111 1110
+  endsequence
+
+  sequence FrameFlag_sequence(serial_line);
+    !serial_line ##1 serial_line[*6] ##1 !serial_line; // Pattern: 0111 1110
+  endsequence
+
+  // If either an abort flag or regular flag is detected while
+  // Rx_ValidFrame is high, we know a transmission has ended, and
+  // that EoF must be asserted some time later.
+  sequence EndOfFrame_sequence;
+    (AbortFlag_sequence(Rx) or FrameFlag_sequence(Rx)) ##0 Rx_ValidFrame;
   endsequence
 
   /*******************************************
    *  Verify correct Rx_FlagDetect behavior  *
    *******************************************/
 
-  sequence Rx_flag;
-    // INSERT CODE HERE
-    !Rx ##1 Rx[*6] ##1 !Rx;
-  endsequence
-
   // Check if flag sequence is detected
   property RX_FlagDetect;
-    @(posedge Clk) Rx_flag |-> ##2 Rx_FlagDetect;
+    @(posedge Clk) FrameFlag_sequence(Rx) |-> ##2 Rx_FlagDetect;
   endproperty
 
   RX_FlagDetect_Assert : assert property (RX_FlagDetect) begin
@@ -77,7 +83,7 @@ module assertions_hdlc (
     ErrCntAssertions++; 
   end
 
-  // Verify correct behaviour when receiving an abort pattern (Spec8, Rx)
+  // Verify correct behaviour when receiving an abort pattern (Spec10)
   property RX_AbortDetect;
     @(posedge Clk) disable iff (!Rx_ValidFrame) (AbortFlag_sequence(Rx)) |=> ##1 Rx_AbortDetect;
   endproperty
@@ -86,5 +92,18 @@ module assertions_hdlc (
     $display("PASS: Abort flag successfully generated abort signal (RX)");
   end else begin
     $error("FAIL: Abort flag did not generate abort signal (RX)");
+    ErrCntAssertions++; 
+  end
+
+  // Verify generation of end of frame (Spec12)
+  property RX_EndOfFrame;
+    @(posedge Clk) EndOfFrame_sequence |=> ##[0:$] Rx_EoF;
+  endproperty
+
+  Rx_EndOfFrameDetect : assert property (RX_EndOfFrame) begin
+    $display("RX_EndOfFrame:: PASS: Succesfully generated end of frame");
+  end else begin
+    $error("RX_EndOfFrame:: PASS: Failed to generate end of frame");
+    ErrCntAssertions++; 
   end
 endmodule
