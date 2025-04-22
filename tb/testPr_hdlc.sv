@@ -183,40 +183,42 @@ program testPr_hdlc(
       $display("FAIL: Rx_Buff is not empty after error");
   endtask
 
-  task VerifyAbortedFrame(logic [127:0][7:0] data, int Size);
+  task VerifyDropReceive(logic [127:0][7:0] data, int Size);
     logic [7:0] ReadData;
-
     // Verify status register bits
     ReadAddress(Rx_SC, ReadData);
     //Check all flags
     assert (ReadData[Rx_Ready] == 0)
-      $display("PASS: Rx_Ready is low after aborted frame");
+      $display("PASS: Rx_Ready is low after dropped frame");
     else
-      $display("FAIL: Rx_Ready is high after aborted frame");
+      $display("FAIL: Rx_Ready is high after dropped frame");
 
-    assert (ReadData[Rx_FrameError] == 1)
-      $display("PASS: Rx_FrameError is high after aborted frame");
+    assert (ReadData[Rx_FrameError] == 0)
+      $display("PASS: Rx_FrameError is low after dropped frame");
     else
-      $display("FAIL: Rx_FrameError is low after aborted frame");
+      $display("FAIL: Rx_FrameError is high after dropped frame");
 
     assert (ReadData[Rx_Overflow] == 0)
-      $display("PASS: Rx_Overflow is low after aborted frame");
+      $display("PASS: Rx_Overflow is low after dropped frame");
     else
-      $display("FAIL: Rx_Overflow is high after aborted frame");
+      $display("FAIL: Rx_Overflow is high after dropped frame");
 
-    assert (ReadData[Rx_AbortSignal] == 1)
-      $display("PASS: Rx_AbortSignal is high after aborted frame");
+    assert (ReadData[Rx_AbortSignal] == 0)
+      $display("PASS: Rx_AbortSignal is low after dropped frame");
     else
-      $display("FAIL: Rx_AbortSignal is low after aborted frame");
+      $display("FAIL: Rx_AbortSignal is high after dropped frame");
 
     assert (ReadData[Rx_Drop] == 0)
+      $display("PASS: Rx_Drop is low after dropped frame");
+    else
+      $display("FAIL: Rx_Drop is high after dropped frame");
 
     // Verify Rx_Buff is empty
     ReadAddress(RX_BUFFER_ADDR, ReadData);
     assert (ReadData == 0)
-      $display("PASS: Rx_Buff is empty after aborted frame");
+      $display("PASS: Rx_Buff is empty after dropped frame");
     else
-      $display("FAIL: Rx_Buff is not empty after aborted frame");
+      $display("FAIL: Rx_Buff is not empty after dropped frame");
 
   endtask
   
@@ -243,6 +245,8 @@ program testPr_hdlc(
     Receive(126, 0, 0, 0, 1, 0, 0); //Overflow
     Receive( 25, 0, 0, 0, 0, 0, 0); //Normal
     Receive( 47, 0, 0, 0, 0, 0, 0); //Normal
+    Receive( 42, 0, 0, 0, 0, 1, 0); //FrameDropped
+    Receive( 14, 0, 0, 0, 0, 0, 0); //Normal
 
     $display("*************************************************************");
     $display("%t - Finishing Test Program", $time);
@@ -403,10 +407,16 @@ program testPr_hdlc(
     repeat(8)
       @(posedge uin_hdlc.Clk);
 
+    if(Drop) begin 
+      WriteAddress(Rx_SC, 8'b1 << Rx_Drop);
+    end
+    
     if(Abort)
       VerifyAbortReceive(ReceiveData, Size);
     else if(Overflow)
       VerifyOverflowReceive(ReceiveData, Size);
+    else if(Drop)
+      VerifyDropReceive(ReceiveData, Size);
     else if(!SkipRead)
       VerifyNormalReceive(ReceiveData, Size);
 
