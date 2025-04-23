@@ -1,5 +1,5 @@
 # vsim -assertdebug -c -voptargs="+acc" test_hdlc bind_hdlc -do "log -r *; run -all; exit" 
-# Start time: 17:25:22 on Apr 23,2025
+# Start time: 19:51:25 on Apr 23,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: ../rtl/TxFCS.sv(13): (vopt-13314) Defaulting port 'DataBuff' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxFCS(fast)".
@@ -7,11 +7,7 @@
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxController(fast)".
 # ** Note: (vopt-143) Recognized 1 FSM in module "RxController(fast)".
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxBuff(fast)".
-# ** Warning: ./test_hdlc.sv(45): (vopt-2685) [TFMPC] - Too few port connections for 'u_dut'.  Expected 13, found 10.
-# ** Warning: ./test_hdlc.sv(45): (vopt-2718) [TFMPC] - Missing connection for port 'Tx_Done'.
-# ** Warning: ./test_hdlc.sv(45): (vopt-2718) [TFMPC] - Missing connection for port 'TxEN'.
-# ** Warning: ./test_hdlc.sv(45): (vopt-2718) [TFMPC] - Missing connection for port 'Tx'.
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=5.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
 # //  Questa Sim
 # //  Version 2021.4_2 linux Dec  4 2021
 # //
@@ -214,17 +210,49 @@
 # ERROR_RECEIVE:: SUCCESS: Rx_AbortSignal is low after error
 # ERROR_RECEIVE:: SUCCESS: Rx_Drop is low after error
 # *************************************************************
-#              4192750 - Finishing Test Program
+#              4192750 - Starting task Transmit - Normal
 # *************************************************************
-# ** Note: $stop    : ./testPr_hdlc.sv(331)
-#    Time: 4192750 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
-# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 331
-# Stopped at ./testPr_hdlc.sv line 331
+# === Transmit - Normal (10 bytes) ===
+# TransmitData[0] = 7b
+# TransmitData[1] = de
+# TransmitData[2] = ec
+# TransmitData[3] = 4
+# TransmitData[4] = 16
+# TransmitData[5] = 9d
+# TransmitData[6] = e8
+# TransmitData[7] = da
+# TransmitData[8] = a
+# TransmitData[9] = 9f
+# Start verify transmit normal
+# PASS: startFlag transmitted
+# PASS: endFlag transmitted
+# VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly
+# VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly
+# VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly
+# VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly
+# VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly
+# VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly
+# VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly
+# VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly
+# VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly
+# VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly
+# VERIFY_TRANSMIT_NORMAL:: PASS: FCS transmitted correctly
+# VERIFY_TRANSMIT_NORMAL:: PASS: Tx_Done is high
+# VERIFY_TRANSMIT_NORMAL:: PASS: Tx_AbortFrame is low
+# VERIFY_TRANSMIT_NORMAL:: PASS: Tx_Full is low
+# End verify transmit normal
+# *************************************************************
+#              4332750 - Finishing Test Program
+# *************************************************************
+# ** Note: $stop    : ./testPr_hdlc.sv(403)
+#    Time: 4332750 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
+# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 403
+# Stopped at ./testPr_hdlc.sv line 403
 #  exit
 # *********************************
 # *                               *
 # * 	Assertion Errors: 0	  *
 # *                               *
 # *********************************
-# End time: 17:25:27 on Apr 23,2025, Elapsed time: 0:00:05
-# Errors: 0, Warnings: 5
+# End time: 19:51:31 on Apr 23,2025, Elapsed time: 0:00:06
+# Errors: 0, Warnings: 1

@@ -297,25 +297,25 @@ program testPr_hdlc(
     end
   endtask
 
-  task VerifyTransmitNormal(logic [125:0][7:0] TransmitData, logic [129:0][7:0] txFrame, int Size);
+  task VerifyNormalTransmit(logic [125:0][7:0] TransmitData, logic [129:0][7:0] txFrame, int Size);
     logic [127:0][7:0] CRCdata;
     logic [15:0]       CRCbytes;
     logic [7:0]        TxStatus;
 
     //Verify startFlag
-    assert(txFrame[0] == 8'b01111110)
+    assert(txFrame[0] == FRAME_FLAG)
       $display("PASS: startFlag transmitted");
       else begin
         $error("FAIL: startFlag not transmitted");
-        TbErrorCnt++;
+        ++TbErrorCnt;
       end
 
     //Verify endFlag
-    assert(txFrame[Size+3] == 8'b01111110)
+    assert(txFrame[Size+3] == FRAME_FLAG)
       $display("PASS: endFlag transmitted");
       else begin
         $error("FAIL: endFlag not transmitted");
-        TbErrorCnt++;
+        ++TbErrorCnt;
       end
 
     //Verify data
@@ -324,7 +324,7 @@ program testPr_hdlc(
         $display("VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly");
       else begin
         $error("VERIFY_TRANSMIT_NORMAL:: FAIL: data not transmitted correctly, buffData[%0d] = %0h, transData[%0d] = %0h", i, TransmitData[i], i, txFrame[i+1]);
-        TbErrorCnt++;
+        ++TbErrorCnt;
       end
     end
 
@@ -340,7 +340,7 @@ program testPr_hdlc(
       $display("VERIFY_TRANSMIT_NORMAL:: PASS: FCS transmitted correctly");
       else begin
         $error("VERIFY_TRANSMIT_NORMAL:: FAIL: FCS not transmitted correctly, got %0h, expected %0h", txFrame[Size + 1], CRCdata[7:0]);
-        TbErrorCnt++;
+        ++TbErrorCnt;
       end
 
     //Check status registers
@@ -349,21 +349,21 @@ program testPr_hdlc(
       $display("VERIFY_TRANSMIT_NORMAL:: PASS: Tx_Done is high");
     else begin
       $error("VERIFY_TRANSMIT_NORMAL:: FAIL: Tx_Done is low");
-      TbErrorCnt++;
+      ++TbErrorCnt;
     end
 
     assert(TxStatus[Tx_AbortFrame] == 0 )
       $display("VERIFY_TRANSMIT_NORMAL:: PASS: Tx_AbortFrame is low");
     else begin
       $error("VERIFY_TRANSMIT_NORMAL:: FAIL: Tx_AbortFrame is high");
-      TbErrorCnt++;
+      ++TbErrorCnt;
     end
 
     assert(TxStatus[Tx_Full] == 0 )
       $display("VERIFY_TRANSMIT_NORMAL:: PASS: Tx_Full is low");
     else begin
       $error("VERIFY_TRANSMIT_NORMAL:: FAIL: Tx_Full is high");
-      TbErrorCnt++;
+      ++TbErrorCnt;
     end
     
   endtask
@@ -395,7 +395,7 @@ program testPr_hdlc(
     Receive( 14, 0, 0, 1, 0, 0, 0); //Non-byte Aligned Data
     Receive( 14, 0, 1, 0, 0, 0, 0); //FCS Checking error
 
-    Transmit(10, 0, 0);
+    Transmit(10, 0, 0);//Normal
 
     $display("*************************************************************");
     $display("%t - Finishing Test Program", $time);
@@ -492,7 +492,7 @@ program testPr_hdlc(
     end
   endtask
 
-  task Receive(int Size, int Abort, int FCSerr, int NonByteAligned, int Overflow, int Drop, int SkipRead);
+ task Receive(int Size, int Abort, int FCSerr, int NonByteAligned, int Overflow, int Drop, int SkipRead);
     logic [127:0][7:0] ReceiveData;
     logic       [15:0] FCSBytes;
     logic   [2:0][7:0] OverflowData;
@@ -518,11 +518,8 @@ program testPr_hdlc(
     for (int i = 0; i < Size; i++) begin
       ReceiveData[i] = $urandom;
     end
-
     ReceiveData[Size]   = '0;
     ReceiveData[Size+1] = '0;
-
-    $display("Managed to get after randome stuff");
 
     //Calculate FCS bits;
     GenerateFCSBytes(ReceiveData, Size, FCSBytes);
@@ -654,7 +651,7 @@ endtask
       ReadAddress(Tx_SC, TxStatus);
     end while (!TxStatus[Tx_Done]);
 
-      //Write randome data
+     // Write random data to Tx_buffer
     for (int i = 0; i < Size; i++) begin
       TransmitData[i] = $urandom;
       WriteAddress(Tx_Buff, TransmitData[i]);
@@ -663,6 +660,7 @@ endtask
 
     //If overlow active overflow
     if (Overflow) begin
+      //TODO: Write until overflow buffer is full
       WriteAddress(Tx_Buff, $urandom);
     end
 
@@ -686,7 +684,7 @@ endtask
     if (!Abort && !Overflow) begin
       // hand off to your checker exactly as before
       $display("Start verify transmit normal");
-      VerifyTransmitNormal(TransmitData, txFrame, Size);
+      VerifyNormalTransmit(TransmitData, txFrame, Size);
       $display("End verify transmit normal");
     end
     #10000ns;
