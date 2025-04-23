@@ -1,5 +1,5 @@
 # vsim -assertdebug -c -voptargs="+acc" test_hdlc bind_hdlc -do "log -r *; run -all; exit" 
-# Start time: 19:51:25 on Apr 23,2025
+# Start time: 21:34:08 on Apr 23,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: ../rtl/TxFCS.sv(13): (vopt-13314) Defaulting port 'DataBuff' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxFCS(fast)".
@@ -242,17 +242,34 @@
 # VERIFY_TRANSMIT_NORMAL:: PASS: Tx_Full is low
 # End verify transmit normal
 # *************************************************************
-#              4332750 - Finishing Test Program
+#              4332750 - Starting task Transmit - Overflow
 # *************************************************************
-# ** Note: $stop    : ./testPr_hdlc.sv(403)
-#    Time: 4332750 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
-# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 403
-# Stopped at ./testPr_hdlc.sv line 403
+# === Transmit - Overflow (10 bytes) ===
+# TransmitData[0] = c5
+# TransmitData[1] = 8f
+# TransmitData[2] = 73
+# TransmitData[3] = 14
+# TransmitData[4] = 71
+# TransmitData[5] = 13
+# TransmitData[6] = c6
+# TransmitData[7] = 38
+# TransmitData[8] = 17
+# TransmitData[9] = 9a
+# VERIFY_OVERFLOW_TRANSMIT:: PASS: Tx_Full is high
+# VERIFY_OVERFLOW_TRANSMIT:: PASS: Tx_Done is low
+# VERIFY_OVERFLOW_TRANSMIT:: PASS: Tx_AbortFrame is low
+# *************************************************************
+#              5056750 - Finishing Test Program
+# *************************************************************
+# ** Note: $stop    : ./testPr_hdlc.sv(434)
+#    Time: 5056750 ns  Iteration: 2  Instance: /test_hdlc/u_testPr
+# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 434
+# Stopped at ./testPr_hdlc.sv line 434
 #  exit
 # *********************************
 # *                               *
 # * 	Assertion Errors: 0	  *
 # *                               *
 # *********************************
-# End time: 19:51:31 on Apr 23,2025, Elapsed time: 0:00:06
+# End time: 21:34:14 on Apr 23,2025, Elapsed time: 0:00:06
 # Errors: 0, Warnings: 1
