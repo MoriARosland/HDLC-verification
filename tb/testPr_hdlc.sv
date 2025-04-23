@@ -26,6 +26,7 @@ program testPr_hdlc(
 
   // HDLC register addresses:
   const logic [2:0] RX_BUFFER_ADDR = 3'b011;
+  const logic [2:0] RX_LEN_ADDR = 3'b100;
   const logic [2:0] RXSC = 3'b010;
 
   /****************************************************************************
@@ -73,7 +74,7 @@ program testPr_hdlc(
      for (int i = 0; i < Size; i++) begin
         ReadAddress(RX_BUFFER_ADDR, ReadData);
         assert (ReadData == 0)
-            $display("SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
+            // $display("SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
         else begin
             $display("ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
             ++TbErrorCnt;
@@ -120,8 +121,8 @@ program testPr_hdlc(
     for (int i = 0; i < Size; i++) begin
         ReadAddress(RX_BUFFER_ADDR, ReadData);
         assert (data[i] == ReadData)
-            $display("Rx_Buff has correct data at index %0d: data[%0d] = %0h, ReadData = %0h", 
-                      i, i, data[i], ReadData);
+            // $display("Rx_Buff has correct data at index %0d: data[%0d] = %0h, ReadData = %0h", 
+                      // i, i, data[i], ReadData);
         else begin
             $display("DATA ERROR: Mismatch at index %0d: data[%0d] = %0h, ReadData = %0h", 
                     i, i, data[i], ReadData);
@@ -171,8 +172,8 @@ program testPr_hdlc(
     for (int i = 0; i < Size; i++) begin
         ReadAddress(RX_BUFFER_ADDR, ReadData);
         assert (data[i] == ReadData)
-            $display("Rx_Buff has correct data at index %0d: data[%0d] = %0h, ReadData = %0h", 
-                      i, i, data[i], ReadData);
+            // $display("Rx_Buff has correct data at index %0d: data[%0d] = %0h, ReadData = %0h", 
+                      // i, i, data[i], ReadData);
         else begin
             $display("DATA ERROR: Mismatch at index %0d: data[%0d] = %0h, ReadData = %0h", 
                     i, i, data[i], ReadData);
@@ -228,7 +229,7 @@ program testPr_hdlc(
      for (int i = 0; i < Size; i++) begin
         ReadAddress(RX_BUFFER_ADDR, ReadData);
         assert (ReadData == 0)
-            $display("ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
+            // $display("ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
         else begin
             $display("ERROR_RECEIVE:: ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
             ++TbErrorCnt;
@@ -273,13 +274,26 @@ program testPr_hdlc(
      for (int i = 0; i < Size; i++) begin
         ReadAddress(RX_BUFFER_ADDR, ReadData);
         assert (ReadData == 0)
-            $display("DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
+            // $display("DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
         else begin
             $display("DROP_RECEIVE:: ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
             ++TbErrorCnt;
         end
     end
 
+  endtask
+
+  task VerifyRxFrameSize(int Size);
+    logic [7:0] ReadData;
+
+    ReadAddress(RX_LEN_ADDR, ReadData);
+
+    assert (ReadData == Size)
+      $display("VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength");
+    else begin
+      $error("VerifyRxFrameSize:: ERROR: Rx_Framelength MISMATCH. Received: %0d, Expected: %0d", ReadData, Size);
+      ++TbErrorCnt;
+    end
   endtask
   
   /****************************************************************************
@@ -302,7 +316,7 @@ program testPr_hdlc(
     Receive( 45, 0, 0, 0, 0, 0, 0); //Normal
     Receive(126, 0, 0, 0, 0, 0, 0); //Normal
     Receive(122, 1, 0, 0, 0, 0, 0); //Abort
-    Receive(126, 0, 0, 0, 1, 0, 0); //Overflow (126 data bytes + 2 flag bytes + overflow bytes )
+    Receive(126, 0, 0, 0, 1, 0, 0); //Overflow (126 data bytes + 2 bytes for FCS + overflow bytes )
     Receive( 25, 0, 0, 0, 0, 0, 0); //Normal
     Receive( 47, 0, 0, 0, 0, 0, 0); //Normal
     Receive( 42, 0, 0, 0, 0, 1, 0); //FrameDropped
@@ -483,6 +497,8 @@ program testPr_hdlc(
       WriteAddress(Rx_SC, 8'b1 << Rx_Drop);
     end
     
+    if(!SkipRead) VerifyRxFrameSize(Size); // Verify that Rx_len matches received number of bytes
+
     if(Abort)
       VerifyAbortReceive(ReceiveData, Size);
     else if(Overflow)
