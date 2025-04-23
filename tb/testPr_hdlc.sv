@@ -345,6 +345,7 @@ program testPr_hdlc(
 
     //Check status registers
     ReadAddress(Tx_SC, TxStatus);
+
     assert(TxStatus[Tx_Done] == 1)
       $display("VERIFY_TRANSMIT_NORMAL:: PASS: Tx_Done is high");
     else begin
@@ -366,6 +367,36 @@ program testPr_hdlc(
       ++TbErrorCnt;
     end
     
+  endtask
+
+  task VerifyTransmitOverflow(logic [125:0][7:0] TransmitData, logic [129:0][7:0] txFrame, int Size);
+  logic [7:0] TxStatus;
+   //Check status registers
+   ReadAddress(Tx_SC, TxStatus);
+   //Check if Tx_Full is high
+   assert(TxStatus[Tx_Full] == 1)
+    $display("VERIFY_OVERFLOW_TRANSMIT:: PASS: Tx_Full is high");
+   else begin
+    $error("VERIFY_OVERFLOW_TRANSMIT:: FAIL: Tx_Full is low");
+    ++TbErrorCnt;
+   end
+
+   //Check if Tx_Done is low
+   assert(TxStatus[Tx_Done] == 0)
+    $display("VERIFY_OVERFLOW_TRANSMIT:: PASS: Tx_Done is low");
+   else begin
+    $error("VERIFY_OVERFLOW_TRANSMIT:: FAIL: Tx_Done is high");
+    ++TbErrorCnt;
+   end
+
+   //Check if Tx_AbortFrame is low
+   assert(TxStatus[Tx_AbortFrame] == 0)
+    $display("VERIFY_OVERFLOW_TRANSMIT:: PASS: Tx_AbortFrame is low");
+   else begin
+    $error("VERIFY_OVERFLOW_TRANSMIT:: FAIL: Tx_AbortFrame is high");
+    ++TbErrorCnt;
+   end
+   
   endtask
   /****************************************************************************
    *                                                                          *
@@ -396,6 +427,7 @@ program testPr_hdlc(
     Receive( 14, 0, 1, 0, 0, 0, 0); //FCS Checking error
 
     Transmit(10, 0, 0);//Normal
+    Transmit(10, 0, 1);//Overflow
 
     $display("*************************************************************");
     $display("%t - Finishing Test Program", $time);
@@ -658,16 +690,20 @@ endtask
     end while (!TxStatus[Tx_Done]);
 
      // Write random data to Tx_buffer
-    for (int i = 0; i < Size; i++) begin
-      TransmitData[i] = $urandom;
-      WriteAddress(Tx_Buff, TransmitData[i]);
-      $display("TransmitData[%0d] = %0h", i, TransmitData[i]);
-    end
 
-    // Overflow the Tx_buffer if the overflow flag is true
-    if (Overflow) begin
-      //TODO: Write until overflow buffer is full
-      WriteAddress(Tx_Buff, $urandom);
+    if(!Overflow) begin
+      for (int i = 0; i < Size; i++) begin
+        TransmitData[i] = $urandom;
+        WriteAddress(Tx_Buff, TransmitData[i]);
+      end
+    end
+    else begin
+      $display("Overflowing buffer ...");
+       //Write random data until we have overflowed
+      for (int i = 0; i < BUFFER_CAPACITY + 1;i++) begin
+        WriteAddress(Tx_Buff, $urandom);
+      end
+      VerifyTransmitOverflow(TransmitData, txFrame, Size);
     end
     
     WriteAddress(Tx_SC, 8'b1 << Tx_Enable); // Start transmission
@@ -684,7 +720,6 @@ endtask
     // Wait for the frame to be transmitted
     repeat(16)
       @(posedge uin_hdlc.Clk);
-
     // only capture & verify in the “normal” case
     if (!Abort && !Overflow) begin
       // hand off to your checker exactly as before
