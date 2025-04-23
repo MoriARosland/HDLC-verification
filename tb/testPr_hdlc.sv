@@ -141,7 +141,6 @@ program testPr_hdlc(
      // Verify status register bits
     ReadAddress(Rx_SC, ReadData);
 
-    // INSERT CODE HERE
     assert (ReadData[Rx_Ready] == 1)
       $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high");
     else begin
@@ -371,8 +370,10 @@ program testPr_hdlc(
 
   task VerifyTransmitOverflow(logic [125:0][7:0] TransmitData, logic [129:0][7:0] txFrame, int Size);
   logic [7:0] TxStatus;
-   //Check status registers
+
+   // Read status register
    ReadAddress(Tx_SC, TxStatus);
+
    //Check if Tx_Full is high
    assert(TxStatus[Tx_Full] == 1)
     $display("VERIFY_OVERFLOW_TRANSMIT:: PASS: Tx_Full is high");
@@ -398,6 +399,21 @@ program testPr_hdlc(
    end
    
   endtask
+
+  // Verify that Tx_Done is asserted when the entire TX buffer has been read for transmission (Spec 17)
+  task VerifyTransmitComplete;
+    logic [7:0] txStatus;
+
+    ReadAddress(Tx_SC, txStatus);
+
+    assert(txStatus[Tx_Done])
+      $display("VerifyTransmitComplete:: PASS: Tx_Done is high after reading the entire buffer");
+    else begin
+      $error("VerifyTransmitComplete:: FAIL: Tx_Done is not high after reading the entire buffer");
+      ++TbErrorCnt;
+    end
+  endtask
+
   /****************************************************************************
    *                                                                          *
    *                             Simulation code                              *
@@ -710,24 +726,26 @@ endtask
     wait (!uin_hdlc.Tx);  // CRC calculation need to finish
 
     if (Abort) begin
-      // let it send a few bits, then abort
+      // Send some bits, then abort
       repeat(16) @(posedge uin_hdlc.Clk);
       WriteAddress(Tx_SC, 8'b1 << Tx_AbortFrame);
     end
 
     ParseTransmittedData(txFrame, Size);
 
-    // Wait for the frame to be transmitted
-    repeat(16)
-      @(posedge uin_hdlc.Clk);
-    // only capture & verify in the “normal” case
-    if (!Abort && !Overflow) begin
-      // hand off to your checker exactly as before
-      $display("Start verify transmit normal");
-      VerifyNormalTransmit(TransmitData, txFrame, Size);
-      $display("End verify transmit normal");
+    if(!Overflow) begin
+      VerifyTransmitComplete(); // After parsing the data, verify that the buffer is ready (Tx_done)
     end
+
+    // Tx_Done goes high once the the final databuffer has been transmitted.
+    repeat(16) @(posedge uin_hdlc.Clk); // Wait for the frame to be transmitted
+
+    if (!Abort && !Overflow) begin
+      VerifyNormalTransmit(TransmitData, txFrame, Size);
+    end
+
     #10000ns;
+
   endtask
 
   task GenerateFCSBytes(logic [127:0][7:0] data, int size, output logic[15:0] FCSBytes);
