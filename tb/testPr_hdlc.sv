@@ -498,7 +498,8 @@ program testPr_hdlc(
       WriteAddress(Rx_SC, 8'b1 << Rx_Drop);
     end
     
-    if(!SkipRead) VerifyRxFrameSize(Size); // Verify that Rx_len matches received number of bytes
+    if(!SkipRead && !Abort && !FCSerr && !NonByteAligned && !Drop)
+      VerifyRxFrameSize(Size);  // Verify that Rx_len matches received number of bytes when Rx_Ready is high  
 
     if(Abort)
       VerifyAbortReceive(ReceiveData, Size);

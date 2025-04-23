@@ -1,5 +1,5 @@
 # vsim -assertdebug -c -voptargs="+acc" test_hdlc bind_hdlc -do "log -r *; run -all; exit" 
-# Start time: 16:45:07 on Apr 23,2025
+# Start time: 17:07:13 on Apr 23,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: ../rtl/TxFCS.sv(13): (vopt-13314) Defaulting port 'DataBuff' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxFCS(fast)".
@@ -69,13 +69,12 @@
 # PASS: Abort flag successfully generated abort signal (RX)
 # PASS: Abort signal
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
-# VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
 # ABORT_RECEIVE:: SUCCESS: Rx_ready is low
 # ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
 # ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low
 # ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
 # *************************************************************
-#               309250 - Starting task Receive - Overflow
+#               308250 - Starting task Receive - Overflow
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -86,7 +85,7 @@
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high
 # OVERFLOW_RECEIVE: SUCCESS: Rx_AbortSignal is low
 # *************************************************************
-#               990250 - Starting task Receive - Normal
+#               989250 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -101,7 +100,7 @@
 # NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
 # 
 # *************************************************************
-#              1245750 - Starting task Receive - Normal
+#              1244750 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -116,19 +115,18 @@
 # NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
 # 
 # *************************************************************
-#              1910250 - Starting task Receive - Abort
+#              1909250 - Starting task Receive - Abort
 # *************************************************************
 # PASS: Flag detect
 # PASS: Abort flag successfully generated abort signal (RX)
 # PASS: Abort signal
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
-# VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
 # ABORT_RECEIVE:: SUCCESS: Rx_ready is low
 # ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
 # ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low
 # ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
 # *************************************************************
-#              2558750 - Starting task Receive - Overflow
+#              2556750 - Starting task Receive - Overflow
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -139,7 +137,7 @@
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high
 # OVERFLOW_RECEIVE: SUCCESS: Rx_AbortSignal is low
 # *************************************************************
-#              3234750 - Starting task Receive - Normal
+#              3232750 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -154,7 +152,7 @@
 # NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
 # 
 # *************************************************************
-#              3391250 - Starting task Receive - Normal
+#              3389250 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -169,18 +167,17 @@
 # NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
 # 
 # *************************************************************
-#              3657250 - Starting task Receive - Drop
+#              3655250 - Starting task Receive - Drop
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
-# VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
 # DROP_RECEIVE:: SUCCESS: Rx_Ready is low after dropped frame
 # DROP_RECEIVE:: SUCCESS: Rx_FrameError is low after dropped frame
 # DROP_RECEIVE:: SUCCESS: Rx_Overflow is low after dropped frame
 # DROP_RECEIVE:: SUCCESS: Rx_AbortSignal is low after dropped frame
 # *************************************************************
-#              3899250 - Starting task Receive - Normal
+#              3896250 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -195,34 +192,32 @@
 # NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
 # 
 # *************************************************************
-#              3997750 - Starting task Receive - Non-byte aligned
+#              3994750 - Starting task Receive - Non-byte aligned
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
-# VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
 # ERROR_RECEIVE:: SUCCESS: Rx_Ready is low after error
 # ERROR_RECEIVE:: SUCCESS: Rx_FrameError is high after error
 # ERROR_RECEIVE:: SUCCESS: Rx_Overflow is low after error
 # ERROR_RECEIVE:: SUCCESS: Rx_AbortSignal is low after error
 # ERROR_RECEIVE:: SUCCESS: Rx_Drop is low after error
 # *************************************************************
-#              4098750 - Starting task Receive - FCS error
+#              4094750 - Starting task Receive - FCS error
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
-# VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
 # ERROR_RECEIVE:: SUCCESS: Rx_Ready is low after error
 # ERROR_RECEIVE:: SUCCESS: Rx_FrameError is high after error
 # ERROR_RECEIVE:: SUCCESS: Rx_Overflow is low after error
 # ERROR_RECEIVE:: SUCCESS: Rx_AbortSignal is low after error
 # ERROR_RECEIVE:: SUCCESS: Rx_Drop is low after error
 # *************************************************************
-#              4197750 - Finishing Test Program
+#              4192750 - Finishing Test Program
 # *************************************************************
 # ** Note: $stop    : ./testPr_hdlc.sv(331)
-#    Time: 4197750 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
+#    Time: 4192750 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
 # Break in Module testPr_hdlc at ./testPr_hdlc.sv line 331
 # Stopped at ./testPr_hdlc.sv line 331
 #  exit
@@ -231,5 +226,5 @@
 # * 	Assertion Errors: 0	  *
 # *                               *
 # *********************************
-# End time: 16:45:13 on Apr 23,2025, Elapsed time: 0:00:06
+# End time: 17:07:18 on Apr 23,2025, Elapsed time: 0:00:05
 # Errors: 0, Warnings: 5
