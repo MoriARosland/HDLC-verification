@@ -184,7 +184,7 @@ program testPr_hdlc(
   endtask
 
   // VerifyErrorReceive checks that a Rx_FrameError is generated if Non-byte aligned data
-  // or error in FCS checking is detected.
+  // or error in FCS checking is detected. (Spec 16)
   task VerifyErrorReceive(logic [127:0][7:0] data, int Size);
     logic [7:0] ReadData;
 
