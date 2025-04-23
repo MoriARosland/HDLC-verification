@@ -1,5 +1,5 @@
 # vsim -assertdebug -c -voptargs="+acc" test_hdlc bind_hdlc -do "log -r *; run -all; exit" 
-# Start time: 13:38:15 on Apr 23,2025
+# Start time: 14:59:45 on Apr 23,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: ../rtl/TxFCS.sv(13): (vopt-13314) Defaulting port 'DataBuff' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxFCS(fast)".
@@ -132,8 +132,134 @@
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_FrameError is low
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high
 # OVERFLOW_RECEIVE: SUCCESS: Rx_AbortSignal is low
+# Rx_Buff has correct data at index 0: data[0] = f6, ReadData = f6
+# Rx_Buff has correct data at index 1: data[1] = 65, ReadData = 65
+# Rx_Buff has correct data at index 2: data[2] = ea, ReadData = ea
+# Rx_Buff has correct data at index 3: data[3] = f, ReadData = f
+# Rx_Buff has correct data at index 4: data[4] = ef, ReadData = ef
+# Rx_Buff has correct data at index 5: data[5] = 44, ReadData = 44
+# Rx_Buff has correct data at index 6: data[6] = c9, ReadData = c9
+# Rx_Buff has correct data at index 7: data[7] = cb, ReadData = cb
+# Rx_Buff has correct data at index 8: data[8] = 47, ReadData = 47
+# Rx_Buff has correct data at index 9: data[9] = c7, ReadData = c7
+# Rx_Buff has correct data at index 10: data[10] = f2, ReadData = f2
+# Rx_Buff has correct data at index 11: data[11] = e1, ReadData = e1
+# Rx_Buff has correct data at index 12: data[12] = 85, ReadData = 85
+# Rx_Buff has correct data at index 13: data[13] = 30, ReadData = 30
+# Rx_Buff has correct data at index 14: data[14] = 76, ReadData = 76
+# Rx_Buff has correct data at index 15: data[15] = 1d, ReadData = 1d
+# Rx_Buff has correct data at index 16: data[16] = d2, ReadData = d2
+# Rx_Buff has correct data at index 17: data[17] = 16, ReadData = 16
+# Rx_Buff has correct data at index 18: data[18] = db, ReadData = db
+# Rx_Buff has correct data at index 19: data[19] = 40, ReadData = 40
+# Rx_Buff has correct data at index 20: data[20] = b5, ReadData = b5
+# Rx_Buff has correct data at index 21: data[21] = 91, ReadData = 91
+# Rx_Buff has correct data at index 22: data[22] = 73, ReadData = 73
+# Rx_Buff has correct data at index 23: data[23] = a0, ReadData = a0
+# Rx_Buff has correct data at index 24: data[24] = 57, ReadData = 57
+# Rx_Buff has correct data at index 25: data[25] = 1d, ReadData = 1d
+# Rx_Buff has correct data at index 26: data[26] = d4, ReadData = d4
+# Rx_Buff has correct data at index 27: data[27] = dd, ReadData = dd
+# Rx_Buff has correct data at index 28: data[28] = 9a, ReadData = 9a
+# Rx_Buff has correct data at index 29: data[29] = 84, ReadData = 84
+# Rx_Buff has correct data at index 30: data[30] = b7, ReadData = b7
+# Rx_Buff has correct data at index 31: data[31] = 89, ReadData = 89
+# Rx_Buff has correct data at index 32: data[32] = a, ReadData = a
+# Rx_Buff has correct data at index 33: data[33] = d5, ReadData = d5
+# Rx_Buff has correct data at index 34: data[34] = fe, ReadData = fe
+# Rx_Buff has correct data at index 35: data[35] = 4c, ReadData = 4c
+# Rx_Buff has correct data at index 36: data[36] = fe, ReadData = fe
+# Rx_Buff has correct data at index 37: data[37] = c3, ReadData = c3
+# Rx_Buff has correct data at index 38: data[38] = 88, ReadData = 88
+# Rx_Buff has correct data at index 39: data[39] = bc, ReadData = bc
+# Rx_Buff has correct data at index 40: data[40] = 9b, ReadData = 9b
+# Rx_Buff has correct data at index 41: data[41] = f3, ReadData = f3
+# Rx_Buff has correct data at index 42: data[42] = 2f, ReadData = 2f
+# Rx_Buff has correct data at index 43: data[43] = b7, ReadData = b7
+# Rx_Buff has correct data at index 44: data[44] = b, ReadData = b
+# Rx_Buff has correct data at index 45: data[45] = e7, ReadData = e7
+# Rx_Buff has correct data at index 46: data[46] = 0, ReadData = 0
+# Rx_Buff has correct data at index 47: data[47] = 9, ReadData = 9
+# Rx_Buff has correct data at index 48: data[48] = 6a, ReadData = 6a
+# Rx_Buff has correct data at index 49: data[49] = c1, ReadData = c1
+# Rx_Buff has correct data at index 50: data[50] = 4, ReadData = 4
+# Rx_Buff has correct data at index 51: data[51] = 60, ReadData = 60
+# Rx_Buff has correct data at index 52: data[52] = af, ReadData = af
+# Rx_Buff has correct data at index 53: data[53] = 6f, ReadData = 6f
+# Rx_Buff has correct data at index 54: data[54] = 45, ReadData = 45
+# Rx_Buff has correct data at index 55: data[55] = cd, ReadData = cd
+# Rx_Buff has correct data at index 56: data[56] = 6c, ReadData = 6c
+# Rx_Buff has correct data at index 57: data[57] = d0, ReadData = d0
+# Rx_Buff has correct data at index 58: data[58] = a9, ReadData = a9
+# Rx_Buff has correct data at index 59: data[59] = fc, ReadData = fc
+# Rx_Buff has correct data at index 60: data[60] = e5, ReadData = e5
+# Rx_Buff has correct data at index 61: data[61] = a7, ReadData = a7
+# Rx_Buff has correct data at index 62: data[62] = 3b, ReadData = 3b
+# Rx_Buff has correct data at index 63: data[63] = be, ReadData = be
+# Rx_Buff has correct data at index 64: data[64] = a1, ReadData = a1
+# Rx_Buff has correct data at index 65: data[65] = 85, ReadData = 85
+# Rx_Buff has correct data at index 66: data[66] = 8e, ReadData = 8e
+# Rx_Buff has correct data at index 67: data[67] = a0, ReadData = a0
+# Rx_Buff has correct data at index 68: data[68] = 15, ReadData = 15
+# Rx_Buff has correct data at index 69: data[69] = 0, ReadData = 0
+# Rx_Buff has correct data at index 70: data[70] = c4, ReadData = c4
+# Rx_Buff has correct data at index 71: data[71] = 8b, ReadData = 8b
+# Rx_Buff has correct data at index 72: data[72] = a8, ReadData = a8
+# Rx_Buff has correct data at index 73: data[73] = bd, ReadData = bd
+# Rx_Buff has correct data at index 74: data[74] = 6c, ReadData = 6c
+# Rx_Buff has correct data at index 75: data[75] = 7d, ReadData = 7d
+# Rx_Buff has correct data at index 76: data[76] = ab, ReadData = ab
+# Rx_Buff has correct data at index 77: data[77] = aa, ReadData = aa
+# Rx_Buff has correct data at index 78: data[78] = 61, ReadData = 61
+# Rx_Buff has correct data at index 79: data[79] = b2, ReadData = b2
+# Rx_Buff has correct data at index 80: data[80] = 56, ReadData = 56
+# Rx_Buff has correct data at index 81: data[81] = 46, ReadData = 46
+# Rx_Buff has correct data at index 82: data[82] = d4, ReadData = d4
+# Rx_Buff has correct data at index 83: data[83] = e1, ReadData = e1
+# Rx_Buff has correct data at index 84: data[84] = d4, ReadData = d4
+# Rx_Buff has correct data at index 85: data[85] = 21, ReadData = 21
+# Rx_Buff has correct data at index 86: data[86] = 60, ReadData = 60
+# Rx_Buff has correct data at index 87: data[87] = 69, ReadData = 69
+# Rx_Buff has correct data at index 88: data[88] = 6, ReadData = 6
+# Rx_Buff has correct data at index 89: data[89] = f4, ReadData = f4
+# Rx_Buff has correct data at index 90: data[90] = 7e, ReadData = 7e
+# Rx_Buff has correct data at index 91: data[91] = ca, ReadData = ca
+# Rx_Buff has correct data at index 92: data[92] = 28, ReadData = 28
+# Rx_Buff has correct data at index 93: data[93] = 3, ReadData = 3
+# Rx_Buff has correct data at index 94: data[94] = af, ReadData = af
+# Rx_Buff has correct data at index 95: data[95] = ec, ReadData = ec
+# Rx_Buff has correct data at index 96: data[96] = 7e, ReadData = 7e
+# Rx_Buff has correct data at index 97: data[97] = 46, ReadData = 46
+# Rx_Buff has correct data at index 98: data[98] = 48, ReadData = 48
+# Rx_Buff has correct data at index 99: data[99] = c5, ReadData = c5
+# Rx_Buff has correct data at index 100: data[100] = fe, ReadData = fe
+# Rx_Buff has correct data at index 101: data[101] = a4, ReadData = a4
+# Rx_Buff has correct data at index 102: data[102] = 75, ReadData = 75
+# Rx_Buff has correct data at index 103: data[103] = d, ReadData = d
+# Rx_Buff has correct data at index 104: data[104] = 76, ReadData = 76
+# Rx_Buff has correct data at index 105: data[105] = 7d, ReadData = 7d
+# Rx_Buff has correct data at index 106: data[106] = 1f, ReadData = 1f
+# Rx_Buff has correct data at index 107: data[107] = f9, ReadData = f9
+# Rx_Buff has correct data at index 108: data[108] = 79, ReadData = 79
+# Rx_Buff has correct data at index 109: data[109] = 21, ReadData = 21
+# Rx_Buff has correct data at index 110: data[110] = 6d, ReadData = 6d
+# Rx_Buff has correct data at index 111: data[111] = dd, ReadData = dd
+# Rx_Buff has correct data at index 112: data[112] = cf, ReadData = cf
+# Rx_Buff has correct data at index 113: data[113] = f1, ReadData = f1
+# Rx_Buff has correct data at index 114: data[114] = 65, ReadData = 65
+# Rx_Buff has correct data at index 115: data[115] = 9a, ReadData = 9a
+# Rx_Buff has correct data at index 116: data[116] = 70, ReadData = 70
+# Rx_Buff has correct data at index 117: data[117] = a8, ReadData = a8
+# Rx_Buff has correct data at index 118: data[118] = 76, ReadData = 76
+# Rx_Buff has correct data at index 119: data[119] = ee, ReadData = ee
+# Rx_Buff has correct data at index 120: data[120] = b4, ReadData = b4
+# Rx_Buff has correct data at index 121: data[121] = 18, ReadData = 18
+# Rx_Buff has correct data at index 122: data[122] = 51, ReadData = 51
+# Rx_Buff has correct data at index 123: data[123] = 7c, ReadData = 7c
+# Rx_Buff has correct data at index 124: data[124] = 4d, ReadData = 4d
+# Rx_Buff has correct data at index 125: data[125] = c1, ReadData = c1
 # *************************************************************
-#               861250 - Starting task Receive - Normal
+#               987250 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -192,7 +318,7 @@
 # Rx_Buff has correct data at index 43: data[43] = c0, ReadData = c0
 # Rx_Buff has correct data at index 44: data[44] = 80, ReadData = 80
 # *************************************************************
-#              1115750 - Starting task Receive - Normal
+#              1241750 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -332,7 +458,7 @@
 # Rx_Buff has correct data at index 124: data[124] = e1, ReadData = e1
 # Rx_Buff has correct data at index 125: data[125] = 62, ReadData = 62
 # *************************************************************
-#              1779250 - Starting task Receive - Abort
+#              1905250 - Starting task Receive - Abort
 # *************************************************************
 # PASS: Flag detect
 # PASS: Abort flag successfully generated abort signal (RX)
@@ -465,7 +591,7 @@
 # SUCCESS: Rx_Buff is empty: ReadData = 0
 # SUCCESS: Rx_Buff is empty: ReadData = 0
 # *************************************************************
-#              2426750 - Starting task Receive - Overflow
+#              2552750 - Starting task Receive - Overflow
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -474,8 +600,134 @@
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_FrameError is low
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high
 # OVERFLOW_RECEIVE: SUCCESS: Rx_AbortSignal is low
+# Rx_Buff has correct data at index 0: data[0] = a5, ReadData = a5
+# Rx_Buff has correct data at index 1: data[1] = 4b, ReadData = 4b
+# Rx_Buff has correct data at index 2: data[2] = 32, ReadData = 32
+# Rx_Buff has correct data at index 3: data[3] = 32, ReadData = 32
+# Rx_Buff has correct data at index 4: data[4] = 4, ReadData = 4
+# Rx_Buff has correct data at index 5: data[5] = ca, ReadData = ca
+# Rx_Buff has correct data at index 6: data[6] = a1, ReadData = a1
+# Rx_Buff has correct data at index 7: data[7] = 8b, ReadData = 8b
+# Rx_Buff has correct data at index 8: data[8] = 90, ReadData = 90
+# Rx_Buff has correct data at index 9: data[9] = 35, ReadData = 35
+# Rx_Buff has correct data at index 10: data[10] = 22, ReadData = 22
+# Rx_Buff has correct data at index 11: data[11] = bf, ReadData = bf
+# Rx_Buff has correct data at index 12: data[12] = da, ReadData = da
+# Rx_Buff has correct data at index 13: data[13] = b8, ReadData = b8
+# Rx_Buff has correct data at index 14: data[14] = 90, ReadData = 90
+# Rx_Buff has correct data at index 15: data[15] = 53, ReadData = 53
+# Rx_Buff has correct data at index 16: data[16] = ad, ReadData = ad
+# Rx_Buff has correct data at index 17: data[17] = 8, ReadData = 8
+# Rx_Buff has correct data at index 18: data[18] = d3, ReadData = d3
+# Rx_Buff has correct data at index 19: data[19] = 76, ReadData = 76
+# Rx_Buff has correct data at index 20: data[20] = b3, ReadData = b3
+# Rx_Buff has correct data at index 21: data[21] = 8c, ReadData = 8c
+# Rx_Buff has correct data at index 22: data[22] = 36, ReadData = 36
+# Rx_Buff has correct data at index 23: data[23] = 51, ReadData = 51
+# Rx_Buff has correct data at index 24: data[24] = d1, ReadData = d1
+# Rx_Buff has correct data at index 25: data[25] = 8b, ReadData = 8b
+# Rx_Buff has correct data at index 26: data[26] = 54, ReadData = 54
+# Rx_Buff has correct data at index 27: data[27] = 63, ReadData = 63
+# Rx_Buff has correct data at index 28: data[28] = 89, ReadData = 89
+# Rx_Buff has correct data at index 29: data[29] = d1, ReadData = d1
+# Rx_Buff has correct data at index 30: data[30] = dc, ReadData = dc
+# Rx_Buff has correct data at index 31: data[31] = be, ReadData = be
+# Rx_Buff has correct data at index 32: data[32] = a9, ReadData = a9
+# Rx_Buff has correct data at index 33: data[33] = 26, ReadData = 26
+# Rx_Buff has correct data at index 34: data[34] = b4, ReadData = b4
+# Rx_Buff has correct data at index 35: data[35] = 25, ReadData = 25
+# Rx_Buff has correct data at index 36: data[36] = 81, ReadData = 81
+# Rx_Buff has correct data at index 37: data[37] = 56, ReadData = 56
+# Rx_Buff has correct data at index 38: data[38] = 9, ReadData = 9
+# Rx_Buff has correct data at index 39: data[39] = 97, ReadData = 97
+# Rx_Buff has correct data at index 40: data[40] = ec, ReadData = ec
+# Rx_Buff has correct data at index 41: data[41] = a1, ReadData = a1
+# Rx_Buff has correct data at index 42: data[42] = 2b, ReadData = 2b
+# Rx_Buff has correct data at index 43: data[43] = 32, ReadData = 32
+# Rx_Buff has correct data at index 44: data[44] = 1f, ReadData = 1f
+# Rx_Buff has correct data at index 45: data[45] = cf, ReadData = cf
+# Rx_Buff has correct data at index 46: data[46] = 2, ReadData = 2
+# Rx_Buff has correct data at index 47: data[47] = dd, ReadData = dd
+# Rx_Buff has correct data at index 48: data[48] = 3f, ReadData = 3f
+# Rx_Buff has correct data at index 49: data[49] = c6, ReadData = c6
+# Rx_Buff has correct data at index 50: data[50] = 92, ReadData = 92
+# Rx_Buff has correct data at index 51: data[51] = 67, ReadData = 67
+# Rx_Buff has correct data at index 52: data[52] = c4, ReadData = c4
+# Rx_Buff has correct data at index 53: data[53] = 63, ReadData = 63
+# Rx_Buff has correct data at index 54: data[54] = 20, ReadData = 20
+# Rx_Buff has correct data at index 55: data[55] = 6f, ReadData = 6f
+# Rx_Buff has correct data at index 56: data[56] = 61, ReadData = 61
+# Rx_Buff has correct data at index 57: data[57] = e3, ReadData = e3
+# Rx_Buff has correct data at index 58: data[58] = e2, ReadData = e2
+# Rx_Buff has correct data at index 59: data[59] = 2e, ReadData = 2e
+# Rx_Buff has correct data at index 60: data[60] = b5, ReadData = b5
+# Rx_Buff has correct data at index 61: data[61] = 45, ReadData = 45
+# Rx_Buff has correct data at index 62: data[62] = 5c, ReadData = 5c
+# Rx_Buff has correct data at index 63: data[63] = bb, ReadData = bb
+# Rx_Buff has correct data at index 64: data[64] = 59, ReadData = 59
+# Rx_Buff has correct data at index 65: data[65] = 3c, ReadData = 3c
+# Rx_Buff has correct data at index 66: data[66] = 70, ReadData = 70
+# Rx_Buff has correct data at index 67: data[67] = 74, ReadData = 74
+# Rx_Buff has correct data at index 68: data[68] = 6a, ReadData = 6a
+# Rx_Buff has correct data at index 69: data[69] = 93, ReadData = 93
+# Rx_Buff has correct data at index 70: data[70] = 40, ReadData = 40
+# Rx_Buff has correct data at index 71: data[71] = 8f, ReadData = 8f
+# Rx_Buff has correct data at index 72: data[72] = 14, ReadData = 14
+# Rx_Buff has correct data at index 73: data[73] = 75, ReadData = 75
+# Rx_Buff has correct data at index 74: data[74] = 15, ReadData = 15
+# Rx_Buff has correct data at index 75: data[75] = 6c, ReadData = 6c
+# Rx_Buff has correct data at index 76: data[76] = d3, ReadData = d3
+# Rx_Buff has correct data at index 77: data[77] = df, ReadData = df
+# Rx_Buff has correct data at index 78: data[78] = d0, ReadData = d0
+# Rx_Buff has correct data at index 79: data[79] = ab, ReadData = ab
+# Rx_Buff has correct data at index 80: data[80] = 3f, ReadData = 3f
+# Rx_Buff has correct data at index 81: data[81] = 27, ReadData = 27
+# Rx_Buff has correct data at index 82: data[82] = a2, ReadData = a2
+# Rx_Buff has correct data at index 83: data[83] = 47, ReadData = 47
+# Rx_Buff has correct data at index 84: data[84] = 62, ReadData = 62
+# Rx_Buff has correct data at index 85: data[85] = e0, ReadData = e0
+# Rx_Buff has correct data at index 86: data[86] = 53, ReadData = 53
+# Rx_Buff has correct data at index 87: data[87] = cf, ReadData = cf
+# Rx_Buff has correct data at index 88: data[88] = a9, ReadData = a9
+# Rx_Buff has correct data at index 89: data[89] = cc, ReadData = cc
+# Rx_Buff has correct data at index 90: data[90] = dd, ReadData = dd
+# Rx_Buff has correct data at index 91: data[91] = a5, ReadData = a5
+# Rx_Buff has correct data at index 92: data[92] = b2, ReadData = b2
+# Rx_Buff has correct data at index 93: data[93] = 4c, ReadData = 4c
+# Rx_Buff has correct data at index 94: data[94] = d, ReadData = d
+# Rx_Buff has correct data at index 95: data[95] = ba, ReadData = ba
+# Rx_Buff has correct data at index 96: data[96] = fc, ReadData = fc
+# Rx_Buff has correct data at index 97: data[97] = 6e, ReadData = 6e
+# Rx_Buff has correct data at index 98: data[98] = cd, ReadData = cd
+# Rx_Buff has correct data at index 99: data[99] = 6d, ReadData = 6d
+# Rx_Buff has correct data at index 100: data[100] = ef, ReadData = ef
+# Rx_Buff has correct data at index 101: data[101] = da, ReadData = da
+# Rx_Buff has correct data at index 102: data[102] = 58, ReadData = 58
+# Rx_Buff has correct data at index 103: data[103] = 6c, ReadData = 6c
+# Rx_Buff has correct data at index 104: data[104] = 92, ReadData = 92
+# Rx_Buff has correct data at index 105: data[105] = 6, ReadData = 6
+# Rx_Buff has correct data at index 106: data[106] = dc, ReadData = dc
+# Rx_Buff has correct data at index 107: data[107] = be, ReadData = be
+# Rx_Buff has correct data at index 108: data[108] = 46, ReadData = 46
+# Rx_Buff has correct data at index 109: data[109] = 9a, ReadData = 9a
+# Rx_Buff has correct data at index 110: data[110] = fa, ReadData = fa
+# Rx_Buff has correct data at index 111: data[111] = 86, ReadData = 86
+# Rx_Buff has correct data at index 112: data[112] = ae, ReadData = ae
+# Rx_Buff has correct data at index 113: data[113] = 3a, ReadData = 3a
+# Rx_Buff has correct data at index 114: data[114] = e, ReadData = e
+# Rx_Buff has correct data at index 115: data[115] = 84, ReadData = 84
+# Rx_Buff has correct data at index 116: data[116] = bc, ReadData = bc
+# Rx_Buff has correct data at index 117: data[117] = 56, ReadData = 56
+# Rx_Buff has correct data at index 118: data[118] = 58, ReadData = 58
+# Rx_Buff has correct data at index 119: data[119] = 95, ReadData = 95
+# Rx_Buff has correct data at index 120: data[120] = 64, ReadData = 64
+# Rx_Buff has correct data at index 121: data[121] = 1f, ReadData = 1f
+# Rx_Buff has correct data at index 122: data[122] = 28, ReadData = 28
+# Rx_Buff has correct data at index 123: data[123] = 9d, ReadData = 9d
+# Rx_Buff has correct data at index 124: data[124] = 20, ReadData = 20
+# Rx_Buff has correct data at index 125: data[125] = d6, ReadData = d6
 # *************************************************************
-#              2975750 - Starting task Receive - Normal
+#              3227750 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -514,7 +766,7 @@
 # Rx_Buff has correct data at index 23: data[23] = 7e, ReadData = 7e
 # Rx_Buff has correct data at index 24: data[24] = e1, ReadData = e1
 # *************************************************************
-#              3131250 - Starting task Receive - Normal
+#              3383250 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -575,7 +827,7 @@
 # Rx_Buff has correct data at index 45: data[45] = 9e, ReadData = 9e
 # Rx_Buff has correct data at index 46: data[46] = b4, ReadData = b4
 # *************************************************************
-#              3396250 - Starting task Receive - Drop
+#              3648250 - Starting task Receive - Drop
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -627,7 +879,7 @@
 # DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
 # DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
 # *************************************************************
-#              3637250 - Starting task Receive - Normal
+#              3889250 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -655,7 +907,7 @@
 # Rx_Buff has correct data at index 12: data[12] = ba, ReadData = ba
 # Rx_Buff has correct data at index 13: data[13] = f2, ReadData = f2
 # *************************************************************
-#              3734750 - Starting task Receive - Non-byte aligned
+#              3986750 - Starting task Receive - Non-byte aligned
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -680,7 +932,7 @@
 # ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
 # ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
 # *************************************************************
-#              3834750 - Starting task Receive - FCS error
+#              4086750 - Starting task Receive - FCS error
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
@@ -705,17 +957,17 @@
 # ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
 # ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
 # *************************************************************
-#              3932750 - Finishing Test Program
+#              4184750 - Finishing Test Program
 # *************************************************************
-# ** Note: $stop    : ./testPr_hdlc.sv(262)
-#    Time: 3932750 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
-# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 262
-# Stopped at ./testPr_hdlc.sv line 262
+# ** Note: $stop    : ./testPr_hdlc.sv(316)
+#    Time: 4184750 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
+# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 316
+# Stopped at ./testPr_hdlc.sv line 316
 #  exit
 # *********************************
 # *                               *
 # * 	Assertion Errors: 0	  *
 # *                               *
 # *********************************
-# End time: 13:38:21 on Apr 23,2025, Elapsed time: 0:00:06
+# End time: 14:59:51 on Apr 23,2025, Elapsed time: 0:00:06
 # Errors: 0, Warnings: 5
