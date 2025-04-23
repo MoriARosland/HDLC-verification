@@ -345,6 +345,7 @@ program testPr_hdlc(
 
     //Check status registers
     ReadAddress(Tx_SC, TxStatus);
+
     assert(TxStatus[Tx_Done] == 1)
       $display("VERIFY_TRANSMIT_NORMAL:: PASS: Tx_Done is high");
     else begin
@@ -368,7 +369,7 @@ program testPr_hdlc(
     
   endtask
 
-  task VerifyOverflowTransmit(logic [125:0][7:0] TransmitData, logic [129:0][7:0] txFrame, int Size);
+  task VerifyTransmitOverflow(logic [125:0][7:0] TransmitData, logic [129:0][7:0] txFrame, int Size);
   logic [7:0] TxStatus;
    //Check status registers
    ReadAddress(Tx_SC, TxStatus);
@@ -683,19 +684,20 @@ endtask
     end while (!TxStatus[Tx_Done]);
 
      // Write random data to Tx_buffer
-    for (int i = 0; i < Size; i++) begin
-      TransmitData[i] = $urandom;
-      WriteAddress(Tx_Buff, TransmitData[i]);
-      $display("TransmitData[%0d] = %0h", i, TransmitData[i]);
-    end
 
-    //If overlow active overflow
-    if (Overflow) begin
-      //Write randome data until we have overflowed
-      for (int i = Size; i <  140 - Size;i++) begin
+    if(!Overflow) begin
+      for (int i = 0; i < Size; i++) begin
+        TransmitData[i] = $urandom;
+        WriteAddress(Tx_Buff, TransmitData[i]);
+      end
+    end
+    else begin
+      $display("Overflowing buffer ...");
+       //Write random data until we have overflowed
+      for (int i = 0; i < BUFFER_CAPACITY + 1;i++) begin
         WriteAddress(Tx_Buff, $urandom);
       end
-      VerifyOverflowTransmit(TransmitData, txFrame, Size);
+      VerifyTransmitOverflow(TransmitData, txFrame, Size);
     end
 
     // start transmission

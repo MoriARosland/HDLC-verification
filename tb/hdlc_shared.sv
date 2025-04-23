@@ -24,3 +24,4 @@ enum int {
 } TxSC_bits;
 
 const logic [7:0] FRAME_FLAG = 8'b01111110;
+const int BUFFER_CAPACITY = 128;
