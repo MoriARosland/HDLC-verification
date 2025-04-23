@@ -1,5 +1,5 @@
 # vsim -assertdebug -c -voptargs="+acc" test_hdlc bind_hdlc -do "log -r *; run -all; exit" 
-# Start time: 16:40:41 on Apr 23,2025
+# Start time: 16:45:07 on Apr 23,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: ../rtl/TxFCS.sv(13): (vopt-13314) Defaulting port 'DataBuff' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxFCS(fast)".
@@ -221,15 +221,15 @@
 # *************************************************************
 #              4197750 - Finishing Test Program
 # *************************************************************
-# ** Note: $stop    : ./testPr_hdlc.sv(330)
+# ** Note: $stop    : ./testPr_hdlc.sv(331)
 #    Time: 4197750 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
-# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 330
-# Stopped at ./testPr_hdlc.sv line 330
+# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 331
+# Stopped at ./testPr_hdlc.sv line 331
 #  exit
 # *********************************
 # *                               *
 # * 	Assertion Errors: 0	  *
 # *                               *
 # *********************************
-# End time: 16:40:50 on Apr 23,2025, Elapsed time: 0:00:09
+# End time: 16:45:13 on Apr 23,2025, Elapsed time: 0:00:06
 # Errors: 0, Warnings: 5
