@@ -19,9 +19,17 @@ interface in_hdlc ();
   logic [7:0] DataIn;
   logic [7:0] DataOut;
 
-  // TX
+  // TX (External)
   logic Tx;
   logic TxEN;
+
+  // TX (Internal)
+  logic Tx_AbortFrame;
+  logic Tx_AbortedTrans;
+  logic Tx_Done;
+  logic Tx_ValidFrame;
+  logic Tx_Enable;
+  logic Tx_Full;
 
   // RX
   logic Rx;

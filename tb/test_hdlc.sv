@@ -37,6 +37,8 @@ module test_hdlc ();
   assign uin_hdlc.Rx_StopFCS         = u_dut.Rx_StopFCS;
   assign uin_hdlc.RxD                = u_dut.RxD;
   assign uin_hdlc.ZeroDetect         = u_dut.u_RxChannel.ZeroDetect;
+  assign uin_hdlc.Tx_AbortFrame      = u_dut.Tx_AbortFrame;
+  assign uin_hdlc.Tx_Full            = u_dut.Tx_Full;
 
   //Clock
   always #250ns uin_hdlc.Clk = ~uin_hdlc.Clk;
@@ -54,7 +56,11 @@ module test_hdlc ();
     // RX
     .Rx          (uin_hdlc.Rx),
     .RxEN        (uin_hdlc.RxEN),
-    .Rx_Ready    (uin_hdlc.Rx_Ready)
+    .Rx_Ready    (uin_hdlc.Rx_Ready),
+    // Tx
+    .Tx          (uin_hdlc.Tx),
+    .Tx_Done     (uin_hdlc.Tx_Done),
+    .TxEN        (uin_hdlc.TxEN)
 );
 
   //Test program

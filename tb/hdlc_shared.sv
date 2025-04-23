@@ -1,5 +1,3 @@
-// shared enums
-
 enum logic[2:0] {
   Tx_SC,
   Tx_Buff,
