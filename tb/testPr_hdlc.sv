@@ -26,6 +26,7 @@ program testPr_hdlc(
 
   // HDLC register addresses:
   const logic [2:0] RX_BUFFER_ADDR = 3'b011;
+  const logic [2:0] RX_LEN_ADDR = 3'b100;
   const logic [2:0] RXSC = 3'b010;
 
   /****************************************************************************
@@ -45,19 +46,19 @@ program testPr_hdlc(
     ReadAddress(Rx_SC, ReadData);
     // INSERT CODE HERE
     assert (ReadData[Rx_Ready] == 1) begin
-      $display("ABORT_RECEIVE: ERROR: Rx_ready should not be high");
+      $error("ABORT_RECEIVE: ERROR: Rx_ready should not be high");
       ++TbErrorCnt;
     end else
       $display("ABORT_RECEIVE:: SUCCESS: Rx_ready is low");
 
     assert (ReadData[Rx_FrameError] == 1) begin
-      $display("ABORT_RECEIVE: ERROR: Rx_FrameError should not be high");
+      $error("ABORT_RECEIVE: ERROR: Rx_FrameError should not be high");
       ++TbErrorCnt;
     end else
       $display("ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low");
 
     assert (ReadData[Rx_Overflow] == 1) begin
-      $display("ABORT_RECEIVE: ERROR: Rx_Overflow should not be high");
+      $error("ABORT_RECEIVE: ERROR: Rx_Overflow should not be high");
       ++TbErrorCnt;
     end else
       $display("ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low");
@@ -65,7 +66,7 @@ program testPr_hdlc(
     assert (ReadData[Rx_AbortSignal] == 1)
       $display("ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low");
     else begin
-      $display("ABORT_RECEIVE: ERROR: Rx_AbortSignal should not be low");
+      $error("ABORT_RECEIVE: ERROR: Rx_AbortSignal should not be low");
       ++TbErrorCnt;
     end
     
@@ -73,9 +74,9 @@ program testPr_hdlc(
      for (int i = 0; i < Size; i++) begin
         ReadAddress(RX_BUFFER_ADDR, ReadData);
         assert (ReadData == 0)
-            $display("SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
+            // $display("SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
         else begin
-            $display("ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
+            $error("ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
             ++TbErrorCnt;
         end
     end
@@ -92,19 +93,19 @@ program testPr_hdlc(
 
     // INSERT CODE HERE
     assert (ReadData[Rx_Overflow] == 1) begin
-      $display("NORMAL RECEIVE:: ERROR: x OVERFLOW DETECTED!\n");
+      $error("NORMAL RECEIVE:: ERROR: x OVERFLOW DETECTED!\n");
       ++TbErrorCnt;
     end else
       $display("NORMAL RECEIVE: SUCCESS: No Rx overflow detected\n");
 
     assert (ReadData[Rx_AbortSignal] == 1) begin
-      $display("NORMAL RECEIVE:: ERROR: Rx ABORT DETECTED!\n");
+      $error("NORMAL RECEIVE:: ERROR: Rx ABORT DETECTED!\n");
       ++TbErrorCnt;
     end else
       $display("NORMAL RECEIVE:: SUCCESS: No Rx abort detected\n");
 
     assert (ReadData[Rx_FrameError] == 1) begin
-      $display("NORMAL RECEIVE:: ERROR: INVALID Rx FRAME DETECTED!\n");
+      $error("NORMAL RECEIVE:: ERROR: INVALID Rx FRAME DETECTED!\n");
       ++TbErrorCnt;
     end else 
       $display("NORMAL RECEIVE:: SUCCESS: FRAME IS VALID\n");
@@ -112,7 +113,7 @@ program testPr_hdlc(
     assert (ReadData[Rx_Ready] == 1)
       $display("NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY\n");
     else begin
-      $display("NORMAL RECEIVE:: ERROR: Rx BUFFER NOT READY\n");
+      $error("NORMAL RECEIVE:: ERROR: Rx BUFFER NOT READY\n");
       ++TbErrorCnt;
     end
 
@@ -120,10 +121,10 @@ program testPr_hdlc(
     for (int i = 0; i < Size; i++) begin
         ReadAddress(RX_BUFFER_ADDR, ReadData);
         assert (data[i] == ReadData)
-            $display("Rx_Buff has correct data at index %0d: data[%0d] = %0h, ReadData = %0h", 
-                      i, i, data[i], ReadData);
+            // $display("Rx_Buff has correct data at index %0d: data[%0d] = %0h, ReadData = %0h", 
+                      // i, i, data[i], ReadData);
         else begin
-            $display("DATA ERROR: Mismatch at index %0d: data[%0d] = %0h, ReadData = %0h", 
+            $error("DATA ERROR: Mismatch at index %0d: data[%0d] = %0h, ReadData = %0h", 
                     i, i, data[i], ReadData);
                     ++TbErrorCnt;
         end
@@ -144,12 +145,12 @@ program testPr_hdlc(
     assert (ReadData[Rx_Ready] == 1)
       $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high");
     else begin
-      $display("OVERFLOW_RECEIVE:: ERROR: Rx_ready should not be low");
+      $error("OVERFLOW_RECEIVE:: ERROR: Rx_ready should not be low");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_FrameError] == 1) begin
-      $display("OVERFLOW_RECEIVE: ERROR: Rx_FrameError should not be high");
+      $error("OVERFLOW_RECEIVE: ERROR: Rx_FrameError should not be high");
       ++TbErrorCnt;
     end else
       $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_FrameError is low");
@@ -157,12 +158,12 @@ program testPr_hdlc(
     assert (ReadData[Rx_Overflow] == 1)
       $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high");
     else begin
-      $display("OVERFLOW_RECEIVE:: ERROR: Rx_Overflow is low");
+      $error("OVERFLOW_RECEIVE:: ERROR: Rx_Overflow is low");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_AbortSignal] == 1) begin
-      $display("OVERFLOW_RECEIVE:: ERROR: Rx_AbortSignal should not be low");
+      $error("OVERFLOW_RECEIVE:: ERROR: Rx_AbortSignal should not be low");
       ++TbErrorCnt;
     end else
       $display("OVERFLOW_RECEIVE: SUCCESS: Rx_AbortSignal is low");
@@ -171,10 +172,10 @@ program testPr_hdlc(
     for (int i = 0; i < Size; i++) begin
         ReadAddress(RX_BUFFER_ADDR, ReadData);
         assert (data[i] == ReadData)
-            $display("Rx_Buff has correct data at index %0d: data[%0d] = %0h, ReadData = %0h", 
-                      i, i, data[i], ReadData);
+            // $display("Rx_Buff has correct data at index %0d: data[%0d] = %0h, ReadData = %0h", 
+                      // i, i, data[i], ReadData);
         else begin
-            $display("DATA ERROR: Mismatch at index %0d: data[%0d] = %0h, ReadData = %0h", 
+            $error("DATA ERROR: Mismatch at index %0d: data[%0d] = %0h, ReadData = %0h", 
                     i, i, data[i], ReadData);
                     ++TbErrorCnt;
         end
@@ -182,45 +183,45 @@ program testPr_hdlc(
   
   endtask
 
-  //Verify error receive checks all flags correct and Rx_Buff is empty
+  // VerifyErrorReceive checks that a Rx_FrameError is generated if Non-byte aligned data
+  // or error in FCS checking is detected. (Spec 16)
   task VerifyErrorReceive(logic [127:0][7:0] data, int Size);
     logic [7:0] ReadData;
 
     // Verify status register bits
     ReadAddress(Rx_SC, ReadData);
 
-    //Might be overkill to check all of these 
     assert (ReadData[Rx_Ready] == 0)
       $display("ERROR_RECEIVE:: SUCCESS: Rx_Ready is low after error");  
     else begin
-      $display("ERROR_RECEIVE:: ERROR: Rx_Ready is high after error");
+      $error("ERROR_RECEIVE:: ERROR: Rx_Ready is high after error");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_FrameError] == 1)
       $display("ERROR_RECEIVE:: SUCCESS: Rx_FrameError is high after error");
     else begin
-      $display("ERROR_RECEIVE:: ERROR: Rx_FrameError is low after error");
+      $error("ERROR_RECEIVE:: ERROR: Rx_FrameError is low after error");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_Overflow] == 0)
       $display("ERROR_RECEIVE:: SUCCESS: Rx_Overflow is low after error");
     else begin
-      $display("ERROR_RECEIVE:: ERROR: Rx_Overflow is high after error");
+      $error("ERROR_RECEIVE:: ERROR: Rx_Overflow is high after error");
       ++TbErrorCnt;
     end
     assert (ReadData[Rx_AbortSignal] == 0)
       $display("ERROR_RECEIVE:: SUCCESS: Rx_AbortSignal is low after error");
     else begin
-      $display("ERROR_RECEIVE:: ERROR: Rx_AbortSignal is high after error");
+      $error("ERROR_RECEIVE:: ERROR: Rx_AbortSignal is high after error");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_Drop] == 0)
       $display("ERROR_RECEIVE:: SUCCESS: Rx_Drop is low after error");
     else begin
-      $display("ERROR_RECEIVE:: ERROR: Rx_Drop is high after error");
+      $error("ERROR_RECEIVE:: ERROR: Rx_Drop is high after error");
       ++TbErrorCnt;
     end
     
@@ -228,9 +229,9 @@ program testPr_hdlc(
      for (int i = 0; i < Size; i++) begin
         ReadAddress(RX_BUFFER_ADDR, ReadData);
         assert (ReadData == 0)
-            $display("ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
+            // $display("ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
         else begin
-            $display("ERROR_RECEIVE:: ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
+            $error("ERROR_RECEIVE:: ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
             ++TbErrorCnt;
         end
     end
@@ -244,28 +245,28 @@ program testPr_hdlc(
     assert (ReadData[Rx_Ready] == 0)
       $display("DROP_RECEIVE:: SUCCESS: Rx_Ready is low after dropped frame");
     else begin
-      $display("DROP_RECEIVE:: ERROR: Rx_Ready is high after dropped frame");
+      $error("DROP_RECEIVE:: ERROR: Rx_Ready is high after dropped frame");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_FrameError] == 0)
       $display("DROP_RECEIVE:: SUCCESS: Rx_FrameError is low after dropped frame");
     else begin
-      $display("DROP_RECEIVE:: ERROR: Rx_FrameError is high after dropped frame");
+      $error("DROP_RECEIVE:: ERROR: Rx_FrameError is high after dropped frame");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_Overflow] == 0)
       $display("DROP_RECEIVE:: SUCCESS: Rx_Overflow is low after dropped frame");
     else begin
-      $display("DROP_RECEIVE:: ERROR: Rx_Overflow is high after dropped frame");
+      $error("DROP_RECEIVE:: ERROR: Rx_Overflow is high after dropped frame");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_AbortSignal] == 0)
       $display("DROP_RECEIVE:: SUCCESS: Rx_AbortSignal is low after dropped frame");
     else begin
-      $display("DROP_RECEIVE:: ERROR: Rx_AbortSignal is high after dropped frame");
+      $error("DROP_RECEIVE:: ERROR: Rx_AbortSignal is high after dropped frame");
       ++TbErrorCnt;
     end
 
@@ -273,13 +274,27 @@ program testPr_hdlc(
      for (int i = 0; i < Size; i++) begin
         ReadAddress(RX_BUFFER_ADDR, ReadData);
         assert (ReadData == 0)
-            $display("DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
+            // $display("DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
         else begin
-            $display("DROP_RECEIVE:: ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
+            $error("DROP_RECEIVE:: ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
             ++TbErrorCnt;
         end
     end
 
+  endtask
+
+  // Spec 14
+  task VerifyRxFrameSize(int Size);
+    logic [7:0] ReadData;
+
+    ReadAddress(RX_LEN_ADDR, ReadData);
+
+    assert (ReadData == Size)
+      $display("VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength");
+    else begin
+      $error("VerifyRxFrameSize:: ERROR: Rx_Framelength MISMATCH. Received: %0d, Expected: %0d", ReadData, Size);
+      ++TbErrorCnt;
+    end
   endtask
 
   task VerifyTransmitNormal(logic [125:0][7:0] TransmitData, logic [129:0][7:0] txFrame, int Size);
@@ -372,13 +387,13 @@ program testPr_hdlc(
     Receive( 45, 0, 0, 0, 0, 0, 0); //Normal
     Receive(126, 0, 0, 0, 0, 0, 0); //Normal
     Receive(122, 1, 0, 0, 0, 0, 0); //Abort
-    Receive(126, 0, 0, 0, 1, 0, 0); //Overflow (126 data bytes + 2 flag bytes + overflow bytes )
+    Receive(126, 0, 0, 0, 1, 0, 0); //Overflow (126 data bytes + 2 bytes for FCS + overflow bytes )
     Receive( 25, 0, 0, 0, 0, 0, 0); //Normal
     Receive( 47, 0, 0, 0, 0, 0, 0); //Normal
     Receive( 42, 0, 0, 0, 0, 1, 0); //FrameDropped
     Receive( 14, 0, 0, 0, 0, 0, 0); //Normal
-    Receive( 14, 0, 0, 1, 0, 0, 0); //NonByteAligned
-    Receive( 14, 0, 1, 0, 0, 0, 0); //FCSerr
+    Receive( 14, 0, 0, 1, 0, 0, 0); //Non-byte Aligned Data
+    Receive( 14, 0, 1, 0, 0, 0, 0); //FCS Checking error
 
     Transmit(10, 0, 0);
 
@@ -558,6 +573,9 @@ program testPr_hdlc(
       WriteAddress(Rx_SC, 8'b1 << Rx_Drop);
     end
     
+    if(!SkipRead && !Abort && !FCSerr && !NonByteAligned && !Drop)
+      VerifyRxFrameSize(Size);  // Verify that Rx_len matches received number of bytes when Rx_Ready is high  
+
     if(Abort)
       VerifyAbortReceive(ReceiveData, Size);
     else if(Overflow)
