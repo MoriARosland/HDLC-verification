@@ -398,6 +398,18 @@ program testPr_hdlc(
    end
    
   endtask
+
+  task VerifyAbortedTransmit(logic [129:0][7:0] txFrame);
+    logic [7:0] TxStatus;
+    //Check status registers
+    ReadAddress(Tx_SC, TxStatus);
+    assert(TxStatus[Tx_AbortedTrans] == 1)
+      $display("VERIFY_ABORTED_TRANSMIT:: PASS: Tx_AbortedTrans is high");
+    else begin
+      $error("VERIFY_ABORTED_TRANSMIT:: FAIL: Tx_AbortedTrans is low");
+      ++TbErrorCnt;
+    end
+  endtask
   /****************************************************************************
    *                                                                          *
    *                             Simulation code                              *
@@ -428,6 +440,7 @@ program testPr_hdlc(
 
     Transmit(10, 0, 0);//Normal
     Transmit(10, 0, 1);//Overflow
+    Transmit(42, 1, 0);//Abort  
 
     $display("*************************************************************");
     $display("%t - Finishing Test Program", $time);
@@ -711,15 +724,22 @@ endtask
 
     if (Abort) begin
       // let it send a few bits, then abort
-      repeat(16) @(posedge uin_hdlc.Clk);
+      ParseTransmittedData(txFrame, Size);
+       repeat(16)
+        @(posedge uin_hdlc.Clk);
+      // abort
       WriteAddress(Tx_SC, 8'b1 << Tx_AbortFrame);
+    // Normal case
+    end else begin
+      ParseTransmittedData(txFrame, Size);
     end
 
-    ParseTransmittedData(txFrame, Size);
-
     // Wait for the frame to be transmitted
-    repeat(16)
-      @(posedge uin_hdlc.Clk);
+    if(Abort) begin
+      repeat(16)
+        @(posedge uin_hdlc.Clk);
+      VerifyAbortedTransmit(txFrame);
+    end
     // only capture & verify in the “normal” case
     if (!Abort && !Overflow) begin
       // hand off to your checker exactly as before

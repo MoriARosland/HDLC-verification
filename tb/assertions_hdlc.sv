@@ -25,7 +25,10 @@ module assertions_hdlc (
   input  logic Rx_AbortSignal,
   input  logic Rx_Overflow,
   input  logic Rx_WrBuff,
-  input  logic Rx_EoF
+  input  logic Rx_EoF,
+  input  logic Tx_ValidFrame,
+  input  logic Tx_AbortFrame,
+  input  logic Tx_AbortedTrans
 );
 
   initial begin
@@ -108,4 +111,20 @@ module assertions_hdlc (
     $error("RX_EndOfFrame:: PASS: Failed to generate end of frame");
     ErrCntAssertions++; 
   end
+/********************************************
+  * Verify correct Tx_AbortedTrans behaviour *
+  ********************************************/
+
+property TX_AbortedTrans;
+  @(posedge Clk)
+  !Tx_AbortFrame ##1 Tx_AbortFrame && Tx_ValidFrame |=> Tx_AbortedTrans;
+endproperty
+
+TX_AbortedTrans_Detect : assert property (TX_AbortedTrans) begin 
+  $display("PASS: Tx_AbortedTrans asserted after aborting frame during transmission");
+end else begin
+  $error("Error: Tx_AbortedTrans not assert after aborting frame during transmission");
+  ErrCntAssertions++;
+end
+
 endmodule
