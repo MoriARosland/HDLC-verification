@@ -619,32 +619,38 @@ program testPr_hdlc(
     #5000ns;
   endtask
 
-  //TODO: MUST BE ROMOVED JUST FOR TESTING 
-
-   //Use size, could maybe not have done that (use a while or something)
- task GetTransmissionReady(
+// Parses the incomming transmission into databytes and 
+// removes transmission padding if 5 consequtive 1-bits are detected.
+// Returns the parsed data buffer
+ task automatic ParseTransmittedData(
     output logic [129:0][7:0] txData,
     input  int               frameSize
 );
-    int onesCount;
-    // Iterate over the entire frame
-    for (int byteIndex = 0; byteIndex < frameSize + 4; byteIndex++) begin
-        // Go through each bit per byte
-        for (int bitIndex = 0; bitIndex < 8; bitIndex++) begin
-            if (onesCount == 5 && uin_hdlc.Tx == '0) begin
-                onesCount = 0;
-                bitIndex -= 1;
-                @(posedge uin_hdlc.Clk);
-            end else begin
-                if (uin_hdlc.Tx == '1)
-                    onesCount++;
-                else
-                    onesCount = 0;
-                txData[byteIndex][bitIndex] = uin_hdlc.Tx;
-                @(posedge uin_hdlc.Clk);
-            end
+    int consequtiveOnes; // Dont init to prevent implicit static behaviour
+    int byteIndex; // Dont init to prevent implicit static behaviour
+    const int totalFrameBytes = frameSize + FLAG_AND_FCS_BYTES;
+
+    consequtiveOnes = 0; 
+    byteIndex = 0;
+
+    do begin
+      for (int bitIndex = 0; bitIndex < 8; bitIndex++) begin
+        if (uin_hdlc.Tx == '0 && consequtiveOnes == 5) begin // Check for padded zeros
+          consequtiveOnes = 0;
+          bitIndex -= 1;            // Remove padded bit
+        end else begin
+          if (uin_hdlc.Tx == '1) ++consequtiveOnes;
+          else consequtiveOnes = 0;
+        
+          txData[byteIndex][bitIndex] = uin_hdlc.Tx; // Save databit in data buffer
         end
-    end
+
+        @(posedge uin_hdlc.Clk);  // Latch next bit
+
+      end
+
+      ++byteIndex;
+    end while (byteIndex < totalFrameBytes);
 endtask
 
 
@@ -652,8 +658,8 @@ endtask
   // Transmit:
   //   - pushes Size bytes into the DUT’s Tx_Buff
   //   - kicks off the transfer
-  //   - then calls CollectFrame() to grab the on-wire frame
-  //   - finally hands that to VerifyTransmitNormal()
+  //   - parses the transmitted data in ParseTransmittedData
+  //   - hands over the parsed data to the assertions
   //-----------------------------------------------------------------------------
   task Transmit(
     int Size,
@@ -699,20 +705,19 @@ endtask
       end
       VerifyTransmitOverflow(TransmitData, txFrame, Size);
     end
-
-    // start transmission
-    WriteAddress(Tx_SC, 8'b1 << Tx_Enable);
-
-    // CRC calculation need to finish
-    wait (!uin_hdlc.Tx);
+    
+    WriteAddress(Tx_SC, 8'b1 << Tx_Enable); // Start transmission
+    wait (!uin_hdlc.Tx);  // CRC calculation need to finish
 
     if (Abort) begin
       // let it send a few bits, then abort
       repeat(16) @(posedge uin_hdlc.Clk);
       WriteAddress(Tx_SC, 8'b1 << Tx_AbortFrame);
     end
-    GetTransmissionReady(txFrame, Size);
-    //wait for the frame to be transmitted
+
+    ParseTransmittedData(txFrame, Size);
+
+    // Wait for the frame to be transmitted
     repeat(16)
       @(posedge uin_hdlc.Clk);
     // only capture & verify in the “normal” case
