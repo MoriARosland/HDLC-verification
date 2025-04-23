@@ -145,12 +145,12 @@ program testPr_hdlc(
     assert (ReadData[Rx_Ready] == 1)
       $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high");
     else begin
-      $display("OVERFLOW_RECEIVE:: ERROR: Rx_ready should not be low");
+      $error("OVERFLOW_RECEIVE:: ERROR: Rx_ready should not be low");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_FrameError] == 1) begin
-      $display("OVERFLOW_RECEIVE: ERROR: Rx_FrameError should not be high");
+      $error("OVERFLOW_RECEIVE: ERROR: Rx_FrameError should not be high");
       ++TbErrorCnt;
     end else
       $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_FrameError is low");
@@ -158,12 +158,12 @@ program testPr_hdlc(
     assert (ReadData[Rx_Overflow] == 1)
       $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high");
     else begin
-      $display("OVERFLOW_RECEIVE:: ERROR: Rx_Overflow is low");
+      $error("OVERFLOW_RECEIVE:: ERROR: Rx_Overflow is low");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_AbortSignal] == 1) begin
-      $display("OVERFLOW_RECEIVE:: ERROR: Rx_AbortSignal should not be low");
+      $error("OVERFLOW_RECEIVE:: ERROR: Rx_AbortSignal should not be low");
       ++TbErrorCnt;
     end else
       $display("OVERFLOW_RECEIVE: SUCCESS: Rx_AbortSignal is low");
@@ -175,7 +175,7 @@ program testPr_hdlc(
             // $display("Rx_Buff has correct data at index %0d: data[%0d] = %0h, ReadData = %0h", 
                       // i, i, data[i], ReadData);
         else begin
-            $display("DATA ERROR: Mismatch at index %0d: data[%0d] = %0h, ReadData = %0h", 
+            $error("DATA ERROR: Mismatch at index %0d: data[%0d] = %0h, ReadData = %0h", 
                     i, i, data[i], ReadData);
                     ++TbErrorCnt;
         end
@@ -194,34 +194,34 @@ program testPr_hdlc(
     assert (ReadData[Rx_Ready] == 0)
       $display("ERROR_RECEIVE:: SUCCESS: Rx_Ready is low after error");  
     else begin
-      $display("ERROR_RECEIVE:: ERROR: Rx_Ready is high after error");
+      $error("ERROR_RECEIVE:: ERROR: Rx_Ready is high after error");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_FrameError] == 1)
       $display("ERROR_RECEIVE:: SUCCESS: Rx_FrameError is high after error");
     else begin
-      $display("ERROR_RECEIVE:: ERROR: Rx_FrameError is low after error");
+      $error("ERROR_RECEIVE:: ERROR: Rx_FrameError is low after error");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_Overflow] == 0)
       $display("ERROR_RECEIVE:: SUCCESS: Rx_Overflow is low after error");
     else begin
-      $display("ERROR_RECEIVE:: ERROR: Rx_Overflow is high after error");
+      $error("ERROR_RECEIVE:: ERROR: Rx_Overflow is high after error");
       ++TbErrorCnt;
     end
     assert (ReadData[Rx_AbortSignal] == 0)
       $display("ERROR_RECEIVE:: SUCCESS: Rx_AbortSignal is low after error");
     else begin
-      $display("ERROR_RECEIVE:: ERROR: Rx_AbortSignal is high after error");
+      $error("ERROR_RECEIVE:: ERROR: Rx_AbortSignal is high after error");
       ++TbErrorCnt;
     end
 
     assert (ReadData[Rx_Drop] == 0)
       $display("ERROR_RECEIVE:: SUCCESS: Rx_Drop is low after error");
     else begin
-      $display("ERROR_RECEIVE:: ERROR: Rx_Drop is high after error");
+      $error("ERROR_RECEIVE:: ERROR: Rx_Drop is high after error");
       ++TbErrorCnt;
     end
     
@@ -231,7 +231,7 @@ program testPr_hdlc(
         assert (ReadData == 0)
             // $display("ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
         else begin
-            $display("ERROR_RECEIVE:: ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
+            $error("ERROR_RECEIVE:: ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
             ++TbErrorCnt;
         end
     end
