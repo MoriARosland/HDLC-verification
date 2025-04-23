@@ -183,14 +183,14 @@ program testPr_hdlc(
   
   endtask
 
-  //Verify error receive checks all flags correct and Rx_Buff is empty
+  // VerifyErrorReceive checks that a Rx_FrameError is generated if Non-byte aligned data
+  // or error in FCS checking is detected.
   task VerifyErrorReceive(logic [127:0][7:0] data, int Size);
     logic [7:0] ReadData;
 
     // Verify status register bits
     ReadAddress(Rx_SC, ReadData);
 
-    //Might be overkill to check all of these 
     assert (ReadData[Rx_Ready] == 0)
       $display("ERROR_RECEIVE:: SUCCESS: Rx_Ready is low after error");  
     else begin
@@ -322,8 +322,8 @@ program testPr_hdlc(
     Receive( 47, 0, 0, 0, 0, 0, 0); //Normal
     Receive( 42, 0, 0, 0, 0, 1, 0); //FrameDropped
     Receive( 14, 0, 0, 0, 0, 0, 0); //Normal
-    Receive( 14, 0, 0, 1, 0, 0, 0); //NonByteAligned
-    Receive( 14, 0, 1, 0, 0, 0, 0); //FCSerr
+    Receive( 14, 0, 0, 1, 0, 0, 0); //Non-byte Aligned Data
+    Receive( 14, 0, 1, 0, 0, 0, 0); //FCS Checking error
 
     $display("*************************************************************");
     $display("%t - Finishing Test Program", $time);
