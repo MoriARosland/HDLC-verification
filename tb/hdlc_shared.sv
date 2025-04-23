@@ -1,5 +1,3 @@
-// shared enums
-
 enum logic[2:0] {
   Tx_SC,
   Tx_Buff,
@@ -25,3 +23,4 @@ enum int {
   Tx_Full
 } TxSC_bits;
 
+const logic [7:0] FRAME_FLAG = 8'b01111110;

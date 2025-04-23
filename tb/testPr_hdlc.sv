@@ -296,7 +296,77 @@ program testPr_hdlc(
       ++TbErrorCnt;
     end
   endtask
-  
+
+  task VerifyNormalTransmit(logic [125:0][7:0] TransmitData, logic [129:0][7:0] txFrame, int Size);
+    logic [127:0][7:0] CRCdata;
+    logic [15:0]       CRCbytes;
+    logic [7:0]        TxStatus;
+
+    //Verify startFlag
+    assert(txFrame[0] == FRAME_FLAG)
+      $display("PASS: startFlag transmitted");
+      else begin
+        $error("FAIL: startFlag not transmitted");
+        ++TbErrorCnt;
+      end
+
+    //Verify endFlag
+    assert(txFrame[Size+3] == FRAME_FLAG)
+      $display("PASS: endFlag transmitted");
+      else begin
+        $error("FAIL: endFlag not transmitted");
+        ++TbErrorCnt;
+      end
+
+    //Verify data
+    for(int i = 0; i < Size; i++) begin
+      assert(TransmitData[i] == txFrame[i+1])
+        $display("VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly");
+      else begin
+        $error("VERIFY_TRANSMIT_NORMAL:: FAIL: data not transmitted correctly, buffData[%0d] = %0h, transData[%0d] = %0h", i, TransmitData[i], i, txFrame[i+1]);
+        ++TbErrorCnt;
+      end
+    end
+
+    //Verify FCS
+    CRCdata[125:0] = TransmitData[125:0];
+    CRCdata[Size] = '0;
+    CRCdata[Size+1] = '0;
+    //Find CRC
+    GenerateFCSBytes(CRCdata, Size, CRCbytes);
+
+    //Verify CRC bytes
+    assert((txFrame[Size + 1] == CRCbytes[7:0]) && (txFrame[Size + 2] == CRCbytes[15:8]) )
+      $display("VERIFY_TRANSMIT_NORMAL:: PASS: FCS transmitted correctly");
+      else begin
+        $error("VERIFY_TRANSMIT_NORMAL:: FAIL: FCS not transmitted correctly, got %0h, expected %0h", txFrame[Size + 1], CRCdata[7:0]);
+        ++TbErrorCnt;
+      end
+
+    //Check status registers
+    ReadAddress(Tx_SC, TxStatus);
+    assert(TxStatus[Tx_Done] == 1)
+      $display("VERIFY_TRANSMIT_NORMAL:: PASS: Tx_Done is high");
+    else begin
+      $error("VERIFY_TRANSMIT_NORMAL:: FAIL: Tx_Done is low");
+      ++TbErrorCnt;
+    end
+
+    assert(TxStatus[Tx_AbortFrame] == 0 )
+      $display("VERIFY_TRANSMIT_NORMAL:: PASS: Tx_AbortFrame is low");
+    else begin
+      $error("VERIFY_TRANSMIT_NORMAL:: FAIL: Tx_AbortFrame is high");
+      ++TbErrorCnt;
+    end
+
+    assert(TxStatus[Tx_Full] == 0 )
+      $display("VERIFY_TRANSMIT_NORMAL:: PASS: Tx_Full is low");
+    else begin
+      $error("VERIFY_TRANSMIT_NORMAL:: FAIL: Tx_Full is high");
+      ++TbErrorCnt;
+    end
+    
+  endtask
   /****************************************************************************
    *                                                                          *
    *                             Simulation code                              *
@@ -324,6 +394,8 @@ program testPr_hdlc(
     Receive( 14, 0, 0, 0, 0, 0, 0); //Normal
     Receive( 14, 0, 0, 1, 0, 0, 0); //Non-byte Aligned Data
     Receive( 14, 0, 1, 0, 0, 0, 0); //FCS Checking error
+
+    Transmit(10, 0, 0);//Normal
 
     $display("*************************************************************");
     $display("%t - Finishing Test Program", $time);
@@ -420,7 +492,7 @@ program testPr_hdlc(
     end
   endtask
 
-  task Receive(int Size, int Abort, int FCSerr, int NonByteAligned, int Overflow, int Drop, int SkipRead);
+ task Receive(int Size, int Abort, int FCSerr, int NonByteAligned, int Overflow, int Drop, int SkipRead);
     logic [127:0][7:0] ReceiveData;
     logic       [15:0] FCSBytes;
     logic   [2:0][7:0] OverflowData;
@@ -513,6 +585,109 @@ program testPr_hdlc(
       VerifyNormalReceive(ReceiveData, Size);
 
     #5000ns;
+  endtask
+
+  //TODO: MUST BE ROMOVED JUST FOR TESTING 
+
+   //Use size, could maybe not have done that (use a while or something)
+ task GetTransmissionReady(
+    output logic [129:0][7:0] txData,
+    input  int               frameSize
+);
+    int onesCount;
+    // Iterate over the entire frame
+    for (int byteIndex = 0; byteIndex < frameSize + 4; byteIndex++) begin
+        // Go through each bit per byte
+        for (int bitIndex = 0; bitIndex < 8; bitIndex++) begin
+            if (onesCount == 5 && uin_hdlc.Tx == '0) begin
+                onesCount = 0;
+                bitIndex -= 1;
+                @(posedge uin_hdlc.Clk);
+            end else begin
+                if (uin_hdlc.Tx == '1)
+                    onesCount++;
+                else
+                    onesCount = 0;
+                txData[byteIndex][bitIndex] = uin_hdlc.Tx;
+                @(posedge uin_hdlc.Clk);
+            end
+        end
+    end
+endtask
+
+
+  //-----------------------------------------------------------------------------
+  // Transmit:
+  //   - pushes Size bytes into the DUT’s Tx_Buff
+  //   - kicks off the transfer
+  //   - then calls CollectFrame() to grab the on-wire frame
+  //   - finally hands that to VerifyTransmitNormal()
+  //-----------------------------------------------------------------------------
+  task Transmit(
+    int Size,
+    int Abort,
+    int Overflow
+  );
+    logic [125:0][7:0] TransmitData;
+    logic [7:0]       TxStatus;
+    logic [129:0][7:0] txFrame;
+    int                frameLen;
+
+    string             msg;
+    if(Abort)
+      msg = "- Abort";
+    else if(Overflow)
+      msg = "- Overflow";
+    else
+      msg = "- Normal";
+
+    $display("*************************************************************");
+    $display("%t - Starting task Transmit %s", $time, msg);
+    $display("*************************************************************");
+    $display("=== Transmit %0s (%0d bytes) ===", msg, Size);
+
+    // Wait for tx ready (Tx_done low)
+    do begin 
+      ReadAddress(Tx_SC, TxStatus);
+    end while (!TxStatus[Tx_Done]);
+
+     // Write random data to Tx_buffer
+    for (int i = 0; i < Size; i++) begin
+      TransmitData[i] = $urandom;
+      WriteAddress(Tx_Buff, TransmitData[i]);
+      $display("TransmitData[%0d] = %0h", i, TransmitData[i]);
+    end
+
+    //If overlow active overflow
+    if (Overflow) begin
+      //TODO: Write until overflow buffer is full
+      WriteAddress(Tx_Buff, $urandom);
+    end
+
+    // start transmission
+    WriteAddress(Tx_SC, 8'b1 << Tx_Enable);
+
+    // CRC calculation need to finish
+    wait (!uin_hdlc.Tx);
+
+    if (Abort) begin
+      // let it send a few bits, then abort
+      repeat(16) @(posedge uin_hdlc.Clk);
+      WriteAddress(Tx_SC, 8'b1 << Tx_AbortFrame);
+    end
+    GetTransmissionReady(txFrame, Size);
+    //wait for the frame to be transmitted
+    repeat(16)
+      @(posedge uin_hdlc.Clk);
+
+    // only capture & verify in the “normal” case
+    if (!Abort && !Overflow) begin
+      // hand off to your checker exactly as before
+      $display("Start verify transmit normal");
+      VerifyNormalTransmit(TransmitData, txFrame, Size);
+      $display("End verify transmit normal");
+    end
+    #10000ns;
   endtask
 
   task GenerateFCSBytes(logic [127:0][7:0] data, int size, output logic[15:0] FCSBytes);
