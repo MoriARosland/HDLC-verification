@@ -45,7 +45,7 @@ module assertions_hdlc (
 
   // If either an abort flag or regular flag is detected while
   // Rx_ValidFrame is high, we know a transmission has ended, and
-  // that EoF must be asserted some time later.
+  // that EoF must be asserted.
   sequence EndOfFrame_sequence;
     (AbortFlag_sequence(Rx) or FrameFlag_sequence(Rx)) ##0 Rx_ValidFrame;
   endsequence
@@ -96,8 +96,10 @@ module assertions_hdlc (
   end
 
   // Verify generation of end of frame (Spec12)
+  // Spec does not specify when Rx_EoF should be asserted,
+  // So we give it arbitrarily 7 clock cycles to go high.
   property RX_EndOfFrame;
-    @(posedge Clk) EndOfFrame_sequence |=> ##[0:$] Rx_EoF;
+    @(posedge Clk) EndOfFrame_sequence |=> ##[0:6] Rx_EoF;
   endproperty
 
   Rx_EndOfFrameDetect : assert property (RX_EndOfFrame) begin

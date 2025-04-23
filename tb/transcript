@@ -1,5 +1,5 @@
 # vsim -assertdebug -c -voptargs="+acc" test_hdlc bind_hdlc -do "log -r *; run -all; exit" 
-# Start time: 15:40:10 on Mar 04,2025
+# Start time: 13:38:15 on Apr 23,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: ../rtl/TxFCS.sv(13): (vopt-13314) Defaulting port 'DataBuff' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxFCS(fast)".
@@ -52,11 +52,14 @@
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # NORMAL RECEIVE: SUCCESS: No Rx overflow detected
 # 
 # NORMAL RECEIVE:: SUCCESS: No Rx abort detected
 # 
 # NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
+# 
+# NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
 # 
 # Rx_Buff has correct data at index 0: data[0] = b8, ReadData = b8
 # Rx_Buff has correct data at index 1: data[1] = 26, ReadData = 26
@@ -69,10 +72,12 @@
 # Rx_Buff has correct data at index 8: data[8] = 67, ReadData = 67
 # Rx_Buff has correct data at index 9: data[9] = 3a, ReadData = 3a
 # *************************************************************
-#                77250 - Starting task Receive - Abort
+#                78250 - Starting task Receive - Abort
 # *************************************************************
 # PASS: Flag detect
+# PASS: Abort flag successfully generated abort signal (RX)
 # PASS: Abort signal
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # ABORT_RECEIVE:: SUCCESS: Rx_ready is low
 # ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
 # ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low
@@ -118,24 +123,28 @@
 # SUCCESS: Rx_Buff is empty: ReadData = 0
 # SUCCESS: Rx_Buff is empty: ReadData = 0
 # *************************************************************
-#               305250 - Starting task Receive - Overflow
+#               307250 - Starting task Receive - Overflow
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_FrameError is low
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high
 # OVERFLOW_RECEIVE: SUCCESS: Rx_AbortSignal is low
 # *************************************************************
-#               858250 - Starting task Receive - Normal
+#               861250 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # NORMAL RECEIVE: SUCCESS: No Rx overflow detected
 # 
 # NORMAL RECEIVE:: SUCCESS: No Rx abort detected
 # 
 # NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
+# 
+# NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
 # 
 # Rx_Buff has correct data at index 0: data[0] = b7, ReadData = b7
 # Rx_Buff has correct data at index 1: data[1] = 46, ReadData = 46
@@ -183,15 +192,18 @@
 # Rx_Buff has correct data at index 43: data[43] = c0, ReadData = c0
 # Rx_Buff has correct data at index 44: data[44] = 80, ReadData = 80
 # *************************************************************
-#              1111750 - Starting task Receive - Normal
+#              1115750 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # NORMAL RECEIVE: SUCCESS: No Rx overflow detected
 # 
 # NORMAL RECEIVE:: SUCCESS: No Rx abort detected
 # 
 # NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
+# 
+# NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
 # 
 # Rx_Buff has correct data at index 0: data[0] = c8, ReadData = c8
 # Rx_Buff has correct data at index 1: data[1] = ed, ReadData = ed
@@ -320,10 +332,12 @@
 # Rx_Buff has correct data at index 124: data[124] = e1, ReadData = e1
 # Rx_Buff has correct data at index 125: data[125] = 62, ReadData = 62
 # *************************************************************
-#              1774250 - Starting task Receive - Abort
+#              1779250 - Starting task Receive - Abort
 # *************************************************************
 # PASS: Flag detect
+# PASS: Abort flag successfully generated abort signal (RX)
 # PASS: Abort signal
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # ABORT_RECEIVE:: SUCCESS: Rx_ready is low
 # ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
 # ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low
@@ -451,24 +465,28 @@
 # SUCCESS: Rx_Buff is empty: ReadData = 0
 # SUCCESS: Rx_Buff is empty: ReadData = 0
 # *************************************************************
-#              2420750 - Starting task Receive - Overflow
+#              2426750 - Starting task Receive - Overflow
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_FrameError is low
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high
 # OVERFLOW_RECEIVE: SUCCESS: Rx_AbortSignal is low
 # *************************************************************
-#              2968750 - Starting task Receive - Normal
+#              2975750 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # NORMAL RECEIVE: SUCCESS: No Rx overflow detected
 # 
 # NORMAL RECEIVE:: SUCCESS: No Rx abort detected
 # 
 # NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
+# 
+# NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
 # 
 # Rx_Buff has correct data at index 0: data[0] = d7, ReadData = d7
 # Rx_Buff has correct data at index 1: data[1] = 55, ReadData = 55
@@ -496,15 +514,18 @@
 # Rx_Buff has correct data at index 23: data[23] = 7e, ReadData = 7e
 # Rx_Buff has correct data at index 24: data[24] = e1, ReadData = e1
 # *************************************************************
-#              3123250 - Starting task Receive - Normal
+#              3131250 - Starting task Receive - Normal
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # NORMAL RECEIVE: SUCCESS: No Rx overflow detected
 # 
 # NORMAL RECEIVE:: SUCCESS: No Rx abort detected
 # 
 # NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
+# 
+# NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
 # 
 # Rx_Buff has correct data at index 0: data[0] = 3d, ReadData = 3d
 # Rx_Buff has correct data at index 1: data[1] = cc, ReadData = cc
@@ -554,17 +575,147 @@
 # Rx_Buff has correct data at index 45: data[45] = 9e, ReadData = 9e
 # Rx_Buff has correct data at index 46: data[46] = b4, ReadData = b4
 # *************************************************************
-#              3387250 - Finishing Test Program
+#              3396250 - Starting task Receive - Drop
 # *************************************************************
-# ** Note: $stop    : ./testPr_hdlc.sv(170)
-#    Time: 3387250 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
-# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 170
-# Stopped at ./testPr_hdlc.sv line 170
+# PASS: Flag detect
+# PASS: Flag detect
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
+# DROP_RECEIVE:: SUCCESS: Rx_Ready is low after dropped frame
+# DROP_RECEIVE:: SUCCESS: Rx_FrameError is low after dropped frame
+# DROP_RECEIVE:: SUCCESS: Rx_Overflow is low after dropped frame
+# DROP_RECEIVE:: SUCCESS: Rx_AbortSignal is low after dropped frame
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# DROP_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# *************************************************************
+#              3637250 - Starting task Receive - Normal
+# *************************************************************
+# PASS: Flag detect
+# PASS: Flag detect
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
+# NORMAL RECEIVE: SUCCESS: No Rx overflow detected
+# 
+# NORMAL RECEIVE:: SUCCESS: No Rx abort detected
+# 
+# NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
+# 
+# NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
+# 
+# Rx_Buff has correct data at index 0: data[0] = 7b, ReadData = 7b
+# Rx_Buff has correct data at index 1: data[1] = 1e, ReadData = 1e
+# Rx_Buff has correct data at index 2: data[2] = 23, ReadData = 23
+# Rx_Buff has correct data at index 3: data[3] = 0, ReadData = 0
+# Rx_Buff has correct data at index 4: data[4] = 5e, ReadData = 5e
+# Rx_Buff has correct data at index 5: data[5] = a6, ReadData = a6
+# Rx_Buff has correct data at index 6: data[6] = b9, ReadData = b9
+# Rx_Buff has correct data at index 7: data[7] = 85, ReadData = 85
+# Rx_Buff has correct data at index 8: data[8] = 22, ReadData = 22
+# Rx_Buff has correct data at index 9: data[9] = 38, ReadData = 38
+# Rx_Buff has correct data at index 10: data[10] = 63, ReadData = 63
+# Rx_Buff has correct data at index 11: data[11] = 40, ReadData = 40
+# Rx_Buff has correct data at index 12: data[12] = ba, ReadData = ba
+# Rx_Buff has correct data at index 13: data[13] = f2, ReadData = f2
+# *************************************************************
+#              3734750 - Starting task Receive - Non-byte aligned
+# *************************************************************
+# PASS: Flag detect
+# PASS: Flag detect
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
+# ERROR_RECEIVE:: SUCCESS: Rx_Ready is low after error
+# ERROR_RECEIVE:: SUCCESS: Rx_FrameError is high after error
+# ERROR_RECEIVE:: SUCCESS: Rx_Overflow is low after error
+# ERROR_RECEIVE:: SUCCESS: Rx_AbortSignal is low after error
+# ERROR_RECEIVE:: SUCCESS: Rx_Drop is low after error
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# *************************************************************
+#              3834750 - Starting task Receive - FCS error
+# *************************************************************
+# PASS: Flag detect
+# PASS: Flag detect
+# RX_EndOfFrame:: PASS: Succesfully generated end of frame
+# ERROR_RECEIVE:: SUCCESS: Rx_Ready is low after error
+# ERROR_RECEIVE:: SUCCESS: Rx_FrameError is high after error
+# ERROR_RECEIVE:: SUCCESS: Rx_Overflow is low after error
+# ERROR_RECEIVE:: SUCCESS: Rx_AbortSignal is low after error
+# ERROR_RECEIVE:: SUCCESS: Rx_Drop is low after error
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
+# *************************************************************
+#              3932750 - Finishing Test Program
+# *************************************************************
+# ** Note: $stop    : ./testPr_hdlc.sv(262)
+#    Time: 3932750 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
+# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 262
+# Stopped at ./testPr_hdlc.sv line 262
 #  exit
 # *********************************
 # *                               *
 # * 	Assertion Errors: 0	  *
 # *                               *
 # *********************************
-# End time: 15:40:16 on Mar 04,2025, Elapsed time: 0:00:06
+# End time: 13:38:21 on Apr 23,2025, Elapsed time: 0:00:06
 # Errors: 0, Warnings: 5
