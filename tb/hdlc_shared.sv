@@ -24,3 +24,4 @@ enum int {
 } TxSC_bits;
 
 const logic [7:0] FRAME_FLAG = 8'b01111110;
+const int FLAG_AND_FCS_BYTES = 4; // 2 Flag bytes + 2 FCS bytes
