@@ -141,7 +141,6 @@ program testPr_hdlc(
      // Verify status register bits
     ReadAddress(Rx_SC, ReadData);
 
-    // INSERT CODE HERE
     assert (ReadData[Rx_Ready] == 1)
       $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high");
     else begin
