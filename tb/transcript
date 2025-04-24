@@ -1,5 +1,5 @@
-# vsim -assertdebug -c -voptargs="+acc" test_hdlc bind_hdlc -do "log -r *; run -all; exit" 
-# Start time: 11:04:42 on Apr 24,2025
+# vsim -coverage -assertdebug -c -voptargs="+acc" test_hdlc bind_hdlc -do "log -r *; run -all; coverage report -file coverage_report.txt -details; exit" 
+# Start time: 11:13:56 on Apr 24,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: ../rtl/TxFCS.sv(13): (vopt-13314) Defaulting port 'DataBuff' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxFCS(fast)".
@@ -35,9 +35,12 @@
 # Loading work.RxBuff(fast)
 # Loading work.RxFCS(fast)
 # Loading work.RxChannel(fast)
+# Loading work.hdlc_coverage_sv_unit(fast)
+# Loading work.hdlc_coverage(fast)
 # Loading work.testPr_hdlc(fast)
 # Loading work.assertions_hdlc(fast)
 # Loading work.bind_hdlc(fast)
+# ** Warning: (vsim-8634) Code was not compiled with coverage options.
 # log -r *
 #  run -all
 # *************************************************************
@@ -54,6 +57,8 @@
 # 
 # NORMAL RECEIVE:: SUCCESS: No Rx abort detected
 # 
+# NORMAL RECEIVE:: SUCCESS: No Rx frame error detected
+# 
 # NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
 # 
 # NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
@@ -68,7 +73,7 @@
 # ABORT_RECEIVE:: SUCCESS: Rx_ready is low
 # ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
 # ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low
-# ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
+# ABORT_RECEIVE:: SUCCESS: Rx_AbortSignal is high
 # *************************************************************
 #               308250 - Starting task Receive - Overflow
 # *************************************************************
@@ -79,7 +84,7 @@
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_FrameError is low
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high
-# OVERFLOW_RECEIVE: SUCCESS: Rx_AbortSignal is low
+# OVERFLOW_RECEIVE:: SUCCESS: Rx_AbortSignal is low
 # *************************************************************
 #               989250 - Starting task Receive - Normal
 # *************************************************************
@@ -90,6 +95,8 @@
 # NORMAL RECEIVE: SUCCESS: No Rx overflow detected
 # 
 # NORMAL RECEIVE:: SUCCESS: No Rx abort detected
+# 
+# NORMAL RECEIVE:: SUCCESS: No Rx frame error detected
 # 
 # NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
 # 
@@ -106,6 +113,8 @@
 # 
 # NORMAL RECEIVE:: SUCCESS: No Rx abort detected
 # 
+# NORMAL RECEIVE:: SUCCESS: No Rx frame error detected
+# 
 # NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
 # 
 # NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
@@ -120,7 +129,7 @@
 # ABORT_RECEIVE:: SUCCESS: Rx_ready is low
 # ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
 # ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low
-# ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
+# ABORT_RECEIVE:: SUCCESS: Rx_AbortSignal is high
 # *************************************************************
 #              2556750 - Starting task Receive - Overflow
 # *************************************************************
@@ -131,7 +140,7 @@
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_FrameError is low
 # OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high
-# OVERFLOW_RECEIVE: SUCCESS: Rx_AbortSignal is low
+# OVERFLOW_RECEIVE:: SUCCESS: Rx_AbortSignal is low
 # *************************************************************
 #              3232750 - Starting task Receive - Normal
 # *************************************************************
@@ -142,6 +151,8 @@
 # NORMAL RECEIVE: SUCCESS: No Rx overflow detected
 # 
 # NORMAL RECEIVE:: SUCCESS: No Rx abort detected
+# 
+# NORMAL RECEIVE:: SUCCESS: No Rx frame error detected
 # 
 # NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
 # 
@@ -157,6 +168,8 @@
 # NORMAL RECEIVE: SUCCESS: No Rx overflow detected
 # 
 # NORMAL RECEIVE:: SUCCESS: No Rx abort detected
+# 
+# NORMAL RECEIVE:: SUCCESS: No Rx frame error detected
 # 
 # NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
 # 
@@ -182,6 +195,8 @@
 # NORMAL RECEIVE: SUCCESS: No Rx overflow detected
 # 
 # NORMAL RECEIVE:: SUCCESS: No Rx abort detected
+# 
+# NORMAL RECEIVE:: SUCCESS: No Rx frame error detected
 # 
 # NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
 # 
@@ -246,15 +261,17 @@
 # *************************************************************
 #              5916250 - Finishing Test Program
 # *************************************************************
-# ** Note: $stop    : ./testPr_hdlc.sv(438)
+# ** Note: $stop    : ./testPr_hdlc.sv(446)
 #    Time: 5916250 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
-# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 438
-# Stopped at ./testPr_hdlc.sv line 438
+# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 446
+# Stopped at ./testPr_hdlc.sv line 446
+#  coverage report -file coverage_report.txt -details
+# ** Warning: (vsim-19053) Option '-file' has been deprecated. Please use option '-output' instead.
 #  exit
 # *********************************
 # *                               *
 # * 	Assertion Errors: 0	  *
 # *                               *
 # *********************************
-# End time: 11:04:47 on Apr 24,2025, Elapsed time: 0:00:05
-# Errors: 0, Warnings: 1
+# End time: 11:14:02 on Apr 24,2025, Elapsed time: 0:00:06
+# Errors: 0, Warnings: 3

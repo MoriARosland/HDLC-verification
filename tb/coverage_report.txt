@@ -1,0 +1,502 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /test_hdlc/u_coverage
+=== Design Unit: work.hdlc_coverage
+=================================================================================
+
+Covergroup Coverage:
+    Covergroups                      1        na        na   100.00%
+        Coverpoints/Crosses         12        na        na        na
+            Covergroup Bins         26        26         0   100.00%
+----------------------------------------------------------------------------------------------------------
+Covergroup                                             Metric       Goal       Bins    Status               
+                                                                                                         
+----------------------------------------------------------------------------------------------------------
+ TYPE /test_hdlc/u_coverage/hdlc_cg                   100.00%        100          -    Covered              
+    covered/total bins:                                    26         26          -                      
+    missing/total bins:                                     0         26          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint Rx_FrameSizeBins                       100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Tx_FrameSizeBins                       100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_RxReady                             100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_RxFrameError                        100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_RxAbortSignal                       100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_TxDone                              100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_TxEnable                            100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_TxAbortedTrans                      100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_RxOverflow                          100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_RxDrop                              100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_TxAbortFrame                        100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_TxFull                              100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+ Covergroup instance \/test_hdlc/u_coverage/hdlc_coverage_inst  
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    26         26          -                      
+    missing/total bins:                                     0         26          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint Rx_FrameSizeBins                       100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin small_frame                                  4286          1          -    Covered              
+        bin medium_frame                                 4930          1          -    Covered              
+        bin max_size                                     2493          1          -    Covered              
+        default bin invalid_frame                         124                     -    Occurred             
+    Coverpoint Tx_FrameSizeBins                       100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin small_frame                                   520          1          -    Covered              
+        bin medium_frame                                  782          1          -    Covered              
+        bin max_size                                     2120          1          -    Covered              
+        default bin invalid_frame                        8411                     -    Occurred             
+    Coverpoint Cp_RxReady                             100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     10741          1          -    Covered              
+        bin auto[1]                                      1092          1          -    Covered              
+    Coverpoint Cp_RxFrameError                        100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                      8283          1          -    Covered              
+        bin auto[1]                                      3550          1          -    Covered              
+    Coverpoint Cp_RxAbortSignal                       100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11447          1          -    Covered              
+        bin auto[1]                                       386          1          -    Covered              
+    Coverpoint Cp_TxDone                              100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                      2936          1          -    Covered              
+        bin auto[1]                                      8897          1          -    Covered              
+    Coverpoint Cp_TxEnable                            100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11830          1          -    Covered              
+        bin auto[1]                                         3          1          -    Covered              
+    Coverpoint Cp_TxAbortedTrans                      100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11431          1          -    Covered              
+        bin auto[1]                                       402          1          -    Covered              
+    Coverpoint Cp_RxOverflow                          100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11277          1          -    Covered              
+        bin auto[1]                                       556          1          -    Covered              
+    Coverpoint Cp_RxDrop                              100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11832          1          -    Covered              
+        bin auto[1]                                         1          1          -    Covered              
+    Coverpoint Cp_TxAbortFrame                        100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11832          1          -    Covered              
+        bin auto[1]                                         1          1          -    Covered              
+    Coverpoint Cp_TxFull                              100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11823          1          -    Covered              
+        bin auto[1]                                        10          1          -    Covered              
+
+=================================================================================
+=== Instance: /test_hdlc/u_testPr
+=== Design Unit: work.testPr_hdlc
+=================================================================================
+
+Assertion Coverage:
+    Assertions                      37        37         0   100.00%
+--------------------------------------------------------------------------------------------------------------------------------
+Name                 File(Line)                   Failure      Pass     Vacuous    Disable    Attempt     Active Peak Active ATV
+                                                  Count        Count    Count      Count      Count       Count  Count          
+--------------------------------------------------------------------------------------------------------------------------------
+/test_hdlc/u_testPr/VerifyAbortReceive/immed__69
+                     ./testPr_hdlc.sv(69)               0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyAbortReceive/immed__62
+                     ./testPr_hdlc.sv(62)               0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyAbortReceive/immed__55
+                     ./testPr_hdlc.sv(55)               0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyAbortReceive/immed__48
+                     ./testPr_hdlc.sv(48)               0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyAbortReceive/#anonblk#119480755#77#4#/#ublk#119480755#77/immed__79
+                     ./testPr_hdlc.sv(79)               0        162          0          0        162          0           0 off
+/test_hdlc/u_testPr/VerifyNormalReceive/immed__119
+                     ./testPr_hdlc.sv(119)              0          6          0          0          6          0           0 off
+/test_hdlc/u_testPr/VerifyNormalReceive/immed__111
+                     ./testPr_hdlc.sv(111)              0          6          0          0          6          0           0 off
+/test_hdlc/u_testPr/VerifyNormalReceive/immed__104
+                     ./testPr_hdlc.sv(104)              0          6          0          0          6          0           0 off
+/test_hdlc/u_testPr/VerifyNormalReceive/immed__97
+                     ./testPr_hdlc.sv(97)               0          6          0          0          6          0           0 off
+/test_hdlc/u_testPr/VerifyNormalReceive/#anonblk#119480755#127#4#/#ublk#119480755#127/immed__129
+                     ./testPr_hdlc.sv(129)              0        267          0          0        267          0           0 off
+/test_hdlc/u_testPr/VerifyOverflowReceive/immed__171
+                     ./testPr_hdlc.sv(171)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyOverflowReceive/immed__164
+                     ./testPr_hdlc.sv(164)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyOverflowReceive/immed__157
+                     ./testPr_hdlc.sv(157)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyOverflowReceive/immed__150
+                     ./testPr_hdlc.sv(150)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyOverflowReceive/#anonblk#119480755#179#4#/#ublk#119480755#179/immed__181
+                     ./testPr_hdlc.sv(181)              0        252          0          0        252          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/immed__228
+                     ./testPr_hdlc.sv(228)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/immed__221
+                     ./testPr_hdlc.sv(221)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/immed__215
+                     ./testPr_hdlc.sv(215)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/immed__208
+                     ./testPr_hdlc.sv(208)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/immed__201
+                     ./testPr_hdlc.sv(201)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/#anonblk#119480755#236#4#/#ublk#119480755#236/immed__238
+                     ./testPr_hdlc.sv(238)              0         28          0          0         28          0           0 off
+/test_hdlc/u_testPr/VerifyDropReceive/immed__273
+                     ./testPr_hdlc.sv(273)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyDropReceive/immed__266
+                     ./testPr_hdlc.sv(266)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyDropReceive/immed__259
+                     ./testPr_hdlc.sv(259)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyDropReceive/immed__252
+                     ./testPr_hdlc.sv(252)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyDropReceive/#anonblk#119480755#281#4#/#ublk#119480755#281/immed__283
+                     ./testPr_hdlc.sv(283)              0         42          0          0         42          0           0 off
+/test_hdlc/u_testPr/VerifyRxFrameSize/immed__299
+                     ./testPr_hdlc.sv(299)              0          8          0          0          8          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__370
+                     ./testPr_hdlc.sv(370)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__363
+                     ./testPr_hdlc.sv(363)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__356
+                     ./testPr_hdlc.sv(356)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__346
+                     ./testPr_hdlc.sv(346)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__321
+                     ./testPr_hdlc.sv(321)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__313
+                     ./testPr_hdlc.sv(313)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/#anonblk#119480755#329#4#/#ublk#119480755#329/immed__330
+                     ./testPr_hdlc.sv(330)              0         10          0          0         10          0           0 off
+/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__402
+                     ./testPr_hdlc.sv(402)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__394
+                     ./testPr_hdlc.sv(394)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__386
+                     ./testPr_hdlc.sv(386)              0          1          0          0          1          0           0 off
+
+=================================================================================
+=== Instance: /test_hdlc/u_assertion_bind
+=== Design Unit: work.assertions_hdlc
+=================================================================================
+
+Assertion Coverage:
+    Assertions                       8         8         0   100.00%
+--------------------------------------------------------------------------------------------------------------------------------
+Name                 File(Line)                   Failure      Pass     Vacuous    Disable    Attempt     Active Peak Active ATV
+                                                  Count        Count    Count      Count      Count       Count  Count          
+--------------------------------------------------------------------------------------------------------------------------------
+/test_hdlc/u_assertion_bind/RX_FlagDetect_Assert
+                     ./assertions_hdlc.sv(103)          0         24      11809          0      11833          0           3 off
+/test_hdlc/u_assertion_bind/RX_AbortSignal_Assert
+                     ./assertions_hdlc.sv(120)          0          2       6407       5424      11833          0           1 off
+/test_hdlc/u_assertion_bind/Rx_AbortDetect_Assert
+                     ./assertions_hdlc.sv(132)          0          2       6396       5435      11833          0           2 off
+/test_hdlc/u_assertion_bind/Rx_EndOfFrameDetect
+                     ./assertions_hdlc.sv(146)          0         13      11820          0      11833          0           2 off
+/test_hdlc/u_assertion_bind/TX_AbortedTrans_Assert
+                     ./assertions_hdlc.sv(163)          0          1      11831          0      11833          1           3 off
+/test_hdlc/u_assertion_bind/TX_IdlePattern_Assert
+                     ./assertions_hdlc.sv(179)          0      10631       1202          0      11833          0           1 off
+/test_hdlc/u_assertion_bind/TX_ZeroPadding_Assert
+                     ./assertions_hdlc.sv(194)          0         15       1127      10691      11833          0           2 off
+/test_hdlc/u_assertion_bind/TX_AbortFlag_Assert
+                     ./assertions_hdlc.sv(209)          0          1      11832          0      11833          0           1 off
+
+COVERGROUP COVERAGE:
+----------------------------------------------------------------------------------------------------------
+Covergroup                                             Metric       Goal       Bins    Status               
+                                                                                                         
+----------------------------------------------------------------------------------------------------------
+ TYPE /test_hdlc/u_coverage/hdlc_cg                   100.00%        100          -    Covered              
+    covered/total bins:                                    26         26          -                      
+    missing/total bins:                                     0         26          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint Rx_FrameSizeBins                       100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Tx_FrameSizeBins                       100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_RxReady                             100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_RxFrameError                        100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_RxAbortSignal                       100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_TxDone                              100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_TxEnable                            100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_TxAbortedTrans                      100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_RxOverflow                          100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_RxDrop                              100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_TxAbortFrame                        100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+    Coverpoint Cp_TxFull                              100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+ Covergroup instance \/test_hdlc/u_coverage/hdlc_coverage_inst  
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    26         26          -                      
+    missing/total bins:                                     0         26          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint Rx_FrameSizeBins                       100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin small_frame                                  4286          1          -    Covered              
+        bin medium_frame                                 4930          1          -    Covered              
+        bin max_size                                     2493          1          -    Covered              
+        default bin invalid_frame                         124                     -    Occurred             
+    Coverpoint Tx_FrameSizeBins                       100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin small_frame                                   520          1          -    Covered              
+        bin medium_frame                                  782          1          -    Covered              
+        bin max_size                                     2120          1          -    Covered              
+        default bin invalid_frame                        8411                     -    Occurred             
+    Coverpoint Cp_RxReady                             100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     10741          1          -    Covered              
+        bin auto[1]                                      1092          1          -    Covered              
+    Coverpoint Cp_RxFrameError                        100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                      8283          1          -    Covered              
+        bin auto[1]                                      3550          1          -    Covered              
+    Coverpoint Cp_RxAbortSignal                       100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11447          1          -    Covered              
+        bin auto[1]                                       386          1          -    Covered              
+    Coverpoint Cp_TxDone                              100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                      2936          1          -    Covered              
+        bin auto[1]                                      8897          1          -    Covered              
+    Coverpoint Cp_TxEnable                            100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11830          1          -    Covered              
+        bin auto[1]                                         3          1          -    Covered              
+    Coverpoint Cp_TxAbortedTrans                      100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11431          1          -    Covered              
+        bin auto[1]                                       402          1          -    Covered              
+    Coverpoint Cp_RxOverflow                          100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11277          1          -    Covered              
+        bin auto[1]                                       556          1          -    Covered              
+    Coverpoint Cp_RxDrop                              100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11832          1          -    Covered              
+        bin auto[1]                                         1          1          -    Covered              
+    Coverpoint Cp_TxAbortFrame                        100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11832          1          -    Covered              
+        bin auto[1]                                         1          1          -    Covered              
+    Coverpoint Cp_TxFull                              100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin auto[0]                                     11823          1          -    Covered              
+        bin auto[1]                                        10          1          -    Covered              
+
+TOTAL COVERGROUP COVERAGE: 100.00%  COVERGROUP TYPES: 1
+
+ASSERTION RESULTS:
+--------------------------------------------------------------------------------------------------------------------------------
+Name                 File(Line)                   Failure      Pass     Vacuous    Disable    Attempt     Active Peak Active ATV
+                                                  Count        Count    Count      Count      Count       Count  Count          
+--------------------------------------------------------------------------------------------------------------------------------
+/test_hdlc/u_testPr/VerifyAbortReceive/immed__69
+                     ./testPr_hdlc.sv(69)               0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyAbortReceive/immed__62
+                     ./testPr_hdlc.sv(62)               0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyAbortReceive/immed__55
+                     ./testPr_hdlc.sv(55)               0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyAbortReceive/immed__48
+                     ./testPr_hdlc.sv(48)               0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyAbortReceive/#anonblk#119480755#77#4#/#ublk#119480755#77/immed__79
+                     ./testPr_hdlc.sv(79)               0        162          0          0        162          0           0 off
+/test_hdlc/u_testPr/VerifyNormalReceive/immed__119
+                     ./testPr_hdlc.sv(119)              0          6          0          0          6          0           0 off
+/test_hdlc/u_testPr/VerifyNormalReceive/immed__111
+                     ./testPr_hdlc.sv(111)              0          6          0          0          6          0           0 off
+/test_hdlc/u_testPr/VerifyNormalReceive/immed__104
+                     ./testPr_hdlc.sv(104)              0          6          0          0          6          0           0 off
+/test_hdlc/u_testPr/VerifyNormalReceive/immed__97
+                     ./testPr_hdlc.sv(97)               0          6          0          0          6          0           0 off
+/test_hdlc/u_testPr/VerifyNormalReceive/#anonblk#119480755#127#4#/#ublk#119480755#127/immed__129
+                     ./testPr_hdlc.sv(129)              0        267          0          0        267          0           0 off
+/test_hdlc/u_testPr/VerifyOverflowReceive/immed__171
+                     ./testPr_hdlc.sv(171)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyOverflowReceive/immed__164
+                     ./testPr_hdlc.sv(164)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyOverflowReceive/immed__157
+                     ./testPr_hdlc.sv(157)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyOverflowReceive/immed__150
+                     ./testPr_hdlc.sv(150)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyOverflowReceive/#anonblk#119480755#179#4#/#ublk#119480755#179/immed__181
+                     ./testPr_hdlc.sv(181)              0        252          0          0        252          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/immed__228
+                     ./testPr_hdlc.sv(228)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/immed__221
+                     ./testPr_hdlc.sv(221)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/immed__215
+                     ./testPr_hdlc.sv(215)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/immed__208
+                     ./testPr_hdlc.sv(208)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/immed__201
+                     ./testPr_hdlc.sv(201)              0          2          0          0          2          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/#anonblk#119480755#236#4#/#ublk#119480755#236/immed__238
+                     ./testPr_hdlc.sv(238)              0         28          0          0         28          0           0 off
+/test_hdlc/u_testPr/VerifyDropReceive/immed__273
+                     ./testPr_hdlc.sv(273)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyDropReceive/immed__266
+                     ./testPr_hdlc.sv(266)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyDropReceive/immed__259
+                     ./testPr_hdlc.sv(259)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyDropReceive/immed__252
+                     ./testPr_hdlc.sv(252)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyDropReceive/#anonblk#119480755#281#4#/#ublk#119480755#281/immed__283
+                     ./testPr_hdlc.sv(283)              0         42          0          0         42          0           0 off
+/test_hdlc/u_testPr/VerifyRxFrameSize/immed__299
+                     ./testPr_hdlc.sv(299)              0          8          0          0          8          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__370
+                     ./testPr_hdlc.sv(370)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__363
+                     ./testPr_hdlc.sv(363)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__356
+                     ./testPr_hdlc.sv(356)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__346
+                     ./testPr_hdlc.sv(346)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__321
+                     ./testPr_hdlc.sv(321)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__313
+                     ./testPr_hdlc.sv(313)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/#anonblk#119480755#329#4#/#ublk#119480755#329/immed__330
+                     ./testPr_hdlc.sv(330)              0         10          0          0         10          0           0 off
+/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__402
+                     ./testPr_hdlc.sv(402)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__394
+                     ./testPr_hdlc.sv(394)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__386
+                     ./testPr_hdlc.sv(386)              0          1          0          0          1          0           0 off
+/test_hdlc/u_assertion_bind/RX_FlagDetect_Assert
+                     ./assertions_hdlc.sv(103)          0         24      11809          0      11833          0           3 off
+/test_hdlc/u_assertion_bind/RX_AbortSignal_Assert
+                     ./assertions_hdlc.sv(120)          0          2       6407       5424      11833          0           1 off
+/test_hdlc/u_assertion_bind/Rx_AbortDetect_Assert
+                     ./assertions_hdlc.sv(132)          0          2       6396       5435      11833          0           2 off
+/test_hdlc/u_assertion_bind/Rx_EndOfFrameDetect
+                     ./assertions_hdlc.sv(146)          0         13      11820          0      11833          0           2 off
+/test_hdlc/u_assertion_bind/TX_AbortedTrans_Assert
+                     ./assertions_hdlc.sv(163)          0          1      11831          0      11833          1           3 off
+/test_hdlc/u_assertion_bind/TX_IdlePattern_Assert
+                     ./assertions_hdlc.sv(179)          0      10631       1202          0      11833          0           1 off
+/test_hdlc/u_assertion_bind/TX_ZeroPadding_Assert
+                     ./assertions_hdlc.sv(194)          0         15       1127      10691      11833          0           2 off
+/test_hdlc/u_assertion_bind/TX_AbortFlag_Assert
+                     ./assertions_hdlc.sv(209)          0          1      11832          0      11833          0           1 off
+
+Total Coverage By Instance (filtered view): 100.00%
+
