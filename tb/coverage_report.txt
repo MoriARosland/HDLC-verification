@@ -239,27 +239,29 @@ Name                 File(Line)                   Failure      Pass     Vacuous 
 =================================================================================
 
 Assertion Coverage:
-    Assertions                       8         8         0   100.00%
+    Assertions                       9         9         0   100.00%
 --------------------------------------------------------------------------------------------------------------------------------
 Name                 File(Line)                   Failure      Pass     Vacuous    Disable    Attempt     Active Peak Active ATV
                                                   Count        Count    Count      Count      Count       Count  Count          
 --------------------------------------------------------------------------------------------------------------------------------
 /test_hdlc/u_assertion_bind/RX_FlagDetect_Assert
-                     ./assertions_hdlc.sv(103)          0         24      11809          0      11833          0           3 off
+                     ./assertions_hdlc.sv(107)          0         24      11809          0      11833          0           3 off
 /test_hdlc/u_assertion_bind/RX_AbortSignal_Assert
-                     ./assertions_hdlc.sv(120)          0          2       6407       5424      11833          0           1 off
+                     ./assertions_hdlc.sv(124)          0          2       6407       5424      11833          0           1 off
 /test_hdlc/u_assertion_bind/Rx_AbortDetect_Assert
-                     ./assertions_hdlc.sv(132)          0          2       6396       5435      11833          0           2 off
+                     ./assertions_hdlc.sv(136)          0          2       6396       5435      11833          0           2 off
 /test_hdlc/u_assertion_bind/Rx_EndOfFrameDetect
-                     ./assertions_hdlc.sv(146)          0         13      11820          0      11833          0           2 off
+                     ./assertions_hdlc.sv(150)          0         13      11820          0      11833          0           2 off
 /test_hdlc/u_assertion_bind/TX_AbortedTrans_Assert
-                     ./assertions_hdlc.sv(163)          0          1      11831          0      11833          1           3 off
+                     ./assertions_hdlc.sv(167)          0          1      11831          0      11833          1           3 off
+/test_hdlc/u_assertion_bind/TransmitComplete_Assert
+                     ./assertions_hdlc.sv(183)          0          2      11831          0      11833          0           1 off
 /test_hdlc/u_assertion_bind/TX_IdlePattern_Assert
-                     ./assertions_hdlc.sv(179)          0      10631       1202          0      11833          0           1 off
+                     ./assertions_hdlc.sv(199)          0      10631       1202          0      11833          0           1 off
 /test_hdlc/u_assertion_bind/TX_ZeroPadding_Assert
-                     ./assertions_hdlc.sv(194)          0         15       1127      10691      11833          0           2 off
+                     ./assertions_hdlc.sv(214)          0         15       1127      10691      11833          0           2 off
 /test_hdlc/u_assertion_bind/TX_AbortFlag_Assert
-                     ./assertions_hdlc.sv(209)          0          1      11832          0      11833          0           1 off
+                     ./assertions_hdlc.sv(229)          0          1      11832          0      11833          0           1 off
 
 COVERGROUP COVERAGE:
 ----------------------------------------------------------------------------------------------------------
@@ -482,21 +484,23 @@ Name                 File(Line)                   Failure      Pass     Vacuous 
 /test_hdlc/u_testPr/VerifyTransmitOverflow/immed__386
                      ./testPr_hdlc.sv(386)              0          1          0          0          1          0           0 off
 /test_hdlc/u_assertion_bind/RX_FlagDetect_Assert
-                     ./assertions_hdlc.sv(103)          0         24      11809          0      11833          0           3 off
+                     ./assertions_hdlc.sv(107)          0         24      11809          0      11833          0           3 off
 /test_hdlc/u_assertion_bind/RX_AbortSignal_Assert
-                     ./assertions_hdlc.sv(120)          0          2       6407       5424      11833          0           1 off
+                     ./assertions_hdlc.sv(124)          0          2       6407       5424      11833          0           1 off
 /test_hdlc/u_assertion_bind/Rx_AbortDetect_Assert
-                     ./assertions_hdlc.sv(132)          0          2       6396       5435      11833          0           2 off
+                     ./assertions_hdlc.sv(136)          0          2       6396       5435      11833          0           2 off
 /test_hdlc/u_assertion_bind/Rx_EndOfFrameDetect
-                     ./assertions_hdlc.sv(146)          0         13      11820          0      11833          0           2 off
+                     ./assertions_hdlc.sv(150)          0         13      11820          0      11833          0           2 off
 /test_hdlc/u_assertion_bind/TX_AbortedTrans_Assert
-                     ./assertions_hdlc.sv(163)          0          1      11831          0      11833          1           3 off
+                     ./assertions_hdlc.sv(167)          0          1      11831          0      11833          1           3 off
+/test_hdlc/u_assertion_bind/TransmitComplete_Assert
+                     ./assertions_hdlc.sv(183)          0          2      11831          0      11833          0           1 off
 /test_hdlc/u_assertion_bind/TX_IdlePattern_Assert
-                     ./assertions_hdlc.sv(179)          0      10631       1202          0      11833          0           1 off
+                     ./assertions_hdlc.sv(199)          0      10631       1202          0      11833          0           1 off
 /test_hdlc/u_assertion_bind/TX_ZeroPadding_Assert
-                     ./assertions_hdlc.sv(194)          0         15       1127      10691      11833          0           2 off
+                     ./assertions_hdlc.sv(214)          0         15       1127      10691      11833          0           2 off
 /test_hdlc/u_assertion_bind/TX_AbortFlag_Assert
-                     ./assertions_hdlc.sv(209)          0          1      11832          0      11833          0           1 off
+                     ./assertions_hdlc.sv(229)          0          1      11832          0      11833          0           1 off
 
 Total Coverage By Instance (filtered view): 100.00%
 
