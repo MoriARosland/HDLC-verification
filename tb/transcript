@@ -1,5 +1,5 @@
 # vsim -assertdebug -c -voptargs="+acc" test_hdlc bind_hdlc -do "log -r *; run -all; exit" 
-# Start time: 10:33:13 on Apr 24,2025
+# Start time: 11:04:42 on Apr 24,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: ../rtl/TxFCS.sv(13): (vopt-13314) Defaulting port 'DataBuff' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxFCS(fast)".
@@ -242,6 +242,7 @@
 # *************************************************************
 # === Transmit - Abort (42 bytes) ===
 # TX_AbortedTrans_Assert: PASS: Tx_AbortedTrans asserted after aborting frame during transmission
+# TX_AbortFlag_Assert: PASS: Transmittet abort flag sequence
 # *************************************************************
 #              5916250 - Finishing Test Program
 # *************************************************************
@@ -255,5 +256,5 @@
 # * 	Assertion Errors: 0	  *
 # *                               *
 # *********************************
-# End time: 10:33:18 on Apr 24,2025, Elapsed time: 0:00:05
+# End time: 11:04:47 on Apr 24,2025, Elapsed time: 0:00:05
 # Errors: 0, Warnings: 1
