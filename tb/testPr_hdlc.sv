@@ -77,7 +77,7 @@ program testPr_hdlc(
     for (int i = 0; i < Size; i++) begin
         ReadAddress(RX_BUFFER_ADDR, ReadData);
         assert (ReadData == 0) begin
-            $display("ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
+            // $display("ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
         end else begin
             $error("ABORT_RECEIVE: ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
             ++TbErrorCnt;

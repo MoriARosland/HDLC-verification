@@ -1,5 +1,5 @@
 # vsim -coverage -assertdebug -c -voptargs="+acc" test_hdlc bind_hdlc -do "log -r *; run -all; coverage report -file coverage_report.txt -details; exit" 
-# Start time: 10:54:26 on Apr 24,2025
+# Start time: 11:13:56 on Apr 24,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: ../rtl/TxFCS.sv(13): (vopt-13314) Defaulting port 'DataBuff' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxFCS(fast)".
@@ -74,46 +74,6 @@
 # ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
 # ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low
 # ABORT_RECEIVE:: SUCCESS: Rx_AbortSignal is high
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
 # *************************************************************
 #               308250 - Starting task Receive - Overflow
 # *************************************************************
@@ -170,128 +130,6 @@
 # ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
 # ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low
 # ABORT_RECEIVE:: SUCCESS: Rx_AbortSignal is high
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
-# ABORT_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = 0
 # *************************************************************
 #              2556750 - Starting task Receive - Overflow
 # *************************************************************
@@ -435,5 +273,5 @@
 # * 	Assertion Errors: 0	  *
 # *                               *
 # *********************************
-# End time: 10:54:32 on Apr 24,2025, Elapsed time: 0:00:06
+# End time: 11:14:02 on Apr 24,2025, Elapsed time: 0:00:06
 # Errors: 0, Warnings: 3
