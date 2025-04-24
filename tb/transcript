@@ -190,6 +190,7 @@
 #              4192750 - Starting task Transmit - Normal
 # *************************************************************
 # === Transmit - Normal (10 bytes) ===
+# TransmitComplete_Assert: SUCCESS: Tx_Complete asserted after TX buffer emptied
 # PASS: startFlag transmitted
 # PASS: endFlag transmitted
 # VERIFY_TRANSMIT_NORMAL:: PASS: data transmitted correctly
@@ -218,6 +219,7 @@
 #              5055750 - Starting task Transmit - Abort
 # *************************************************************
 # === Transmit - Abort (42 bytes) ===
+# TransmitComplete_Assert: SUCCESS: Tx_Complete asserted after TX buffer emptied
 # TX_AbortedTrans_Assert: PASS: Tx_AbortedTrans asserted after aborting frame during transmission
 # TX_AbortFlag_Assert: PASS: Transmittet abort flag sequence
 # *************************************************************
