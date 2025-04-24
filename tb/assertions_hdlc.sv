@@ -26,17 +26,32 @@ module assertions_hdlc (
   input  logic Rx_Overflow,
   input  logic Rx_WrBuff,
   input  logic Rx_EoF,
+  input  logic Tx,
   input  logic Tx_AbortFrame,
   input  logic Tx_AbortedTrans,
   input  logic Tx_ValidFrame
 );
 
+  logic TransmittInProgress;
+
   initial begin
     ErrCntAssertions  =  0;
+    TransmittInProgress = '0;
+  end
+
+  initial begin // Track the state of the Tx serial-line
+    forever begin
+      wait(Tx_ValidFrame); // Transmission has started
+      TransmittInProgress = 1'b1;
+
+      wait(!Tx_ValidFrame); // Transmission has ended
+      repeat(8) @(posedge Clk); // Give time to generate end/abort flag
+
+      TransmittInProgress = 1'b0;
+    end
   end
 
   /// Sequence utilities (Rx and Tx use some of the same sequences):
-  
   sequence AbortFlag_sequence(serial_line); 
     // Note that least significant bit is received first
     !serial_line ##1 serial_line[*7]; // Pattern: 1111 1110
@@ -128,5 +143,20 @@ end else begin
   $error("TX_AbortedTrans_Assert:: Error: Tx_AbortedTrans not assert after aborting frame during transmission");
   ErrCntAssertions++;
 end
+
+/***********************************
+  * Verify idle pattern generation *
+  **********************************/
+
+  // Only 1's should be on the Tx serial line when not transmitting a frame
+  property TX_IdlePattern;
+    @(posedge Clk) !TransmittInProgress|=> Tx;
+  endproperty
+
+  TX_IdlePattern_Assert : assert property (TX_IdlePattern)
+  else begin
+    $error("TX_IdlePattern_Assert:: FAIL: Did not generate idle pattern when not transmitting");
+    ErrCntAssertions++;
+  end
 
 endmodule
