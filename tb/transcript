@@ -1,5 +1,5 @@
 # vsim -coverage -assertdebug -c -voptargs="+acc" test_hdlc bind_hdlc -do "log -r *; run -all; coverage report -file coverage_report.txt -details; exit" 
-# Start time: 10:46:08 on Apr 24,2025
+# Start time: 10:54:26 on Apr 24,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: ../rtl/TxFCS.sv(13): (vopt-13314) Defaulting port 'DataBuff' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxFCS(fast)".
@@ -422,10 +422,10 @@
 # *************************************************************
 #              5916250 - Finishing Test Program
 # *************************************************************
-# ** Note: $stop    : ./testPr_hdlc.sv(445)
+# ** Note: $stop    : ./testPr_hdlc.sv(446)
 #    Time: 5916250 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
-# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 445
-# Stopped at ./testPr_hdlc.sv line 445
+# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 446
+# Stopped at ./testPr_hdlc.sv line 446
 #  coverage report -file coverage_report.txt -details
 # ** Warning: (vsim-19053) Option '-file' has been deprecated. Please use option '-output' instead.
 #  exit
@@ -434,5 +434,5 @@
 # * 	Assertion Errors: 0	  *
 # *                               *
 # *********************************
-# End time: 10:46:13 on Apr 24,2025, Elapsed time: 0:00:05
+# End time: 10:54:32 on Apr 24,2025, Elapsed time: 0:00:06
 # Errors: 0, Warnings: 3
