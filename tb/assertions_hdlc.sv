@@ -74,7 +74,7 @@ module assertions_hdlc (
   end
 
   /// Sequence utilities (Rx and Tx use some of the same sequences):
-  
+
   sequence AbortFlag_sequence(serial_line); 
     // Note that least significant bit is received first
     !serial_line ##1 serial_line[*7]; // Pattern: 1111 1110
@@ -194,6 +194,22 @@ end
   TX_ZeroPadding_Assert : assert property (TX_ZeroPadding)
   else begin
     $error("TX_ZeroPadding_Assert:: FAIL: Missing zero insertion");
+    ErrCntAssertions++;
+  end
+
+
+  // Verify that an abort flag is transmitted when Tx_AbortFrame is asserted
+  property TX_AbortFlag;
+    @(posedge Clk) Tx_AbortFrame ##0 Tx_ValidFrame |=> ##3 AbortFlag_sequence(Tx);
+    // It takes 3 clock cycles to propagate the Tx_AbortFrame signal and initiate
+    // transmission of the abort flag
+  endproperty
+
+
+  TX_AbortFlag_Assert : assert property (TX_AbortFlag) begin 
+    $display("TX_AbortFlag_Assert: PASS: Transmittet abort flag sequence");
+  end else begin
+    $error("TX_AbortFlag_Assert:: Error: Did not transmitt abort flag sequence");
     ErrCntAssertions++;
   end
 
