@@ -1,5 +1,5 @@
 # vsim -coverage -assertdebug -c -voptargs="+acc" test_hdlc bind_hdlc -do "log -r *; run -all; coverage report -file coverage_report.txt -details; exit" 
-# Start time: 11:13:56 on Apr 24,2025
+# Start time: 11:53:49 on Apr 24,2025
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: ../rtl/TxFCS.sv(13): (vopt-13314) Defaulting port 'DataBuff' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # ** Note: (vopt-143) Recognized 1 FSM in module "TxFCS(fast)".
@@ -53,16 +53,10 @@
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
-# NORMAL RECEIVE: SUCCESS: No Rx overflow detected
-# 
-# NORMAL RECEIVE:: SUCCESS: No Rx abort detected
-# 
-# NORMAL RECEIVE:: SUCCESS: No Rx frame error detected
-# 
-# NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
-# 
-# NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
-# 
+# VerifyNormalReceive:: PASS: Rx_ready is high
+# VerifyNormalReceive:: PASS: Rx_FrameError is low
+# VerifyNormalReceive:: PASS: Rx_Overflow is low
+# VerifyNormalReceive:: PASS: Rx_AbortSignal is low
 # *************************************************************
 #                79250 - Starting task Receive - Abort
 # *************************************************************
@@ -70,10 +64,10 @@
 # PASS: Abort flag successfully generated abort signal (RX)
 # PASS: Abort signal
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
-# ABORT_RECEIVE:: SUCCESS: Rx_ready is low
-# ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
-# ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low
-# ABORT_RECEIVE:: SUCCESS: Rx_AbortSignal is high
+# VerifyAbortReceive:: PASS: Rx_ready is low
+# VerifyAbortReceive:: PASS: Rx_FrameError is low
+# VerifyAbortReceive:: PASS: Rx_Overflow is low
+# VerifyAbortReceive:: PASS: Rx_AbortSignal is high
 # *************************************************************
 #               308250 - Starting task Receive - Overflow
 # *************************************************************
@@ -81,10 +75,10 @@
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
-# OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high
-# OVERFLOW_RECEIVE:: SUCCESS: Rx_FrameError is low
-# OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high
-# OVERFLOW_RECEIVE:: SUCCESS: Rx_AbortSignal is low
+# VerifyOverflowReceive:: PASS: Rx_Buff has data to read
+# VerifyOverflowReceive:: PASS: No frame error
+# VerifyOverflowReceive:: PASS: Overflow signal asserted
+# VerifyOverflowReceive:: PASS: No abort signal
 # *************************************************************
 #               989250 - Starting task Receive - Normal
 # *************************************************************
@@ -92,16 +86,10 @@
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
-# NORMAL RECEIVE: SUCCESS: No Rx overflow detected
-# 
-# NORMAL RECEIVE:: SUCCESS: No Rx abort detected
-# 
-# NORMAL RECEIVE:: SUCCESS: No Rx frame error detected
-# 
-# NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
-# 
-# NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
-# 
+# VerifyNormalReceive:: PASS: Rx_ready is high
+# VerifyNormalReceive:: PASS: Rx_FrameError is low
+# VerifyNormalReceive:: PASS: Rx_Overflow is low
+# VerifyNormalReceive:: PASS: Rx_AbortSignal is low
 # *************************************************************
 #              1244750 - Starting task Receive - Normal
 # *************************************************************
@@ -109,16 +97,10 @@
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
-# NORMAL RECEIVE: SUCCESS: No Rx overflow detected
-# 
-# NORMAL RECEIVE:: SUCCESS: No Rx abort detected
-# 
-# NORMAL RECEIVE:: SUCCESS: No Rx frame error detected
-# 
-# NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
-# 
-# NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
-# 
+# VerifyNormalReceive:: PASS: Rx_ready is high
+# VerifyNormalReceive:: PASS: Rx_FrameError is low
+# VerifyNormalReceive:: PASS: Rx_Overflow is low
+# VerifyNormalReceive:: PASS: Rx_AbortSignal is low
 # *************************************************************
 #              1909250 - Starting task Receive - Abort
 # *************************************************************
@@ -126,10 +108,10 @@
 # PASS: Abort flag successfully generated abort signal (RX)
 # PASS: Abort signal
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
-# ABORT_RECEIVE:: SUCCESS: Rx_ready is low
-# ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low
-# ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low
-# ABORT_RECEIVE:: SUCCESS: Rx_AbortSignal is high
+# VerifyAbortReceive:: PASS: Rx_ready is low
+# VerifyAbortReceive:: PASS: Rx_FrameError is low
+# VerifyAbortReceive:: PASS: Rx_Overflow is low
+# VerifyAbortReceive:: PASS: Rx_AbortSignal is high
 # *************************************************************
 #              2556750 - Starting task Receive - Overflow
 # *************************************************************
@@ -137,10 +119,10 @@
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
-# OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high
-# OVERFLOW_RECEIVE:: SUCCESS: Rx_FrameError is low
-# OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high
-# OVERFLOW_RECEIVE:: SUCCESS: Rx_AbortSignal is low
+# VerifyOverflowReceive:: PASS: Rx_Buff has data to read
+# VerifyOverflowReceive:: PASS: No frame error
+# VerifyOverflowReceive:: PASS: Overflow signal asserted
+# VerifyOverflowReceive:: PASS: No abort signal
 # *************************************************************
 #              3232750 - Starting task Receive - Normal
 # *************************************************************
@@ -148,16 +130,10 @@
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
-# NORMAL RECEIVE: SUCCESS: No Rx overflow detected
-# 
-# NORMAL RECEIVE:: SUCCESS: No Rx abort detected
-# 
-# NORMAL RECEIVE:: SUCCESS: No Rx frame error detected
-# 
-# NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
-# 
-# NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
-# 
+# VerifyNormalReceive:: PASS: Rx_ready is high
+# VerifyNormalReceive:: PASS: Rx_FrameError is low
+# VerifyNormalReceive:: PASS: Rx_Overflow is low
+# VerifyNormalReceive:: PASS: Rx_AbortSignal is low
 # *************************************************************
 #              3389250 - Starting task Receive - Normal
 # *************************************************************
@@ -165,26 +141,20 @@
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
-# NORMAL RECEIVE: SUCCESS: No Rx overflow detected
-# 
-# NORMAL RECEIVE:: SUCCESS: No Rx abort detected
-# 
-# NORMAL RECEIVE:: SUCCESS: No Rx frame error detected
-# 
-# NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
-# 
-# NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
-# 
+# VerifyNormalReceive:: PASS: Rx_ready is high
+# VerifyNormalReceive:: PASS: Rx_FrameError is low
+# VerifyNormalReceive:: PASS: Rx_Overflow is low
+# VerifyNormalReceive:: PASS: Rx_AbortSignal is low
 # *************************************************************
 #              3655250 - Starting task Receive - Drop
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
-# DROP_RECEIVE:: SUCCESS: Rx_Ready is low after dropped frame
-# DROP_RECEIVE:: SUCCESS: Rx_FrameError is low after dropped frame
-# DROP_RECEIVE:: SUCCESS: Rx_Overflow is low after dropped frame
-# DROP_RECEIVE:: SUCCESS: Rx_AbortSignal is low after dropped frame
+# VerifyDropReceive:: PASS: Rx_Ready is low after dropped frame
+# VerifyDropReceive:: PASS: Rx_FrameError is low after dropped frame
+# VerifyDropReceive:: PASS: Rx_Overflow is low after dropped frame
+# VerifyDropReceive:: PASS: Rx_AbortSignal is low after dropped frame
 # *************************************************************
 #              3896250 - Starting task Receive - Normal
 # *************************************************************
@@ -192,38 +162,30 @@
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
 # VerifyRxFrameSize:: SUCCESS: Rx_FrameLength matches received framelength
-# NORMAL RECEIVE: SUCCESS: No Rx overflow detected
-# 
-# NORMAL RECEIVE:: SUCCESS: No Rx abort detected
-# 
-# NORMAL RECEIVE:: SUCCESS: No Rx frame error detected
-# 
-# NORMAL RECEIVE:: SUCCESS: FRAME IS VALID
-# 
-# NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY
-# 
+# VerifyNormalReceive:: PASS: Rx_ready is high
+# VerifyNormalReceive:: PASS: Rx_FrameError is low
+# VerifyNormalReceive:: PASS: Rx_Overflow is low
+# VerifyNormalReceive:: PASS: Rx_AbortSignal is low
 # *************************************************************
 #              3994750 - Starting task Receive - Non-byte aligned
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
-# ERROR_RECEIVE:: SUCCESS: Rx_Ready is low after error
-# ERROR_RECEIVE:: SUCCESS: Rx_FrameError is high after error
-# ERROR_RECEIVE:: SUCCESS: Rx_Overflow is low after error
-# ERROR_RECEIVE:: SUCCESS: Rx_AbortSignal is low after error
-# ERROR_RECEIVE:: SUCCESS: Rx_Drop is low after error
+# VerifyErrorReceive:: PASS: Rx_Ready is low after error
+# VerifyErrorReceive:: PASS: Rx_FrameError is high after error
+# VerifyErrorReceive:: PASS: Rx_Overflow is low after error
+# VerifyErrorReceive:: PASS: Rx_AbortSignal is low after error
 # *************************************************************
 #              4094750 - Starting task Receive - FCS error
 # *************************************************************
 # PASS: Flag detect
 # PASS: Flag detect
 # RX_EndOfFrame:: PASS: Succesfully generated end of frame
-# ERROR_RECEIVE:: SUCCESS: Rx_Ready is low after error
-# ERROR_RECEIVE:: SUCCESS: Rx_FrameError is high after error
-# ERROR_RECEIVE:: SUCCESS: Rx_Overflow is low after error
-# ERROR_RECEIVE:: SUCCESS: Rx_AbortSignal is low after error
-# ERROR_RECEIVE:: SUCCESS: Rx_Drop is low after error
+# VerifyErrorReceive:: PASS: Rx_Ready is low after error
+# VerifyErrorReceive:: PASS: Rx_FrameError is high after error
+# VerifyErrorReceive:: PASS: Rx_Overflow is low after error
+# VerifyErrorReceive:: PASS: Rx_AbortSignal is low after error
 # *************************************************************
 #              4192750 - Starting task Transmit - Normal
 # *************************************************************
@@ -261,10 +223,10 @@
 # *************************************************************
 #              5916250 - Finishing Test Program
 # *************************************************************
-# ** Note: $stop    : ./testPr_hdlc.sv(446)
+# ** Note: $stop    : ./testPr_hdlc.sv(334)
 #    Time: 5916250 ns  Iteration: 1  Instance: /test_hdlc/u_testPr
-# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 446
-# Stopped at ./testPr_hdlc.sv line 446
+# Break in Module testPr_hdlc at ./testPr_hdlc.sv line 334
+# Stopped at ./testPr_hdlc.sv line 334
 #  coverage report -file coverage_report.txt -details
 # ** Warning: (vsim-19053) Option '-file' has been deprecated. Please use option '-output' instead.
 #  exit
@@ -273,5 +235,5 @@
 # * 	Assertion Errors: 0	  *
 # *                               *
 # *********************************
-# End time: 11:14:02 on Apr 24,2025, Elapsed time: 0:00:06
+# End time: 11:53:54 on Apr 24,2025, Elapsed time: 0:00:05
 # Errors: 0, Warnings: 3

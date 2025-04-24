@@ -37,41 +37,30 @@ program testPr_hdlc(
 
   `include "hdlc_shared.sv"
 
+function void VerifyStatusBits(logic [7:0] status, status_bit_check_t checks[$], string assertion_name);
+    foreach (checks[i]) begin
+        assert (status[checks[i].bit_pos] == checks[i].expected) begin
+            $display("%s:: PASS: %s", assertion_name, checks[i].pass_msg);
+        end else begin
+            $error("%s:: FAIL: %s", assertion_name, checks[i].fail_msg);
+            ++TbErrorCnt;
+        end
+    end
+endfunction
+
   // VerifyAbortReceive should verify correct value in the Rx status/control
   // register, and that the Rx data buffer is zero after abort.
   task VerifyAbortReceive(logic [127:0][7:0] data, int Size);
     logic [7:0] ReadData;
+    status_bit_check_t checks[$];
 
     // Verify status register bits
     ReadAddress(Rx_SC, ReadData);
-    // INSERT CODE HERE
-    assert (ReadData[Rx_Ready] == 0) begin
-      $display("ABORT_RECEIVE:: SUCCESS: Rx_ready is low");
-    end else begin
-      $error("ABORT_RECEIVE: ERROR: Rx_ready should be low, got %b", ReadData[Rx_Ready]);
-      ++TbErrorCnt;
-    end
 
-    assert (ReadData[Rx_FrameError] == 0) begin
-      $display("ABORT_RECEIVE:: SUCCESS: Rx_FrameError is low");
-    end else begin
-      $error("ABORT_RECEIVE: ERROR: Rx_FrameError should be low, got %b", ReadData[Rx_FrameError]);
-      ++TbErrorCnt;
-    end
+    // bit_pos, expected, pass_msg, fail_msg, assertion_name
+    checks = ABORT_RECEIVE_CHECKS;
 
-    assert (ReadData[Rx_Overflow] == 0) begin
-      $display("ABORT_RECEIVE:: SUCCESS: Rx_Overflow is low");
-    end else begin
-      $error("ABORT_RECEIVE: ERROR: Rx_Overflow should be low, got %b", ReadData[Rx_Overflow]);
-      ++TbErrorCnt;
-    end
-
-    assert (ReadData[Rx_AbortSignal] == 1) begin
-      $display("ABORT_RECEIVE:: SUCCESS: Rx_AbortSignal is high");
-    end else begin
-      $error("ABORT_RECEIVE: ERROR: Rx_AbortSignal should be high, got %b", ReadData[Rx_AbortSignal]);
-      ++TbErrorCnt;
-    end
+    VerifyStatusBits(ReadData, checks, "VerifyAbortReceive");
     
     // Verify all bytes from the Rx_Buff are zero
     for (int i = 0; i < Size; i++) begin
@@ -89,39 +78,15 @@ endtask
   // register, and that the Rx data buffer contains correct data.
   task VerifyNormalReceive(logic [127:0][7:0] data, int Size);
     logic [7:0] ReadData;
+    status_bit_check_t checks[$];
+
     wait(uin_hdlc.Rx_Ready);
+
     //Verify status register bits
     ReadAddress(Rx_SC, ReadData);
 
-    // INSERT CODE HERE
-    assert (ReadData[Rx_Overflow] == 0) begin
-      $display("NORMAL RECEIVE: SUCCESS: No Rx overflow detected\n");
-    end else begin
-      $error("NORMAL RECEIVE:: ERROR: x OVERFLOW DETECTED!\n");
-      ++TbErrorCnt;
-    end
-
-    assert (ReadData[Rx_AbortSignal] == 0) begin
-      $display("NORMAL RECEIVE:: SUCCESS: No Rx abort detected\n");
-    end else begin
-      $error("NORMAL RECEIVE:: ERROR: Rx ABORT DETECTED!\n");
-      ++TbErrorCnt;
-    end
-
-    assert (ReadData[Rx_FrameError] == 0) begin
-      $display("NORMAL RECEIVE:: SUCCESS: No Rx frame error detected\n");
-    end else begin
-      $error("NORMAL RECEIVE:: ERROR: INVALID Rx FRAME DETECTED!\n");
-      ++TbErrorCnt;
-    end
-      $display("NORMAL RECEIVE:: SUCCESS: FRAME IS VALID\n");
-
-    assert (ReadData[Rx_Ready] == 1)
-      $display("NORMAL RECEIVE:: SUCCESS: Rx BUFFER IS READY\n");
-    else begin
-      $error("NORMAL RECEIVE:: ERROR: Rx BUFFER NOT READY\n");
-      ++TbErrorCnt;
-    end
+    checks = NORMAL_RECEIVE_CHECKS;
+    VerifyStatusBits(ReadData, checks, "VerifyNormalReceive");
 
     // Verify all bytes from the Rx_Buff
     for (int i = 0; i < Size; i++) begin
@@ -142,38 +107,14 @@ endtask
   // 128 bytes have been received.
   task VerifyOverflowReceive(logic [127:0][7:0] data, int Size);
     logic [7:0] ReadData;
+    status_bit_check_t checks[$];
     
     wait(uin_hdlc.Rx_Ready);
      // Verify status register bits
     ReadAddress(Rx_SC, ReadData);
 
-    assert (ReadData[Rx_Ready] == 1)
-      $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high");
-    else begin
-      $error("OVERFLOW_RECEIVE:: ERROR: Rx_ready should not be low");
-      ++TbErrorCnt;
-    end
-
-    assert (ReadData[Rx_FrameError] == 0) begin
-      $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_FrameError is low");
-    end else begin
-      $error("OVERFLOW_RECEIVE: ERROR: Rx_FrameError should not be high");
-      ++TbErrorCnt;
-    end
-
-    assert (ReadData[Rx_Overflow] == 1)
-      $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_Overflow is high");
-    else begin
-      $error("OVERFLOW_RECEIVE:: ERROR: Rx_Overflow is low");
-      ++TbErrorCnt;
-    end
-
-    assert (ReadData[Rx_AbortSignal] == 0) begin
-      $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_AbortSignal is low");
-    end else begin
-      $error("OVERFLOW_RECEIVE:: ERROR: Rx_AbortSignal should not be high");
-      ++TbErrorCnt;
-    end
+    checks = OVERFLOW_RECEIVE_CHECKS;
+    VerifyStatusBits(ReadData, checks, "VerifyOverflowReceive");
 
     // Verify all bytes from the Rx_Buff
     for (int i = 0; i < Size; i++) begin
@@ -194,88 +135,35 @@ endtask
   // or error in FCS checking is detected. (Spec 16)
   task VerifyErrorReceive(logic [127:0][7:0] data, int Size);
     logic [7:0] ReadData;
+    status_bit_check_t checks[$];
 
     // Verify status register bits
     ReadAddress(Rx_SC, ReadData);
 
-    assert (ReadData[Rx_Ready] == 0)
-      $display("ERROR_RECEIVE:: SUCCESS: Rx_Ready is low after error");  
-    else begin
-      $error("ERROR_RECEIVE:: ERROR: Rx_Ready is high after error");
-      ++TbErrorCnt;
-    end
-
-    assert (ReadData[Rx_FrameError] == 1)
-      $display("ERROR_RECEIVE:: SUCCESS: Rx_FrameError is high after error");
-    else begin
-      $error("ERROR_RECEIVE:: ERROR: Rx_FrameError is low after error");
-      ++TbErrorCnt;
-    end
-
-    assert (ReadData[Rx_Overflow] == 0)
-      $display("ERROR_RECEIVE:: SUCCESS: Rx_Overflow is low after error");
-    else begin
-      $error("ERROR_RECEIVE:: ERROR: Rx_Overflow is high after error");
-      ++TbErrorCnt;
-    end
-    assert (ReadData[Rx_AbortSignal] == 0)
-      $display("ERROR_RECEIVE:: SUCCESS: Rx_AbortSignal is low after error");
-    else begin
-      $error("ERROR_RECEIVE:: ERROR: Rx_AbortSignal is high after error");
-      ++TbErrorCnt;
-    end
-
-    assert (ReadData[Rx_Drop] == 0)
-      $display("ERROR_RECEIVE:: SUCCESS: Rx_Drop is low after error");
-    else begin
-      $error("ERROR_RECEIVE:: ERROR: Rx_Drop is high after error");
-      ++TbErrorCnt;
-    end
+    checks = ERROR_RECEIVE_CHECKS;
+    VerifyStatusBits(ReadData, checks, "VerifyErrorReceive");    
     
-     // Verify all bytes from the Rx_Buff are zero
-     for (int i = 0; i < Size; i++) begin
-        ReadAddress(RX_BUFFER_ADDR, ReadData);
-        assert (ReadData == 0)
-            // $display("ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
-        else begin
-            $error("ERROR_RECEIVE:: ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
-            ++TbErrorCnt;
-        end
+    // Verify all bytes from the Rx_Buff are zero
+    for (int i = 0; i < Size; i++) begin
+      ReadAddress(RX_BUFFER_ADDR, ReadData);
+      assert (ReadData == 0)
+          // $display("ERROR_RECEIVE:: SUCCESS: Rx_Buff is empty: ReadData = %0h", ReadData);
+      else begin
+          $error("ERROR_RECEIVE:: ERROR: Rx_Buff is not empty: ReadData = %0h", ReadData);
+          ++TbErrorCnt;
+      end
     end
   endtask
 
   task VerifyDropReceive(logic [127:0][7:0] data, int Size);
     logic [7:0] ReadData;
+    status_bit_check_t checks[$];
+
     // Verify status register bits
     ReadAddress(Rx_SC, ReadData);
-    //Check all flags
-    assert (ReadData[Rx_Ready] == 0)
-      $display("DROP_RECEIVE:: SUCCESS: Rx_Ready is low after dropped frame");
-    else begin
-      $error("DROP_RECEIVE:: ERROR: Rx_Ready is high after dropped frame");
-      ++TbErrorCnt;
-    end
 
-    assert (ReadData[Rx_FrameError] == 0)
-      $display("DROP_RECEIVE:: SUCCESS: Rx_FrameError is low after dropped frame");
-    else begin
-      $error("DROP_RECEIVE:: ERROR: Rx_FrameError is high after dropped frame");
-      ++TbErrorCnt;
-    end
-
-    assert (ReadData[Rx_Overflow] == 0)
-      $display("DROP_RECEIVE:: SUCCESS: Rx_Overflow is low after dropped frame");
-    else begin
-      $error("DROP_RECEIVE:: ERROR: Rx_Overflow is high after dropped frame");
-      ++TbErrorCnt;
-    end
-
-    assert (ReadData[Rx_AbortSignal] == 0)
-      $display("DROP_RECEIVE:: SUCCESS: Rx_AbortSignal is low after dropped frame");
-    else begin
-      $error("DROP_RECEIVE:: ERROR: Rx_AbortSignal is high after dropped frame");
-      ++TbErrorCnt;
-    end
+    checks = DROP_RECEIVE_CHECKS;
+    VerifyStatusBits(ReadData, checks, "VerifyDropReceive");  
 
     // Verify all bytes from the Rx_Buff are zero
      for (int i = 0; i < Size; i++) begin

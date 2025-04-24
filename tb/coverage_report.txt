@@ -153,85 +153,45 @@ Covergroup                                             Metric       Goal       B
 =================================================================================
 
 Assertion Coverage:
-    Assertions                      37        37         0   100.00%
+    Assertions                      17        17         0   100.00%
 --------------------------------------------------------------------------------------------------------------------------------
 Name                 File(Line)                   Failure      Pass     Vacuous    Disable    Attempt     Active Peak Active ATV
                                                   Count        Count    Count      Count      Count       Count  Count          
 --------------------------------------------------------------------------------------------------------------------------------
-/test_hdlc/u_testPr/VerifyAbortReceive/immed__69
-                     ./testPr_hdlc.sv(69)               0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyAbortReceive/immed__62
-                     ./testPr_hdlc.sv(62)               0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyAbortReceive/immed__55
-                     ./testPr_hdlc.sv(55)               0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyAbortReceive/immed__48
-                     ./testPr_hdlc.sv(48)               0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyAbortReceive/#anonblk#119480755#77#4#/#ublk#119480755#77/immed__79
-                     ./testPr_hdlc.sv(79)               0        162          0          0        162          0           0 off
-/test_hdlc/u_testPr/VerifyNormalReceive/immed__119
-                     ./testPr_hdlc.sv(119)              0          6          0          0          6          0           0 off
-/test_hdlc/u_testPr/VerifyNormalReceive/immed__111
-                     ./testPr_hdlc.sv(111)              0          6          0          0          6          0           0 off
-/test_hdlc/u_testPr/VerifyNormalReceive/immed__104
-                     ./testPr_hdlc.sv(104)              0          6          0          0          6          0           0 off
-/test_hdlc/u_testPr/VerifyNormalReceive/immed__97
-                     ./testPr_hdlc.sv(97)               0          6          0          0          6          0           0 off
-/test_hdlc/u_testPr/VerifyNormalReceive/#anonblk#119480755#127#4#/#ublk#119480755#127/immed__129
-                     ./testPr_hdlc.sv(129)              0        267          0          0        267          0           0 off
-/test_hdlc/u_testPr/VerifyOverflowReceive/immed__171
-                     ./testPr_hdlc.sv(171)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyOverflowReceive/immed__164
-                     ./testPr_hdlc.sv(164)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyOverflowReceive/immed__157
-                     ./testPr_hdlc.sv(157)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyOverflowReceive/immed__150
-                     ./testPr_hdlc.sv(150)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyOverflowReceive/#anonblk#119480755#179#4#/#ublk#119480755#179/immed__181
-                     ./testPr_hdlc.sv(181)              0        252          0          0        252          0           0 off
-/test_hdlc/u_testPr/VerifyErrorReceive/immed__228
-                     ./testPr_hdlc.sv(228)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyErrorReceive/immed__221
-                     ./testPr_hdlc.sv(221)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyErrorReceive/immed__215
-                     ./testPr_hdlc.sv(215)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyErrorReceive/immed__208
-                     ./testPr_hdlc.sv(208)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyErrorReceive/immed__201
-                     ./testPr_hdlc.sv(201)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyErrorReceive/#anonblk#119480755#236#4#/#ublk#119480755#236/immed__238
-                     ./testPr_hdlc.sv(238)              0         28          0          0         28          0           0 off
-/test_hdlc/u_testPr/VerifyDropReceive/immed__273
-                     ./testPr_hdlc.sv(273)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyDropReceive/immed__266
-                     ./testPr_hdlc.sv(266)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyDropReceive/immed__259
-                     ./testPr_hdlc.sv(259)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyDropReceive/immed__252
-                     ./testPr_hdlc.sv(252)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyDropReceive/#anonblk#119480755#281#4#/#ublk#119480755#281/immed__283
-                     ./testPr_hdlc.sv(283)              0         42          0          0         42          0           0 off
-/test_hdlc/u_testPr/VerifyRxFrameSize/immed__299
-                     ./testPr_hdlc.sv(299)              0          8          0          0          8          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/immed__370
-                     ./testPr_hdlc.sv(370)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/immed__363
-                     ./testPr_hdlc.sv(363)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/immed__356
-                     ./testPr_hdlc.sv(356)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/immed__346
-                     ./testPr_hdlc.sv(346)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/immed__321
-                     ./testPr_hdlc.sv(321)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/immed__313
-                     ./testPr_hdlc.sv(313)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/#anonblk#119480755#329#4#/#ublk#119480755#329/immed__330
-                     ./testPr_hdlc.sv(330)              0         10          0          0         10          0           0 off
-/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__402
-                     ./testPr_hdlc.sv(402)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__394
-                     ./testPr_hdlc.sv(394)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__386
-                     ./testPr_hdlc.sv(386)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyStatusBits/#anonblk#119480755#41#2#/#ublk#119480755#41/immed__42
+                     ./testPr_hdlc.sv(42)               0         52          0          0         52          0           0 off
+/test_hdlc/u_testPr/VerifyAbortReceive/#anonblk#119480755#66#4#/#ublk#119480755#66/immed__68
+                     ./testPr_hdlc.sv(68)               0        162          0          0        162          0           0 off
+/test_hdlc/u_testPr/VerifyNormalReceive/#anonblk#119480755#92#4#/#ublk#119480755#92/immed__94
+                     ./testPr_hdlc.sv(94)               0        267          0          0        267          0           0 off
+/test_hdlc/u_testPr/VerifyOverflowReceive/#anonblk#119480755#120#4#/#ublk#119480755#120/immed__122
+                     ./testPr_hdlc.sv(122)              0        252          0          0        252          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/#anonblk#119480755#147#4#/#ublk#119480755#147/immed__149
+                     ./testPr_hdlc.sv(149)              0         28          0          0         28          0           0 off
+/test_hdlc/u_testPr/VerifyDropReceive/#anonblk#119480755#169#4#/#ublk#119480755#169/immed__171
+                     ./testPr_hdlc.sv(171)              0         42          0          0         42          0           0 off
+/test_hdlc/u_testPr/VerifyRxFrameSize/immed__187
+                     ./testPr_hdlc.sv(187)              0          8          0          0          8          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__258
+                     ./testPr_hdlc.sv(258)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__251
+                     ./testPr_hdlc.sv(251)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__244
+                     ./testPr_hdlc.sv(244)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__234
+                     ./testPr_hdlc.sv(234)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__209
+                     ./testPr_hdlc.sv(209)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__201
+                     ./testPr_hdlc.sv(201)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/#anonblk#119480755#217#4#/#ublk#119480755#217/immed__218
+                     ./testPr_hdlc.sv(218)              0         10          0          0         10          0           0 off
+/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__290
+                     ./testPr_hdlc.sv(290)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__282
+                     ./testPr_hdlc.sv(282)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__274
+                     ./testPr_hdlc.sv(274)              0          1          0          0          1          0           0 off
 
 =================================================================================
 === Instance: /test_hdlc/u_assertion_bind
@@ -407,80 +367,40 @@ ASSERTION RESULTS:
 Name                 File(Line)                   Failure      Pass     Vacuous    Disable    Attempt     Active Peak Active ATV
                                                   Count        Count    Count      Count      Count       Count  Count          
 --------------------------------------------------------------------------------------------------------------------------------
-/test_hdlc/u_testPr/VerifyAbortReceive/immed__69
-                     ./testPr_hdlc.sv(69)               0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyAbortReceive/immed__62
-                     ./testPr_hdlc.sv(62)               0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyAbortReceive/immed__55
-                     ./testPr_hdlc.sv(55)               0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyAbortReceive/immed__48
-                     ./testPr_hdlc.sv(48)               0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyAbortReceive/#anonblk#119480755#77#4#/#ublk#119480755#77/immed__79
-                     ./testPr_hdlc.sv(79)               0        162          0          0        162          0           0 off
-/test_hdlc/u_testPr/VerifyNormalReceive/immed__119
-                     ./testPr_hdlc.sv(119)              0          6          0          0          6          0           0 off
-/test_hdlc/u_testPr/VerifyNormalReceive/immed__111
-                     ./testPr_hdlc.sv(111)              0          6          0          0          6          0           0 off
-/test_hdlc/u_testPr/VerifyNormalReceive/immed__104
-                     ./testPr_hdlc.sv(104)              0          6          0          0          6          0           0 off
-/test_hdlc/u_testPr/VerifyNormalReceive/immed__97
-                     ./testPr_hdlc.sv(97)               0          6          0          0          6          0           0 off
-/test_hdlc/u_testPr/VerifyNormalReceive/#anonblk#119480755#127#4#/#ublk#119480755#127/immed__129
-                     ./testPr_hdlc.sv(129)              0        267          0          0        267          0           0 off
-/test_hdlc/u_testPr/VerifyOverflowReceive/immed__171
-                     ./testPr_hdlc.sv(171)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyOverflowReceive/immed__164
-                     ./testPr_hdlc.sv(164)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyOverflowReceive/immed__157
-                     ./testPr_hdlc.sv(157)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyOverflowReceive/immed__150
-                     ./testPr_hdlc.sv(150)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyOverflowReceive/#anonblk#119480755#179#4#/#ublk#119480755#179/immed__181
-                     ./testPr_hdlc.sv(181)              0        252          0          0        252          0           0 off
-/test_hdlc/u_testPr/VerifyErrorReceive/immed__228
-                     ./testPr_hdlc.sv(228)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyErrorReceive/immed__221
-                     ./testPr_hdlc.sv(221)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyErrorReceive/immed__215
-                     ./testPr_hdlc.sv(215)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyErrorReceive/immed__208
-                     ./testPr_hdlc.sv(208)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyErrorReceive/immed__201
-                     ./testPr_hdlc.sv(201)              0          2          0          0          2          0           0 off
-/test_hdlc/u_testPr/VerifyErrorReceive/#anonblk#119480755#236#4#/#ublk#119480755#236/immed__238
-                     ./testPr_hdlc.sv(238)              0         28          0          0         28          0           0 off
-/test_hdlc/u_testPr/VerifyDropReceive/immed__273
-                     ./testPr_hdlc.sv(273)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyDropReceive/immed__266
-                     ./testPr_hdlc.sv(266)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyDropReceive/immed__259
-                     ./testPr_hdlc.sv(259)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyDropReceive/immed__252
-                     ./testPr_hdlc.sv(252)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyDropReceive/#anonblk#119480755#281#4#/#ublk#119480755#281/immed__283
-                     ./testPr_hdlc.sv(283)              0         42          0          0         42          0           0 off
-/test_hdlc/u_testPr/VerifyRxFrameSize/immed__299
-                     ./testPr_hdlc.sv(299)              0          8          0          0          8          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/immed__370
-                     ./testPr_hdlc.sv(370)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/immed__363
-                     ./testPr_hdlc.sv(363)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/immed__356
-                     ./testPr_hdlc.sv(356)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/immed__346
-                     ./testPr_hdlc.sv(346)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/immed__321
-                     ./testPr_hdlc.sv(321)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/immed__313
-                     ./testPr_hdlc.sv(313)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyNormalTransmit/#anonblk#119480755#329#4#/#ublk#119480755#329/immed__330
-                     ./testPr_hdlc.sv(330)              0         10          0          0         10          0           0 off
-/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__402
-                     ./testPr_hdlc.sv(402)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__394
-                     ./testPr_hdlc.sv(394)              0          1          0          0          1          0           0 off
-/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__386
-                     ./testPr_hdlc.sv(386)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyStatusBits/#anonblk#119480755#41#2#/#ublk#119480755#41/immed__42
+                     ./testPr_hdlc.sv(42)               0         52          0          0         52          0           0 off
+/test_hdlc/u_testPr/VerifyAbortReceive/#anonblk#119480755#66#4#/#ublk#119480755#66/immed__68
+                     ./testPr_hdlc.sv(68)               0        162          0          0        162          0           0 off
+/test_hdlc/u_testPr/VerifyNormalReceive/#anonblk#119480755#92#4#/#ublk#119480755#92/immed__94
+                     ./testPr_hdlc.sv(94)               0        267          0          0        267          0           0 off
+/test_hdlc/u_testPr/VerifyOverflowReceive/#anonblk#119480755#120#4#/#ublk#119480755#120/immed__122
+                     ./testPr_hdlc.sv(122)              0        252          0          0        252          0           0 off
+/test_hdlc/u_testPr/VerifyErrorReceive/#anonblk#119480755#147#4#/#ublk#119480755#147/immed__149
+                     ./testPr_hdlc.sv(149)              0         28          0          0         28          0           0 off
+/test_hdlc/u_testPr/VerifyDropReceive/#anonblk#119480755#169#4#/#ublk#119480755#169/immed__171
+                     ./testPr_hdlc.sv(171)              0         42          0          0         42          0           0 off
+/test_hdlc/u_testPr/VerifyRxFrameSize/immed__187
+                     ./testPr_hdlc.sv(187)              0          8          0          0          8          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__258
+                     ./testPr_hdlc.sv(258)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__251
+                     ./testPr_hdlc.sv(251)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__244
+                     ./testPr_hdlc.sv(244)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__234
+                     ./testPr_hdlc.sv(234)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__209
+                     ./testPr_hdlc.sv(209)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/immed__201
+                     ./testPr_hdlc.sv(201)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyNormalTransmit/#anonblk#119480755#217#4#/#ublk#119480755#217/immed__218
+                     ./testPr_hdlc.sv(218)              0         10          0          0         10          0           0 off
+/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__290
+                     ./testPr_hdlc.sv(290)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__282
+                     ./testPr_hdlc.sv(282)              0          1          0          0          1          0           0 off
+/test_hdlc/u_testPr/VerifyTransmitOverflow/immed__274
+                     ./testPr_hdlc.sv(274)              0          1          0          0          1          0           0 off
 /test_hdlc/u_assertion_bind/RX_FlagDetect_Assert
                      ./assertions_hdlc.sv(103)          0         24      11809          0      11833          0           3 off
 /test_hdlc/u_assertion_bind/RX_AbortSignal_Assert
