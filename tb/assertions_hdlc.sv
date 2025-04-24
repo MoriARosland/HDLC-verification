@@ -32,11 +32,16 @@ module assertions_hdlc (
   input  logic Tx_ValidFrame
 );
 
-  logic TransmittInProgress;
+  logic TransmittInProgress; // Used for zero pattern checking
+  logic DataTransmittInProgress; // Used for zero insert checking
+
+  const int FLAG_TRANSMIT_DELAY = 8; // 8 flag bits
+  const int DATA_TRANSFER_START_DELAY = 9; // 8 flag bits + 1 zero start bit
 
   initial begin
     ErrCntAssertions  =  0;
     TransmittInProgress = '0;
+    DataTransmittInProgress = '0;
   end
 
   initial begin // Track the state of the Tx serial-line
@@ -45,13 +50,31 @@ module assertions_hdlc (
       TransmittInProgress = 1'b1;
 
       wait(!Tx_ValidFrame); // Transmission has ended
-      repeat(8) @(posedge Clk); // Give time to generate end/abort flag
+
+      // Wait for end flag to transmit, which starts on the NEXT clk cycle.
+      // Therefore +1.
+      repeat(1 + FLAG_TRANSMIT_DELAY) @(posedge Clk);
 
       TransmittInProgress = 1'b0;
     end
   end
 
+  initial begin // Track when data is on the Tx serial-line (including FCS, no flags)
+    forever begin
+      wait(TransmittInProgress); // Transmission has started
+
+      // Wait for start flag and start zero-bit to transmit, which starts on the NEXT clock edge.
+      // Therefore +1
+      repeat(1 + DATA_TRANSFER_START_DELAY) @(posedge Clk); 
+      DataTransmittInProgress = 1'b1;
+
+      wait(!Tx_ValidFrame); // Transmission has ended
+      DataTransmittInProgress = 1'b0;
+    end
+  end
+
   /// Sequence utilities (Rx and Tx use some of the same sequences):
+  
   sequence AbortFlag_sequence(serial_line); 
     // Note that least significant bit is received first
     !serial_line ##1 serial_line[*7]; // Pattern: 1111 1110
@@ -150,12 +173,27 @@ end
 
   // Only 1's should be on the Tx serial line when not transmitting a frame
   property TX_IdlePattern;
-    @(posedge Clk) !TransmittInProgress|=> Tx;
+    @(posedge Clk) !TransmittInProgress |-> Tx;
   endproperty
 
   TX_IdlePattern_Assert : assert property (TX_IdlePattern)
   else begin
     $error("TX_IdlePattern_Assert:: FAIL: Did not generate idle pattern when not transmitting");
+    ErrCntAssertions++;
+  end
+
+/***********************************
+  * Verify Abort flag generation *
+  **********************************/
+
+  property TX_ZeroPadding;
+    @(posedge Clk) disable iff (!DataTransmittInProgress)
+      !Tx ##1 Tx[*5] |=> !Tx; // A zero should be inserted for every 5 consequtive 1's during datatransmission
+  endproperty
+
+  TX_ZeroPadding_Assert : assert property (TX_ZeroPadding)
+  else begin
+    $error("TX_ZeroPadding_Assert:: FAIL: Missing zero insertion");
     ErrCntAssertions++;
   end
 
