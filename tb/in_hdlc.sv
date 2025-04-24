@@ -31,6 +31,7 @@ interface in_hdlc ();
   logic Tx_Enable;
   logic Tx_Full;
   logic [7:0] Tx_FrameSize;
+  logic [7:0] Tx_BufferCount;
 
   // RX
   logic Rx;

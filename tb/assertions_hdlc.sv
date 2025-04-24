@@ -29,7 +29,11 @@ module assertions_hdlc (
   input  logic Tx,
   input  logic Tx_AbortFrame,
   input  logic Tx_AbortedTrans,
-  input  logic Tx_ValidFrame
+  input  logic Tx_ValidFrame,
+  input  logic Tx_Enable,
+  input  logic [7:0] Tx_FrameSize,
+  input  logic [7:0] Tx_BufferCount,
+  input  logic Tx_Done
 );
 
   logic TransmittInProgress; // Used for zero pattern checking
@@ -165,6 +169,22 @@ TX_AbortedTrans_Assert : assert property (TX_AbortedTrans) begin
 end else begin
   $error("TX_AbortedTrans_Assert:: Error: Tx_AbortedTrans not assert after aborting frame during transmission");
   ErrCntAssertions++;
+end
+
+/********************************************
+ * Verify correct Tx_Complete on emptied TX buffer  *
+ ********************************************/
+
+property TransmitComplete;
+  @(posedge Clk)
+  TransmittInProgress ##0 (Tx_BufferCount == Tx_FrameSize - 1) |-> Tx_Done;
+endproperty
+
+TransmitComplete_Assert : assert property (TransmitComplete)
+  $display("TransmitComplete_Assert: SUCCESS: Tx_Complete asserted after TX buffer emptied");
+else begin
+  $error("TransmitComplete_Assert: ERROR: Tx_Complete not asserted after TX buffer emptied");
+  ++ErrCntAssertions;
 end
 
 /***********************************
