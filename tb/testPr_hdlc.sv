@@ -721,7 +721,6 @@ endtask
 
     if (Abort) begin
       // Send some bits, then abort
-      // Send some bits, then abort
       repeat(16) @(posedge uin_hdlc.Clk);
       WriteAddress(Tx_SC, 8'b1 << Tx_AbortFrame);
     end
