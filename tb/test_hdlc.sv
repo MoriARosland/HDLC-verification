@@ -39,6 +39,8 @@ module test_hdlc ();
   assign uin_hdlc.ZeroDetect         = u_dut.u_RxChannel.ZeroDetect;
   assign uin_hdlc.Tx_AbortFrame      = u_dut.Tx_AbortFrame;
   assign uin_hdlc.Tx_Full            = u_dut.Tx_Full;
+  assign uin_hdlc.Tx_ValidFrame      = u_dut.Tx_ValidFrame;
+  assign uin_hdlc.Tx_AbortedTrans    = u_dut.Tx_AbortedTrans;
 
   //Clock
   always #250ns uin_hdlc.Clk = ~uin_hdlc.Clk;

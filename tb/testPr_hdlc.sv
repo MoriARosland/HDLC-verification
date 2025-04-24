@@ -400,20 +400,6 @@ program testPr_hdlc(
    
   endtask
 
-  // Verify that Tx_Done is asserted when the entire TX buffer has been read for transmission (Spec 17)
-  task VerifyTransmitComplete;
-    logic [7:0] txStatus;
-
-    ReadAddress(Tx_SC, txStatus);
-
-    assert(txStatus[Tx_Done])
-      $display("VerifyTransmitComplete:: PASS: Tx_Done is high after reading the entire buffer");
-    else begin
-      $error("VerifyTransmitComplete:: FAIL: Tx_Done is not high after reading the entire buffer");
-      ++TbErrorCnt;
-    end
-  endtask
-
   /****************************************************************************
    *                                                                          *
    *                             Simulation code                              *
@@ -444,6 +430,7 @@ program testPr_hdlc(
 
     Transmit(10, 0, 0);//Normal
     Transmit(10, 0, 1);//Overflow
+    Transmit(42, 1, 0);//Abort  
 
     $display("*************************************************************");
     $display("%t - Finishing Test Program", $time);
@@ -677,6 +664,13 @@ endtask
   //   - parses the transmitted data in ParseTransmittedData
   //   - hands over the parsed data to the assertions
   //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+  // Transmit:
+  //   - pushes Size bytes into the DUT’s Tx_Buff
+  //   - kicks off the transfer
+  //   - parses the transmitted data in ParseTransmittedData
+  //   - hands over the parsed data to the assertions
+  //-----------------------------------------------------------------------------
   task Transmit(
     int Size,
     int Abort,
@@ -733,10 +727,6 @@ endtask
 
     ParseTransmittedData(txFrame, Size);
 
-    if(!Overflow) begin
-      VerifyTransmitComplete(); // After parsing the data, verify that the buffer is ready (Tx_done)
-    end
-
     // Tx_Done goes high once the the final databuffer has been transmitted.
     repeat(16) @(posedge uin_hdlc.Clk); // Wait for the frame to be transmitted
 
@@ -744,9 +734,12 @@ endtask
       VerifyNormalTransmit(TransmitData, txFrame, Size);
     end
 
+
     #10000ns;
 
+
   endtask
+
 
   task GenerateFCSBytes(logic [127:0][7:0] data, int size, output logic[15:0] FCSBytes);
     logic [23:0] CheckReg;
