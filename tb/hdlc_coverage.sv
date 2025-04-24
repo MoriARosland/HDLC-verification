@@ -21,7 +21,8 @@ module hdlc_coverage (
             bins invalid_frame = default;
         }
 
-        // Check that Rx and Tx status bits have been toggled at least once
+        // Check that Rx and Tx status bits have been toggled at least once:
+
         // Rx status bits
         Cp_RxReady: coverpoint u_in_hdlc.Rx_Ready;
         Cp_RxFrameError: coverpoint u_in_hdlc.Rx_FrameError;
