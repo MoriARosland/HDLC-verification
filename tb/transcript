@@ -230,7 +230,7 @@
 # VERIFY_TRANSMIT_NORMAL:: PASS: Tx_AbortFrame is low
 # VERIFY_TRANSMIT_NORMAL:: PASS: Tx_Full is low
 # *************************************************************
-#              4332750 - Starting task Transmit - Overflow
+#              4333750 - Starting task Transmit - Overflow
 # *************************************************************
 # === Transmit - Overflow (10 bytes) ===
 # Overflowing buffer ...

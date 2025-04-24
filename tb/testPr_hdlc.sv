@@ -141,7 +141,6 @@ program testPr_hdlc(
      // Verify status register bits
     ReadAddress(Rx_SC, ReadData);
 
-    // INSERT CODE HERE
     assert (ReadData[Rx_Ready] == 1)
       $display("OVERFLOW_RECEIVE:: SUCCESS: Rx_ready is high");
     else begin
@@ -371,8 +370,10 @@ program testPr_hdlc(
 
   task VerifyTransmitOverflow(logic [125:0][7:0] TransmitData, logic [129:0][7:0] txFrame, int Size);
   logic [7:0] TxStatus;
-   //Check status registers
+
+   // Read status register
    ReadAddress(Tx_SC, TxStatus);
+
    //Check if Tx_Full is high
    assert(TxStatus[Tx_Full] == 1)
     $display("VERIFY_OVERFLOW_TRANSMIT:: PASS: Tx_Full is high");
@@ -720,6 +721,7 @@ endtask
 
     if (Abort) begin
       // Send some bits, then abort
+      // Send some bits, then abort
       repeat(16) @(posedge uin_hdlc.Clk);
       WriteAddress(Tx_SC, 8'b1 << Tx_AbortFrame);
     end
@@ -733,7 +735,9 @@ endtask
       VerifyNormalTransmit(TransmitData, txFrame, Size);
     end
 
+
     #10000ns;
+
 
   endtask
 
