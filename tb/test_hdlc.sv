@@ -37,10 +37,13 @@ module test_hdlc ();
   assign uin_hdlc.Rx_StopFCS         = u_dut.Rx_StopFCS;
   assign uin_hdlc.RxD                = u_dut.RxD;
   assign uin_hdlc.ZeroDetect         = u_dut.u_RxChannel.ZeroDetect;
+  //Tx internal signals
   assign uin_hdlc.Tx_AbortFrame      = u_dut.Tx_AbortFrame;
   assign uin_hdlc.Tx_Full            = u_dut.Tx_Full;
   assign uin_hdlc.Tx_ValidFrame      = u_dut.Tx_ValidFrame;
   assign uin_hdlc.Tx_AbortedTrans    = u_dut.Tx_AbortedTrans;
+  assign uin_hdlc.Tx_Enable          = u_dut.Tx_Enable;
+  assign uin_hdlc.Tx_FrameSize       = u_dut.Tx_FrameSize;
 
   //Clock
   always #250ns uin_hdlc.Clk = ~uin_hdlc.Clk;
@@ -64,6 +67,11 @@ module test_hdlc ();
     .Tx_Done     (uin_hdlc.Tx_Done),
     .TxEN        (uin_hdlc.TxEN)
 );
+
+  // Coverage module
+  hdlc_coverage u_coverage(
+    .u_in_hdlc(uin_hdlc)
+  );
 
   //Test program
   testPr_hdlc u_testPr(
