@@ -419,6 +419,7 @@
 # *************************************************************
 # === Transmit - Abort (42 bytes) ===
 # TX_AbortedTrans_Assert: PASS: Tx_AbortedTrans asserted after aborting frame during transmission
+# TX_AbortFlag_Assert: PASS: Transmittet abort flag sequence
 # *************************************************************
 #              5916250 - Finishing Test Program
 # *************************************************************
