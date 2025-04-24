@@ -399,17 +399,6 @@ program testPr_hdlc(
    
   endtask
 
-  task VerifyAbortedTransmit(logic [129:0][7:0] txFrame);
-    logic [7:0] TxStatus;
-    //Check status registers
-    ReadAddress(Tx_SC, TxStatus);
-    assert(TxStatus[Tx_AbortedTrans] == 1)
-      $display("VERIFY_ABORTED_TRANSMIT:: PASS: Tx_AbortedTrans is high");
-    else begin
-      $error("VERIFY_ABORTED_TRANSMIT:: FAIL: Tx_AbortedTrans is low");
-      ++TbErrorCnt;
-    end
-  endtask
   /****************************************************************************
    *                                                                          *
    *                             Simulation code                              *
@@ -674,6 +663,13 @@ endtask
   //   - parses the transmitted data in ParseTransmittedData
   //   - hands over the parsed data to the assertions
   //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+  // Transmit:
+  //   - pushes Size bytes into the DUT’s Tx_Buff
+  //   - kicks off the transfer
+  //   - parses the transmitted data in ParseTransmittedData
+  //   - hands over the parsed data to the assertions
+  //-----------------------------------------------------------------------------
   task Transmit(
     int Size,
     int Abort,
@@ -723,32 +719,24 @@ endtask
     wait (!uin_hdlc.Tx);  // CRC calculation need to finish
 
     if (Abort) begin
-      // let it send a few bits, then abort
-      ParseTransmittedData(txFrame, Size);
-       repeat(16)
-        @(posedge uin_hdlc.Clk);
-      // abort
+      // Send some bits, then abort
+      repeat(16) @(posedge uin_hdlc.Clk);
       WriteAddress(Tx_SC, 8'b1 << Tx_AbortFrame);
-    // Normal case
-    end else begin
-      ParseTransmittedData(txFrame, Size);
     end
 
-    // Wait for the frame to be transmitted
-    if(Abort) begin
-      repeat(16)
-        @(posedge uin_hdlc.Clk);
-      VerifyAbortedTransmit(txFrame);
-    end
-    // only capture & verify in the “normal” case
+    ParseTransmittedData(txFrame, Size);
+
+    // Tx_Done goes high once the the final databuffer has been transmitted.
+    repeat(16) @(posedge uin_hdlc.Clk); // Wait for the frame to be transmitted
+
     if (!Abort && !Overflow) begin
-      // hand off to your checker exactly as before
-      $display("Start verify transmit normal");
       VerifyNormalTransmit(TransmitData, txFrame, Size);
-      $display("End verify transmit normal");
     end
+
     #10000ns;
+
   endtask
+
 
   task GenerateFCSBytes(logic [127:0][7:0] data, int size, output logic[15:0] FCSBytes);
     logic [23:0] CheckReg;

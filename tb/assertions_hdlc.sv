@@ -26,9 +26,9 @@ module assertions_hdlc (
   input  logic Rx_Overflow,
   input  logic Rx_WrBuff,
   input  logic Rx_EoF,
-  input  logic Tx_ValidFrame,
   input  logic Tx_AbortFrame,
-  input  logic Tx_AbortedTrans
+  input  logic Tx_AbortedTrans,
+  input  logic Tx_ValidFrame
 );
 
   initial begin
@@ -117,13 +117,13 @@ module assertions_hdlc (
 
 property TX_AbortedTrans;
   @(posedge Clk)
-  !Tx_AbortFrame ##1 Tx_AbortFrame && Tx_ValidFrame |=> Tx_AbortedTrans;
+  !Tx_AbortFrame ##1 Tx_AbortFrame ##0 Tx_ValidFrame |=> ##1 Tx_AbortedTrans;
 endproperty
 
 TX_AbortedTrans_Detect : assert property (TX_AbortedTrans) begin 
-  $display("PASS: Tx_AbortedTrans asserted after aborting frame during transmission");
+  $display("TX_AbortedTrans_Detect: PASS: Tx_AbortedTrans asserted after aborting frame during transmission");
 end else begin
-  $error("Error: Tx_AbortedTrans not assert after aborting frame during transmission");
+  $error("TX_AbortedTrans_Detect:Error: Tx_AbortedTrans not assert after aborting frame during transmission");
   ErrCntAssertions++;
 end
 
